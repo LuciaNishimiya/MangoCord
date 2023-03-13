@@ -1,5 +1,5 @@
 
-<a href="https://builtbybit.com/attachments/mangocord-png.575841/">
+<img src="https://builtbybit.com/attachments/mangocord-png.575841/" />
 ## Description
 A modified version of Flamecord and Waterfall that fixes netty exploits, improves performance, keeps your console clean & supports latest versions.
 
