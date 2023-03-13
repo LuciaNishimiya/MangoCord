@@ -3,6 +3,13 @@
 
 A modified version of Flamecord and Waterfall that fixes netty exploits, improves performance, keeps your console clean & supports latest versions.
 
+## Links
+Free download MangoCord:
+https://github.com/LuciaNishimiya/MangoCord/releases
+<br>
+Discord Mango Studio:
+https://discord.gg/PeS8h8eJZJ
+
 ## Feactures
 * Our features are focused on the security of your Minecraft server preventing hacking with crash exploits, bots and other kind of dos attacks on the application layer.
 
