@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
 
     <name>Waterfall-Super</name>
-    <description>Super project for AkarinProxy.</description>
+    <description>Super project for MangoCord.</description>
     <url>https://github.com/LuciaNishimiya/AkarinProxy</url>
 
     <modules>
