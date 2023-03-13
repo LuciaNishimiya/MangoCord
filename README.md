@@ -1,6 +1,6 @@
 
 <img src="https://mondongo.cf/cloud/up/Mangocord.png" />
-## Description
+
 A modified version of Flamecord and Waterfall that fixes netty exploits, improves performance, keeps your console clean & supports latest versions.
 
 ## Feactures
