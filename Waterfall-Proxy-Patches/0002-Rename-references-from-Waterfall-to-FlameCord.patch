@@ -13,7 +13,7 @@ index 688f1b995..b0b0d33eb 100644
  
      <build>
 -        <finalName>Waterfall</finalName>
-+        <finalName>FlameCord</finalName>
++        <finalName>Mangocord</finalName>
          <plugins>
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
@@ -61,7 +61,7 @@ index e0fcd8fbe..8617cdc7a 100644
      public String getName()
      {
 -        return "Waterfall";
-+        return "FlameCord";
++        return "Mangocord";
      }
  
      @Override
