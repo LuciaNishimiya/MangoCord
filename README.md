@@ -45,7 +45,7 @@ You can customize many MangoCord  features in the flamecord.yml file.
 
 ## How To (Compiling from source)
 
-To compile FlameCord, you need JDK8 or above, git, bash, maven, and an internet connection.
+To compile MangoCord, you need JDK8 or above, git, bash, maven, and an internet connection.
 
 Clone this repo, run `./mangocord b` from *bash*, get jar from `FlameCord-Proxy/bootstrap/target`
 
