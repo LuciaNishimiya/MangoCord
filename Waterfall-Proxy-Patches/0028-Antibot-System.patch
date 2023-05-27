@@ -1719,16 +1719,16 @@ index ae179438..276e57ac 100644
  		setIfUnexistant("illegal_chat_characters", "&cIllegal characters in chat ({0})", configuration);
  
 +		// FlameCord start - Antibot System
-+		setIfUnexistant("antibot_accounts", "&c&lFlameCord\n\n&cYou have too many accounts! ({0})\n\n&cError? Contact us on discord.gg/gF36AT3", configuration);
-+		setIfUnexistant("antibot_fastchat", "&c&lFlameCord\n\n&cYou are chatting too fast!\n\n&cError? Contact us on discord.gg/gF36AT3", configuration);
-+		setIfUnexistant("antibot_firewall", "&c&lFlameCord\n\n&cYou are blocked from this server!\n\n&cError? Contact us on discord.gg/gF36AT3", configuration);
-+		setIfUnexistant("antibot_nickname", "&c&lFlameCord\n\n&cYour nickname was detected as bot! ({0})\n\n&cError? Contact us on discord.gg/gF36AT3", configuration);
-+		setIfUnexistant("antibot_password", "&c&lFlameCord\n\n&cYour password is used by other players! ({0})\n\n&cError? Contact us on discord.gg/gF36AT3", configuration);
-+		setIfUnexistant("antibot_ratelimit", "&c&lFlameCord\n\n&cYou are connecting too fast! ({0})\n\n&cError? Contact us on discord.gg/gF36AT3", configuration);
-+		setIfUnexistant("antibot_reconnect", "&c&lFlameCord\n\n&cReconnect {0} more times to enter!\n&cRefresh {1} more times to enter!\n\n&cError? Contact us on discord.gg/gF36AT3", configuration);
-+		setIfUnexistant("antibot_country", "&c&lFlameCord\n\n&cYour country {0} is blacklisted!\n\n&cError? Contact us on discord.gg/gF36AT3", configuration);
-+		setIfUnexistant("antibot_proxy", "&c&lFlameCord\n\n&cYou are using a Proxy/VPN! ({0})\n\n&cError? Contact us on discord.gg/gF36AT3", configuration);
-+		setIfUnexistant("antibot_stats", "&c&lFlameCord Antibot Stats\n &7■ Total Pings: &a{0}\n &7■ Total Connections: &b{1}\n\n &7■ Current Pings: &a{2}\n &7■ Current Connections: &b{3}", configuration);
++		setIfUnexistant("antibot_accounts", "&c&lMangoCord\n\n&cYou have too many accounts! ({0})\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
++		setIfUnexistant("antibot_fastchat", "&c&lMangoCord\n\n&cYou are chatting too fast!\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
++		setIfUnexistant("antibot_firewall", "&c&lMangoCord\n\n&cYou are blocked from this server!\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
++		setIfUnexistant("antibot_nickname", "&c&lMangoCord\n\n&cYour nickname was detected as bot! ({0})\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
++		setIfUnexistant("antibot_password", "&c&lMangoCord\n\n&cYour password is used by other players! ({0})\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
++		setIfUnexistant("antibot_ratelimit", "&c&lMangoCord\n\n&cYou are connecting too fast! ({0})\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
++		setIfUnexistant("antibot_reconnect", "&c&lMangoCord\n\n&cReconnect {0} more times to enter!\n&cRefresh {1} more times to enter!\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
++		setIfUnexistant("antibot_country", "&c&lMangoCord\n\n&cYour country {0} is blacklisted!\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
++		setIfUnexistant("antibot_proxy", "&c&lMangoCord\n\n&cYou are using a Proxy/VPN! ({0})\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
++		setIfUnexistant("antibot_stats", "&c&lMangoCord Antibot Stats\n &7■ Total Pings: &a{0}\n &7■ Total Connections: &b{1}\n\n &7■ Current Pings: &a{2}\n &7■ Current Connections: &b{3}", configuration);
 +		
 +		setIfUnexistant("flamecord_firewall_help", "&c/flamecord firewall <add/remove> <ip>", configuration);
 +		setIfUnexistant("flamecord_firewall_add", "&cThe ip {0} was added to the firewall!", configuration);

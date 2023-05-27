@@ -1,33 +1,33 @@
-Contributing to FlameCord
+Contributing to Mangocord
 ==========================
-FlameCord follows the parameters of the WaterfallMC project when making a Pull Request. WaterfallMC has a very lenient policy towards PRs, but would prefer that you try and adhere to the following guidelines.
+mangocord follows the parameters of the WaterfallMC project when making a Pull Request. WaterfallMC has a very lenient policy towards PRs, but would prefer that you try and adhere to the following guidelines.
 
 ## Understanding Patches
-Patches to FlameCord are very simple, but center around the directory 'FlameCord-Proxy'
+Patches to mangocord are very simple, but center around the directory 'flamecord-Proxy'
 
 Assuming you already have forked the repository:
 
 1. Pull the latest changes from the main repository
-2. Type `./flamecord p` in git bash to apply the changes from upstream
-3. cd into `FlameCord-Proxy` for proxy changes
+2. Type `./mangocord p` in git bash to apply the changes from upstream
+3. cd into `flamecord-Proxy` for proxy changes
 
 This directory is not a git repository in the traditional sense:
 
-- Every single commit in FlameCord-Proxy is a patch. 
-- 'origin/master' points to a directory similar to Waterfall-Proxy but for FlameCord
-- Typing `git status` should show that we are 10 or 11 commits ahead of master, meaning we have 10 or 11 patches that FlameCord, Waterfall, and Bungeecord don't
-  - If it says something like `212 commits ahead, 207 commits behind`, then type `git fetch` to update FlameCord
+- Every single commit in mangocord-Proxy is a patch. 
+- 'origin/master' points to a directory similar to Waterfall-Proxy but for mangocord
+- Typing `git status` should show that we are 10 or 11 commits ahead of master, meaning we have 10 or 11 patches that mangocord, Waterfall, and Bungeecord don't
+  - If it says something like `212 commits ahead, 207 commits behind`, then type `git fetch` to update mangocord
 
 ## Adding Patches
-Adding patches to FlameCord is very simple:
+Adding patches to mangocord is very simple:
 
-1. Modify `FlameCord-Proxy` with the appropriate changes
+1. Modify `flamecord-Proxy` with the appropriate changes
 2. Type `git add .` to add your changes
 3. Run `git commit` with the desired patch message
-4. Run `./flamecord rb` in the main directory to convert your commit into a new patch
+4. Run `./mangocord rb` in the main directory to convert your commit into a new patch
 5. PR your patches back to this repository
 
-Your commit will be converted into a patch that you can then PR into FlameCord
+Your commit will be converted into a patch that you can then PR into mangocord
 
 ## Modifying Patches
 Modifying previous patches is a bit more complex:
@@ -46,7 +46,7 @@ This method works by temporarily resetting HEAD to the desired commit to edit us
   - **MAKE SURE TO ADD `--amend`** or else a new patch will be created.
   - You can also modify the commit message here.
 7. Type `git rebase --continue` to finish rebasing.
-8. Type `./flamecord rb` in the main directory.
+8. Type `./mangocord rb` in the main directory.
   - This will modify the appropriate patches based on your commits.
 9. PR your modifications back to this project.
 
@@ -57,27 +57,27 @@ If you are simply editing a more recent commit or your change is small, simply m
 2. Make a temporary commit. You don't need to make a message for this.
 3. Type `git rebase -i upstream/upstream`, move (cut) your temporary commit and move it under the line of the patch you wish to modify.
 4. Change the `pick` with `f` (fixup) or `s` (squash) if you need to edit the commit message 
-5. Type `./flamecord rb` in the main directory.
+5. Type `./mangocord rb` in the main directory.
   - This will modify the appropriate patches based on your commits.
 6. PR your modifications to github
 
 
 ## PR Policy
-We'll accept changes that make sense. You should be able to justify their existence, along with any maintenance costs that come with them. Remember, these changes will affect everyone who runs FlameCord, not just you and your server.
+We'll accept changes that make sense. You should be able to justify their existence, along with any maintenance costs that come with them. Remember, these changes will affect everyone who runs mangocord, not just you and your server.
 While we will fix minor formatting issues, you should stick to the guide below when making and submitting changes.
 
 ## Formatting
-All modifications to non-FlameCord files should be marked
-- Multi line changes start with `// FlameCord start` and end with `// FlameCord end`
-- You can put a messages with a change if it isn't obvious, like this: `// FlameCord start - reason
+All modifications to non-mangocord files should be marked
+- Multi line changes start with `// mangocord start` and end with `// mangocord end`
+- You can put a messages with a change if it isn't obvious, like this: `// mangocord start - reason
   - Should generally be about the reason the change was made, what it was before, or what the change is
-  - Multi-line messages should start with `// FlameCord start` and use `/* Multi line message here */` for the message itself
-- Single line changes should have `// FlameCord` or `// FlameCord - reason`
+  - Multi-line messages should start with `// mangocord start` and use `/* Multi line message here */` for the message itself
+- Single line changes should have `// mangocord` or `// mangocord - reason`
 - For example:
 ````java
-return getConfig().getNotStupid(); // FlameCord - was return getConfig().getStupid();
+return getConfig().getNotStupid(); // mangocord - was return getConfig().getStupid();
 
-// FlameCord start
+// mangocord start
 // con.disconnect( bungee.getTranslation( "lost_connection" ) );
 ServerInfo def = con.updateAndGetNextServer( server.getInfo() );
 ServerKickEvent event = bungee.getPluginManager().callEvent( new ServerKickEvent( con, server.getInfo(), TextComponent.fromLegacyText( bungee.getTranslation( "lost_connection" ) ), def, ServerKickEvent.State.CONNECTED, ServerKickEvent.Cause.LOST_CONNECTION ) );
@@ -85,12 +85,12 @@ if ( event.isCancelled() && event.getCancelServer() != null )
 {
     server.setObsolete( true );
     con.connectNow( event.getCancelServer() );
-}
+}mangocord
 else
 {
     con.disconnect0( event.getKickReasonComponent() );
 }
-// FlameCord end
+// mangocord end
 ````
 - We generally follow usual java style, or what is programmed into most IDEs and formatters by default
   - This is also known as oracle style
