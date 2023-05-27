@@ -1,7 +1,7 @@
 
 <img src="https://mondongo.cf/cloud/up/Mangocord.png" />
 
-A modified version of Flamecord and Waterfall that fixes netty exploits, improves performance, keeps your console clean & supports latest versions.
+MangoCord is a fork of Waterfall and Flamecord that protects your Minecraft server from bot attacks and exploits with its advanced set of antibot filtering features. MangoCord also fixes bugs, improves performance and adds new functionalities to your server. MangoCord is the ultimate solution for a secure and fast Minecraft network
 
 ## Links
 Free download MangoCord:
@@ -47,9 +47,9 @@ You can customize many MangoCord  features in the flamecord.yml file.
 
 To compile FlameCord, you need JDK8 or above, git, bash, maven, and an internet connection.
 
-Clone this repo, run `./flamecord b` from *bash*, get jar from `FlameCord-Proxy/bootstrap/target`
+Clone this repo, run `./mangocord b` from *bash*, get jar from `FlameCord-Proxy/bootstrap/target`
 
-FlameCord is compiled like Waterfall does; Please follow the [CONTRIBUTING.md](https://github.com/2lstudios-mc/FlameCord/blob/master/CONTRIBUTING.md) file. If you need help you can always contact us on Discord.
+FlameCord is compiled like Waterfall does; Please follow the [CONTRIBUTING.md](https://github.com/LuciaNishimiya/MangoCord/blob/main/CONTRIBUTING.md) file. If you need help you can always contact us on Discord.
 
 ## Contribute
 
