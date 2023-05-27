@@ -9,7 +9,7 @@
 
     <name>Waterfall-Super</name>
     <description>Super project for MangoCord.</description>
-    <url>https://github.com/LuciaNishimiya/AkarinProxy</url>
+    <url>https://github.com/LuciaNishimiya/MangoCord</url>
 
     <modules>
         <module>FlameCord-Proxy</module>

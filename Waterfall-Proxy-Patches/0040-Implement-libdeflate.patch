@@ -2150,7 +2150,7 @@ index c5fca906..78324f6a 100644
 -                logger.info( "Using standard Java compressor." );
 -            }
 -        }
-+        logger.log(Level.INFO, "FlameCord is using " + Natives.getCompressorFactory().getName() + " compression");
++        logger.log(Level.INFO, "Mangocord is using " + Natives.getCompressorFactory().getName() + " compression");
      }
  
      /**

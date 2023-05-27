@@ -225,7 +225,7 @@ index 00000000..0295ea89
 +                
 +                if ( config.isAntibotAccountsLog() )
 +                {
-+                    logger.log( Level.INFO, "[FlameCord] [{0}] has too many accounts", remoteAddress );
++                    logger.log( Level.INFO, "[Mangocord] [{0}] has too many accounts", remoteAddress );
 +                }
 +
 +                if (config.isAntibotAccountsFirewall()) {
@@ -378,7 +378,7 @@ index 00000000..7aa15796
 +            this.firewallReason = reason;
 +
 +            if (FlameCord.getInstance().getFlameCordConfiguration().isAntibotFirewallLog()) {
-+                FlameCord.getInstance().getLoggerWrapper().log( Level.INFO, "[FlameCord] [{0}] was firewalled because of " + reason, hostString );
++                FlameCord.getInstance().getLoggerWrapper().log( Level.INFO, "[Mangocord] [{0}] was firewalled because of " + reason, hostString );
 +            }
 +
 +            // Queue the firewall as a ipset linux command
@@ -668,7 +668,7 @@ index 00000000..9f65a2b3
 +            if (country != null && isBlacklisted(config, country)) {
 +                if (config.isAntibotCountryLog()) {
 +                    logger.log(Level.INFO,
-+                            "[FlameCord] [{0}] has his country blocked from the server", remoteAddress);
++                            "[Mangocord] [{0}] has his country blocked from the server", remoteAddress);
 +                }
 +
 +                if (config.isAntibotCountryFirewall()) {
@@ -713,7 +713,7 @@ index 00000000..e2140887
 +
 +            if (addressData.getTimeSinceLastConnection() <= config.getAntibotFastChatTime()) {
 +                if (config.isAntibotFastChatLog()) {
-+                    logger.log(Level.INFO, "[FlameCord] [{0}] is chatting too fast", remoteAddress);
++                    logger.log(Level.INFO, "[Mangocord] [{0}] is chatting too fast", remoteAddress);
 +                }
 +
 +                if (config.isAntibotFastChatFirewall()) {
@@ -809,7 +809,7 @@ index 00000000..1b35fba5
 +
 +            if (isBlacklisted(config, nickname)) {
 +                if (config.isAntibotNicknameLog()) {
-+                    logger.log(Level.INFO, "[FlameCord] [{0}] has a blacklisted nickname (" + nickname + ")", remoteAddress);
++                    logger.log(Level.INFO, "[Mangocord] [{0}] has a blacklisted nickname (" + nickname + ")", remoteAddress);
 +                }
 +
 +                if (config.isAntibotNicknameFirewall()) {
@@ -941,7 +941,7 @@ index 00000000..7189a7f3
 +    public void printKick() {
 +        if (FlameCord.getInstance().getFlameCordConfiguration().isAntibotPacketsLog()) {
 +            System.out
-+                    .println("[FlameCord] [" + address
++                    .println("[Mangocord] [" + address
 +                            + "] was kicked because of too many packets (Total: " + simplify(packetsVls) + "vls Size: "
 +                            + simplify(packetsVlsSize) + "vls Rate: " + simplify(packetsVlsRate) + "vls)");
 +        }
@@ -950,7 +950,7 @@ index 00000000..7189a7f3
 +    public void printCancel() {
 +        if (FlameCord.getInstance().getFlameCordConfiguration().isAntibotPacketsLog() && !cancelPrinted) {
 +            System.out
-+                    .println("[FlameCord] [" + address
++                    .println("[Mangocord] [" + address
 +                            + "] was cancelled because of too many packets (Total: " + simplify(packetsVls) + "vls Size: "
 +                            + simplify(packetsVlsSize) + "vls Rate: " + simplify(packetsVlsRate) + "vls)");
 +                            this.cancelPrinted = true;
@@ -961,7 +961,7 @@ index 00000000..7189a7f3
 +        if (FlameCord.getInstance().getFlameCordConfiguration().isAntibotPacketsDebug()
 +                && simplify(this.packetsVls) > 0) {
 +            System.out
-+                    .println("[FlameCord] [" + address
++                    .println("[Mangocord] [" + address
 +                            + "] debug is enabled, showing stats (Total: " + simplify(packetsVls) + "vls Size: "
 +                            + simplify(packetsVlsSize) + "vls Rate: " + simplify(packetsVlsRate) + "vls)");
 +            for (Entry<Integer, Double> entry : this.vlsByPacketId.entrySet()) {
@@ -1069,7 +1069,7 @@ index 00000000..68555de3
 +
 +                if (repeatCount >= config.getAntibotPasswordLimit()) {
 +                    if (config.isAntibotPasswordLog()) {
-+                        logger.log(Level.INFO, "[FlameCord] [{0}] has entered a repeated password", remoteAddress);
++                        logger.log(Level.INFO, "[Mangocord] [{0}] has entered a repeated password", remoteAddress);
 +                    }
 +
 +                    if (config.isAntibotPasswordFirewall()) {
@@ -1125,7 +1125,7 @@ index 00000000..6b3ee3d0
 +
 +        // send updating proxies message
 +        FlameCord.getInstance().getLoggerWrapper().getLogger()
-+                .info("[FlameCord] Updating proxy database from " + lists.size() + " websites... (It can take a while!)");
++                .info("[Mangocord] Updating proxy database from " + lists.size() + " websites... (It can take a while!)");
 +
 +        // create a string builder to store the content
 +        StringBuilder content = new StringBuilder();
@@ -1188,7 +1188,7 @@ index 00000000..6b3ee3d0
 +
 +        // send updated proxies message
 +        FlameCord.getInstance().getLoggerWrapper().getLogger()
-+                .info("[FlameCord] Loaded a total of " + proxyCount + " proxies to the database! (Took " + timeTook + " seconds)");
++                .info("[Mangocord] Loaded a total of " + proxyCount + " proxies to the database! (Took " + timeTook + " seconds)");
 +
 +        // set the updated proxy list
 +        proxies = content.toString();
@@ -1214,7 +1214,7 @@ index 00000000..6b3ee3d0
 +        // Check if it's a proxy
 +        if ((!proxies.equals("") && proxies.contains(ip)) || isVPN(ip)) {
 +            if (config.isAntibotProxyLog()) {
-+                logger.log(Level.INFO, "[FlameCord] [{0}] was blocked for using a VPN/Proxy service", address);
++                logger.log(Level.INFO, "[Mangocord] [{0}] was blocked for using a VPN/Proxy service", address);
 +            }
 +
 +            if (config.isAntibotProxyFirewall()) {
@@ -1311,9 +1311,9 @@ index 00000000..51c1866e
 +                    || addressData.getPingsSecond() >= config.getAntibotRatelimitPingsPerSecond()) {
 +                if (config.isAntibotRatelimitLog()) {
 +                    if (protocol == 1) {
-+                        logger.log(Level.INFO, "[FlameCord] [{0}] is pinging too fast", remoteAddress);
++                        logger.log(Level.INFO, "[Mangocord] [{0}] is pinging too fast", remoteAddress);
 +                    } else {
-+                        logger.log(Level.INFO, "[FlameCord] [{0}] is connecting too fast", remoteAddress);
++                        logger.log(Level.INFO, "[Mangocord] [{0}] is connecting too fast", remoteAddress);
 +                    }
 +                }
 +
@@ -1377,7 +1377,7 @@ index 00000000..d38ffc9e
 +
 +                if (tooSlow) {
 +                    if (config.isAntibotReconnectLog()) {
-+                        logger.log(Level.INFO, "[FlameCord] [{0}] has to reconnect to join", remoteAddress);
++                        logger.log(Level.INFO, "[Mangocord] [{0}] has to reconnect to join", remoteAddress);
 +                    }
 +
 +                    addressData.setTotalConnections(0);
@@ -2222,7 +2222,7 @@ index 1a5a0e08..9266ba8f 100644
 +            {
 +                if ( flameCord.getFlameCordConfiguration().isAntibotFirewallLog() )
 +                {
-+                    flameCord.getLoggerWrapper().log( Level.INFO, "[FlameCord] [{0}] is firewalled from the server. ({1})", new Object[]{ remoteAddress, firewallReason } );
++                    flameCord.getLoggerWrapper().log( Level.INFO, "[Mangocord] [{0}] is firewalled from the server. ({1})", new Object[]{ remoteAddress, firewallReason } );
 +                }
 +
 +                ch.close();
