@@ -4,11 +4,11 @@
 MangoCord is a fork of Waterfall and Flamecord that protects your Minecraft server from bot attacks and exploits with its advanced set of antibot filtering features. MangoCord also fixes bugs, improves performance and adds new functionalities to your server. MangoCord is the ultimate solution for a secure and fast Minecraft network
 
 ## Links
-Free download MangoCord:
-https://github.com/LuciaNishimiya/MangoCord/releases
+Free download MangoCord:<br>
+https://github.com/LuciaNishimiya/MangoCord/releases<br>
 https://builtbybit.com/resources/mangocord-mitigate-bots-exploits.27316/
 <br>
-Discord Mango Studio:
+Discord Mango Studio:<br>
 https://discord.gg/PeS8h8eJZJ
 
 ## Feactures
