@@ -50,7 +50,7 @@ To compile MangoCord, you need JDK8 or above, git, bash, maven, and an internet 
 
 Clone this repo, run `./mangocord b` from *bash*, get jar from `FlameCord-Proxy/bootstrap/target`
 
-FlameCord is compiled like Waterfall does; Please follow the [CONTRIBUTING.md](https://github.com/LuciaNishimiya/MangoCord/blob/main/CONTRIBUTING.md) file. If you need help you can always contact us on Discord.
+Mangocord is compiled like Waterfall does; Please follow the [CONTRIBUTING.md](https://github.com/LuciaNishimiya/MangoCord/blob/main/CONTRIBUTING.md) file. If you need help you can always contact us on Discord.
 
 ## Contribute
 
