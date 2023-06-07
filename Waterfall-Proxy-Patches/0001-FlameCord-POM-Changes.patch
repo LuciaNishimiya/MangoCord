@@ -1,4 +1,4 @@
-From f549424aed518d36fb5d4b9ba3a6f42ca6559ba6 Mon Sep 17 00:00:00 2001
+From 26e96485a5f9ae0a87a69dbf7754f9920aec7aa0 Mon Sep 17 00:00:00 2001
 From: foss-mc <69294560+foss-mc@users.noreply.github.com>
 Date: Wed, 16 Dec 2020 17:59:15 +0800
 Subject: [PATCH] FlameCord POM Changes
@@ -55,7 +55,7 @@ index 00000000..20edd900
 +    </build>
 +</project>
 diff --git a/pom.xml b/pom.xml
-index 7ff4a013..378c5f7d 100644
+index d333a528..88d0f3fa 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -63,6 +63,7 @@
@@ -67,7 +67,7 @@ index 7ff4a013..378c5f7d 100644
  
      <scm>
 diff --git a/protocol/pom.xml b/protocol/pom.xml
-index 221469b9..5bc0cefd 100644
+index c6105b87..ae7cf9f7 100644
 --- a/protocol/pom.xml
 +++ b/protocol/pom.xml
 @@ -63,5 +63,14 @@
@@ -86,10 +86,10 @@ index 221469b9..5bc0cefd 100644
      </dependencies>
  </project>
 diff --git a/proxy/pom.xml b/proxy/pom.xml
-index d3801c9b..02625018 100644
+index 83d8719b..896770ae 100644
 --- a/proxy/pom.xml
 +++ b/proxy/pom.xml
-@@ -150,6 +150,51 @@
+@@ -160,6 +160,51 @@
              <scope>runtime</scope>
          </dependency>
          <!-- Waterfall end -->
@@ -142,5 +142,5 @@ index d3801c9b..02625018 100644
  
      <!-- Waterfall start - copy license files into jar -->
 -- 
-2.37.3.windows.1
+2.40.1.windows.1
 
