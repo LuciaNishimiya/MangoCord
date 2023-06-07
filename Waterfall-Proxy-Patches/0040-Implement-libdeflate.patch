@@ -1,11 +1,11 @@
-From 3bc1f1f17e6f7335fb1015936f220f279c7dc4c7 Mon Sep 17 00:00:00 2001
+From a5060bf4bc34170f6260c156a17a9a13cf982b2a Mon Sep 17 00:00:00 2001
 From: xIsm4 <soportexism4@gmail.com>
 Date: Fri, 27 Jan 2023 14:12:44 +0100
 Subject: [PATCH] Implement libdeflate
 
 
 diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
-index ad7f8c8e..024398a1 100644
+index 59b2d94f..cc277990 100644
 --- a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
 +++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
 @@ -59,6 +59,8 @@ public class FlameCordConfiguration extends FlameConfig {
@@ -2101,10 +2101,10 @@ index f33ce913..01b208ed 100644
      {
          int low = buf.readUnsignedShort();
 diff --git a/proxy/pom.xml b/proxy/pom.xml
-index 02625018..37abc9f7 100644
+index 896770ae..1b63f484 100644
 --- a/proxy/pom.xml
 +++ b/proxy/pom.xml
-@@ -158,6 +158,12 @@
+@@ -168,6 +168,12 @@
              <version>${project.version}</version>
              <scope>compile</scope>
          </dependency>
@@ -2118,7 +2118,7 @@ index 02625018..37abc9f7 100644
              <groupId>io.github.waterfallmc</groupId>
              <artifactId>waterfall-module-cmd-alert</artifactId>
 diff --git a/proxy/src/main/java/net/md_5/bungee/BungeeCord.java b/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
-index c5fca906..78324f6a 100644
+index ebbeae08..8de4bcae 100644
 --- a/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
 +++ b/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
 @@ -17,6 +17,7 @@ import dev._2lstudios.flamecord.commands.FlameCordCommand;
@@ -2464,5 +2464,5 @@ index 9266ba8f..00d3096a 100644
      public static final String TIMEOUT_HANDLER = "timeout";
      public static final String PACKET_DECODER = "packet-decoder";
 -- 
-2.37.3.windows.1
+2.40.1.windows.1
 

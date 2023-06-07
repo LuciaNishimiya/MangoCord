@@ -1,4 +1,4 @@
-From 5e44201df8cb6a999b7b367ca5829e84347bec2f Mon Sep 17 00:00:00 2001
+From f6fcbbb9df037b9b94fa2b11dc91d90f171cb77e Mon Sep 17 00:00:00 2001
 From: LinsaFTW <25271111+linsaftw@users.noreply.github.com>
 Date: Thu, 30 Sep 2021 19:54:33 -0300
 Subject: [PATCH] 1.7.x support
@@ -324,7 +324,7 @@ index 8bf14d56..c433ac4a 100644
              TO_SERVER.registerPacket(
                      LoginPayloadResponse.class,
 diff --git a/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java b/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
-index fa625d96..34a90b85 100644
+index 18574b30..d7f430bd 100644
 --- a/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
 +++ b/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
 @@ -7,6 +7,10 @@ public class ProtocolConstants
@@ -338,7 +338,7 @@ index fa625d96..34a90b85 100644
      public static final int MINECRAFT_1_8 = 47;
      public static final int MINECRAFT_1_9 = 107;
      public static final int MINECRAFT_1_9_1 = 108;
-@@ -48,6 +52,7 @@ public class ProtocolConstants
+@@ -49,6 +53,7 @@ public class ProtocolConstants
      static
      {
          ImmutableList.Builder<String> supportedVersions = ImmutableList.<String>builder().add(
@@ -346,8 +346,8 @@ index fa625d96..34a90b85 100644
                  "1.8.x",
                  "1.9.x",
                  "1.10.x",
-@@ -62,6 +67,10 @@ public class ProtocolConstants
-                 "1.19.x"
+@@ -64,6 +69,10 @@ public class ProtocolConstants
+                 "1.20.x"
          );
          ImmutableList.Builder<Integer> supportedVersionIds = ImmutableList.<Integer>builder().add(
 +                // FlameCord start - 1.7.x support
@@ -915,7 +915,7 @@ index a5555f6a..1eb458b6 100644
          buf.writeByte( mode );
          if ( mode == 0 || mode == 2 )
 diff --git a/proxy/src/main/java/net/md_5/bungee/BungeeCord.java b/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
-index b61f5759..ff6e0b2b 100644
+index f4667e30..f4333c6f 100644
 --- a/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
 +++ b/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
 @@ -171,6 +171,14 @@ public class BungeeCord extends ProxyServer
@@ -1000,10 +1000,10 @@ index 491cf1a1..6cd8ec3b 100644
      }
  }
 diff --git a/proxy/src/main/java/net/md_5/bungee/ServerConnector.java b/proxy/src/main/java/net/md_5/bungee/ServerConnector.java
-index 8181d76b..c23c7ff9 100644
+index 60232e52..3c77da32 100644
 --- a/proxy/src/main/java/net/md_5/bungee/ServerConnector.java
 +++ b/proxy/src/main/java/net/md_5/bungee/ServerConnector.java
-@@ -280,10 +280,20 @@ public class ServerConnector extends PacketHandler
+@@ -282,10 +282,20 @@ public class ServerConnector extends PacketHandler
                  user.getServer().disconnect( "Quitting" );
              } else
              {
@@ -1028,7 +1028,7 @@ index 8181d76b..c23c7ff9 100644
              }
  
              user.setDimension( login.getDimension() );
-@@ -296,7 +306,7 @@ public class ServerConnector extends PacketHandler
+@@ -298,7 +308,7 @@ public class ServerConnector extends PacketHandler
              if ( !user.isDisableEntityMetadataRewrite() ) { // Waterfall
              for ( Objective objective : serverScoreboard.getObjectives() )
              {
@@ -1247,7 +1247,7 @@ index 7fb79bfd..86c469ee 100644
              }
              con.getServer().disconnect( "Quitting" );
 diff --git a/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap.java b/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap.java
-index 28d2127f..8fb6bf51 100644
+index 65ea8044..2fc16c5d 100644
 --- a/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap.java
 +++ b/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap.java
 @@ -34,6 +34,12 @@ public abstract class EntityMap
