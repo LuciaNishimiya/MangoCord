@@ -53,7 +53,7 @@ index 0c1ecfb8..b2b19996 100644
              List<String> players = bungee.getPlayers().stream().map(ProxiedPlayer::getName).collect(Collectors.toList());
  
 -            ProxyQueryEvent event = new ProxyQueryEvent(listener, new QueryResult(listener.getMotd(), "SMP", "Waterfall_Proxy",
-+            // FlameCord - Rebrand
++            // FlameCord - Rebrand 
 +            ProxyQueryEvent event = new ProxyQueryEvent(listener, new QueryResult(listener.getMotd(), "SMP", "FlameCord_Proxy",
                      bungee.getOnlineCount(), listener.getMaxPlayers(), listener.getHost().getPort(),
                      listener.getHost().getHostString(), "MINECRAFT",  players, bungee.getGameVersion()));
