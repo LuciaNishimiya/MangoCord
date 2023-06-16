@@ -64,7 +64,7 @@ index 00000000..ae179438
 +		// FlameCord
 +		setIfUnexistant("flamecord_reload", "&aAll files had been successfully reloaded!", configuration);
 +		setIfUnexistant("flamecord_help",
-+				"&aMangocord&b {0}&a by&b LuciaNishimiya\n&e /[Mangocord]&7 >&b Reloads Mangocord files!\n&e /flamecord firewall <add/remove> <ip>&7 >&b Firewall certain ips!\n&e /bplugins&7 >&b Show the plugin list!\n&e /bip <player>&7 >&b Show the ip and info of a player!\n&e /flamecord help&7 >&b Shows this message!\n&c join our discord >&b https://discord.gg/VmcKYCmQPn ",
++				"&aMangocord&b {0}&a by&b LuciaNishimiya\n&e /flamecord&7 >&b Reloads Mangocord files!\n&e /flamecord firewall <add/remove> <ip>&7 >&b Firewall certain ips!\n&e /bplugins&7 >&b Show the plugin list!\n&e /bip <player>&7 >&b Show the ip and info of a player!\n&e /flamecord stats&7 >&b Displays flamecord stats!\n&e /flamecord help&7 >&b Shows this message!\n&c join our discord >&b https://discord.gg/VmcKYCmQPn ",
 +				configuration);
 +		setIfUnexistant("flamecord_nopermission", "&cYou don't have permission to do this!", configuration);
 +
@@ -97,7 +97,7 @@ index 00000000..ae179438
 +				configuration);
 +		setIfUnexistant("total_players", "Total players online: {0}", configuration);
 +		setIfUnexistant("name_invalid", "Username contains invalid characters.", configuration);
-+		setIfUnexistant("ping_cannot_connect", "&c[Bungee] Can't connect to server.", configuration);
++		setIfUnexistant("ping_cannot_connect", "&c[Mangocord] Can't connect to server.", configuration);
 +		setIfUnexistant("offline_mode_player", "[Mangocord] Not authenticated with Minecraft.net", configuration);
 +		setIfUnexistant("secure_profile_required", "A secure profile is required to join this server.", configuration);
 +		setIfUnexistant("secure_profile_expired", "Secure profile expired.", configuration);
