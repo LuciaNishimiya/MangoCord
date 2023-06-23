@@ -14,17 +14,17 @@ https://discord.gg/PeS8h8eJZJ
 ## Feactures
 * Our features are focused on the security of your Minecraft server preventing hacking with crash exploits, bots and other kind of dos attacks on the application layer.
 
-* **Bots**: We prevent bots using multiple security checks to minimize the damage.
+* **Bots**: We provides a powerful anti-bot solution programmed directly into the core of BungeeCord, with the ability to mitigate these attacks without hindering your server's performance.
 
-* **Anti-vpn/proxy**: VPN detection check.
+* **Anti-vpn/proxy**: Checks whether a connection is a proxy/VPN by utilizing web databases from over 10 webs, and additional websites can be added as well.
 
-* **Performance**: We reduce the amount of processing done to improve the speed of our servers.
+* **Performance**: It reduces CPU usage and RAM usage by optimizing and reusing code, caching heavy getters, using libdeflate for faster compression/decompression of packets, and fixing memory leaks.
 
-* **GeyserMC compatibility**: Set the GeyserMC configuration option “disable-compression” to false to fix compatibility with MangoCord.
+* **GeyserMC compatibility**: MangoCord supports Geyser, a proxy that allows Bedrock Edition players to join Java Edition servers. It supports most Java features and cross-play between different platforms.
 
 * **Motd**: Incorporates customizable an advanced motd system that protects against null pink attacks
 
-* **Languages Supported**: Fully configurable in messages.yml!!.
+* **Languages Supported**: Provides you with absolute flexibility by allowing you to fully customize all messages and texts of your server through the messages.yml configuration file.
 
 * **Exploit Fixes**: MangoCord specializes in providing better server security by fixing major exploits, performance flaws and bugs that Bungeecord already has, and that have not yet been fixed in WaterfallMC.
 
