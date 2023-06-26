@@ -24,7 +24,7 @@ index 241e8ed9..b563cbce 100644
 +    private boolean loggerDetailedConnection = true;
 +
      public FlameCordConfiguration(final ConfigurationProvider configurationProvider, final Collection<String> whitelistedAddresses) {
-         final File configurationFile = new File("./flamecord.yml");
+         final File configurationFile = new File("./mangocord.yml");
          final Configuration configuration = load(configurationFile);
  
 +        this.loggerInitialhandler = setIfUnexistant("logger.initialhandler", this.loggerInitialhandler, configuration);

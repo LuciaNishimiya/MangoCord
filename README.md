@@ -28,8 +28,17 @@ https://discord.gg/PeS8h8eJZJ
 
 * **Exploit Fixes**: MangoCord specializes in providing better server security by fixing major exploits, performance flaws and bugs that Bungeecord already has, and that have not yet been fixed in WaterfallMC.
 
+## Commands
+- /mangocord firewall <add/remove> <ip> > Firewall certain ips!
+- /bplugins > Show the plugin list!
+- /bip <player> > Show the ip and info of a player!
+- /mangocord stats > Displays flamecord stats!
+- /mangocord help > Shows this message!
 
-MangoCord is a FlameCord and Waterfall fork that protects your server from bot attacks and exploits done to your Minecraft Server by minimizing the impact received by those with our advanced set of antibot filtering features. MangoCord improves your server performance and reduces your CPU usage by cutting the amount of processes required to process packets. MangoCord has free official and community support on our Discord server. https://discord.gg/PeS8h8eJZJ . Visit our detailed guide to MangoCord configuration to know more about it's features and how to configure them.
+
+## MangoCord
+
+MangoCord is a Waterfall fork that protects your server from bot attacks and exploits done to your Minecraft Server by minimizing the impact received by those with our advanced set of antibot filtering features. MangoCord improves your server performance and reduces your CPU usage by cutting the amount of processes required to process packets. MangoCord has free official and community support on our Discord server. https://discord.gg/PeS8h8eJZJ . Visit our detailed guide to MangoCord configuration to know more about it's features and how to configure them.
 
 
 ## Why fork Waterfall?
@@ -42,13 +51,13 @@ MangoCord  will track upstream Waterfall and merge changes as needed.
 
 Just drag an drop MangoCord .jar into your server folder and run it.
 
-You can customize many MangoCord  features in the flamecord.yml file.
+You can customize many MangoCord  features in the mangocord.yml file.
 
 ## How To (Compiling from source)
 
 To compile MangoCord, you need JDK8 or above, git, bash, maven, and an internet connection.
 
-Clone this repo, run `./mangocord b` from *bash*, get jar from `FlameCord-Proxy/bootstrap/target`
+Clone this repo, run `./mangocord b` from *bash*, get jar from `MangoCord-Proxy/bootstrap/target`
 
 Mangocord is compiled like Waterfall does; Please follow the [CONTRIBUTING.md](https://github.com/LuciaNishimiya/MangoCord/blob/main/CONTRIBUTING.md) file. If you need help you can always contact us on Discord.
 

@@ -72,12 +72,12 @@ index b563cbce..b41ee92c 100644
 +
 +    @Getter
 +    private boolean motdEnabled = false;
-+    private List<String> motds = Collections.singletonList("&eDefault &cMangoCord&e server &7(%onlineplayers%/%maxplayers%)\n&eEdit on &cflamecord.yml&7 (IridiumColorAPI HEX)");
++    private List<String> motds = Collections.singletonList("&eDefault &cMangoCord&e server &7(%onlineplayers%/%maxplayers%)\n&eEdit on &cmangocord.yml&7 (IridiumColorAPI HEX)");
 +    private List<String> hexMotds;
 +
 +    @Getter
 +    private boolean sampleEnabled = false;
-+    private List<String> samples = Collections.singletonList("&eDefault &cMangoCord&e server &7(%onlineplayers%/%maxplayers%)\n&eEdit on &cflamecord.yml&7 (IridiumColorAPI HEX)");
++    private List<String> samples = Collections.singletonList("&eDefault &cMangoCord&e server &7(%onlineplayers%/%maxplayers%)\n&eEdit on &cmangocord.yml&7 (IridiumColorAPI HEX)");
 +    private List<String> hexSamples;
 +
 +    @Getter

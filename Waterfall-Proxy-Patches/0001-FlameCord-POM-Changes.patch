@@ -27,7 +27,7 @@ index 00000000..20edd900
 +    <packaging>jar</packaging>
 +
 +    <name>Waterfall-FlameCord</name>
-+    <description>FlameCord adds security essentials and new configuration options</description>
++    <description>Mangocord adds security essentials and new configuration options</description>
 +
 +    <dependencies>
 +        <dependency>

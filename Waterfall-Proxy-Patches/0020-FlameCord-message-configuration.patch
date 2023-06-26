@@ -64,7 +64,7 @@ index 00000000..ae179438
 +		// FlameCord
 +		setIfUnexistant("flamecord_reload", "&aAll files had been successfully reloaded!", configuration);
 +		setIfUnexistant("flamecord_help",
-+				"&aMangocord&b {0}&a by&b LuciaNishimiya\n&e /flamecord&7 >&b Reloads Mangocord files!\n&e /flamecord firewall <add/remove> <ip>&7 >&b Firewall certain ips!\n&e /bplugins&7 >&b Show the plugin list!\n&e /bip <player>&7 >&b Show the ip and info of a player!\n&e /flamecord stats&7 >&b Displays flamecord stats!\n&e /flamecord help&7 >&b Shows this message!\n&c join our discord >&b https://discord.gg/VmcKYCmQPn ",
++				"&aMangocord&b {0}&a by&b LuciaNishimiya\n&e /mangocord reload&7 >&b Reloads Mangocord files!\n&e /mangocord firewall <add/remove> <ip>&7 >&b Firewall certain ips!\n&e /bplugins&7 >&b Show the plugin list!\n&e /bip <player>&7 >&b Show the ip and info of a player!\n&e /mangocord stats&7 >&b Displays flamecord stats!\n&e /mangocord help&7 >&b Shows this message!\n&c join our discord >&b https://discord.gg/VmcKYCmQPn ",
 +				configuration);
 +		setIfUnexistant("flamecord_nopermission", "&cYou don't have permission to do this!", configuration);
 +
@@ -175,7 +175,7 @@ index 021b38d4..fb81adee 100644
          final FlameCord flameCord = FlameCord.getInstance();
 +        final MessagesConfiguration messagesConfiguration = flameCord.getMessagesConfiguration();
  
-         if (sender.hasPermission("flamecord.usage")) {
+         if (sender.hasPermission("mangocord.usage")) {
              if (args.length > 0) {
 @@ -38,21 +40,22 @@ private final BungeeCord bungeeCord;
  

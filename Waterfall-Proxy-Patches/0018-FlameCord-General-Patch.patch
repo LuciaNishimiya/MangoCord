@@ -162,7 +162,7 @@ index 00000000..241e8ed9
 +
 +public class FlameCordConfiguration extends FlameConfig {
 +    public FlameCordConfiguration(final ConfigurationProvider configurationProvider, final Collection<String> whitelistedAddresses) {
-+        final File configurationFile = new File("./flamecord.yml");
++        final File configurationFile = new File("./mangocord.yml");
 +        final Configuration configuration = load(configurationFile);
 +
 +        save(configuration, configurationFile);
@@ -201,7 +201,7 @@ index 00000000..021b38d4
 +private final BungeeCord bungeeCord;
 +
 +    public FlameCordCommand(final BungeeCord bungeeCord) {
-+        super("flamecord");
++        super("mangocord");
 +
 +        this.bungeeCord = bungeeCord;
 +    }
@@ -210,7 +210,7 @@ index 00000000..021b38d4
 +    public void execute(final CommandSender sender, final String[] args) {
 +        final FlameCord flameCord = FlameCord.getInstance();
 +
-+        if (sender.hasPermission("flamecord.usage")) {
++        if (sender.hasPermission("mangocord.usage")) {
 +            if (args.length > 0) {
 +                final String arg0 = args[0];
 +

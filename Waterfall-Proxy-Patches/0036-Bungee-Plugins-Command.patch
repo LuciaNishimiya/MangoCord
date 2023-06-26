@@ -48,7 +48,7 @@ index 00000000..2e20e9dc
 +        final FlameCord flameCord = FlameCord.getInstance();
 +        final MessagesConfiguration messagesConfiguration = flameCord.getMessagesConfiguration();
 +
-+        if (sender.hasPermission("flamecord.usage")) {
++        if (sender.hasPermission("mangocord.usage")) {
 +            Collection<Plugin> plugins = BungeeCord.getInstance().getPluginManager().getPlugins();
 +            int amount = plugins.size();
 +            String header = FlameCord.getInstance().getMessagesConfiguration().getTranslation("flamecord_bplugins_header", amount);

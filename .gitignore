@@ -1,10 +1,12 @@
-FlameCord-Proxy
+MangoCord-Proxy/
+
 
 # intellij
 *.iml
 *.ipr
 *.iws
 .idea/
+.vscode/
 out/
 
 .project

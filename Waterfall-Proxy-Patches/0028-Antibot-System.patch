@@ -1730,7 +1730,7 @@ index ae179438..820b012b 100644
 +		setIfUnexistant("antibot_proxy", "&c&lMangoCord\n\n&cYou are using a Proxy/VPN! ({0})\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
 +		setIfUnexistant("antibot_stats", "&c&lMangoCord Antibot Stats\n &7■ Total Pings: &a{0}\n &7■ Total Connections: &b{1}\n\n &7■ Current Pings: &a{2}\n &7■ Current Connections: &b{3}", configuration);
 +		
-+		setIfUnexistant("flamecord_firewall_help", "&c/flamecord firewall <add/remove> <ip>", configuration);
++		setIfUnexistant("flamecord_firewall_help", "&c/mangocord firewall <add/remove> <ip>", configuration);
 +		setIfUnexistant("flamecord_firewall_add", "&cThe ip {0} was added to the firewall!", configuration);
 +		setIfUnexistant("flamecord_firewall_remove", "&cThe ip {0} was removed from the firewall!", configuration);
 +		// FlameCord end - Antibot System
@@ -1880,7 +1880,7 @@ index fb81adee..56bc46eb 100644
  import net.md_5.bungee.api.CommandSender;
 @@ -27,9 +28,7 @@ private final BungeeCord bungeeCord;
  
-         if (sender.hasPermission("flamecord.usage")) {
+         if (sender.hasPermission("mangocord.usage")) {
              if (args.length > 0) {
 -                final String arg0 = args[0];
 -

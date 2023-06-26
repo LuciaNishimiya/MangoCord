@@ -68,6 +68,6 @@ popd
 basedir=$(dirname "$basedir")
 
 # Apply flamecord patches
-applyPatch Waterfall/Waterfall-Proxy FlameCord-Proxy HEAD
+applyPatch Waterfall/Waterfall-Proxy MangoCord-Proxy HEAD
 
 enableCommitSigningIfNeeded

@@ -39,7 +39,7 @@ index d703d6d24..49dce84ba 100644
      public LogDispatcher(BungeeLogger logger)
      {
 -        super( "Waterfall Logger Thread" );
-+        super( "FlameCord Logger Thread" );
++        super( "Mangocord Logger Thread" );
          this.logger = logger;
      }
  
