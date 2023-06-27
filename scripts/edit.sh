@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-pushd FlameCord-Proxy
+pushd mangocord-Proxy
 git rebase --interactive upstream/upstream
 popd
