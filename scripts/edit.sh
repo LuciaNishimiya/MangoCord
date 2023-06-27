@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-pushd mangocord-Proxy
+pushd MangoCord-Proxy
 git rebase --interactive upstream/upstream
 popd
