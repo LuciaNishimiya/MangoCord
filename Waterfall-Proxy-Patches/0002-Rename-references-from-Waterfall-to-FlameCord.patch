@@ -1,7 +1,7 @@
 From 5b40e2e22fb37fb5aa2b34d3a6b14bd91e7e72fa Mon Sep 17 00:00:00 2001
 From: Techcable <Techcable@techcable.net>
 Date: Mon, 6 Jun 2016 13:47:46 -0600
-Subject: [PATCH] Rename references from Waterfall to FlameCord
+Subject: [PATCH] Rename references from Waterfall to MangoCord
 
 
 diff --git a/bootstrap/pom.xml b/bootstrap/pom.xml
@@ -26,7 +26,7 @@ index a4516ed96..9838f5c55 100644
          if ( Float.parseFloat( System.getProperty( "java.class.version" ) ) < 52.0 )
          {
 -            System.err.println( "*** ERROR *** Waterfall requires Java 8 or above to function! Please download and install it!" );
-+            System.err.println( "*** ERROR *** FlameCord requires Java 8 or above to function! Please download and install it!" );
++            System.err.println( "*** ERROR *** MangoCord requires Java 8 or above to function! Please download and install it!" );
              System.out.println( "You can check your Java version with the command: java -version" );
              return;
          }
@@ -52,7 +52,7 @@ index e0fcd8fbe..8617cdc7a 100644
      {
          // Java uses ! to indicate a resource inside of a jar/zip/other container. Running Bungee from within a directory that has a ! will cause this to muck up.
 -        Preconditions.checkState( new File( "." ).getAbsolutePath().indexOf( '!' ) == -1, "Cannot use Waterfall in directory with ! in path." );
-+        Preconditions.checkState( new File( "." ).getAbsolutePath().indexOf( '!' ) == -1, "Cannot use FlameCord in directory with ! in path." );
++        Preconditions.checkState( new File( "." ).getAbsolutePath().indexOf( '!' ) == -1, "Cannot use MangoCord in directory with ! in path." );
  
          reloadMessages();
  
@@ -74,7 +74,7 @@ index 96a9998d1..463bc3d53 100644
          BungeeCord bungee = new BungeeCord();
          ProxyServer.setInstance( bungee );
 -        bungee.getLogger().info( "Enabled Waterfall version " + bungee.getVersion() );
-+        bungee.getLogger().info( "Enabled FlameCord version " + bungee.getVersion() );
++        bungee.getLogger().info( "Enabled MangoCord version " + bungee.getVersion() );
          bungee.start();
  
          if ( !options.has( "noconsole" ) )
@@ -87,7 +87,7 @@ index b26035cf9..820f7b03c 100644
      public void execute(CommandSender sender, String[] args)
      {
 -        sender.sendMessage( ChatColor.BLUE + "This server is running Waterfall version " + ProxyServer.getInstance().getVersion() + " by md_5" );
-+        sender.sendMessage( ChatColor.BLUE + "This server is running FlameCord version " + ProxyServer.getInstance().getVersion() + " by md_5" );
++        sender.sendMessage( ChatColor.BLUE + "This server is running MangoCord version " + ProxyServer.getInstance().getVersion() + " by md_5" );
      }
  }
 diff --git a/proxy/src/main/java/net/md_5/bungee/command/CommandReload.java b/proxy/src/main/java/net/md_5/bungee/command/CommandReload.java
@@ -100,8 +100,8 @@ index 720d0c3b5..5ab4db189 100644
  
 -        sender.sendMessage( ChatColor.BOLD.toString() + ChatColor.RED.toString() + "Waterfall has been reloaded."
 -                + " This is NOT advisable and you will not be supported with any issues that arise! Please restart Waterfall ASAP." );
-+        sender.sendMessage( ChatColor.BOLD.toString() + ChatColor.RED.toString() + "FlameCord has been reloaded."
-+                + " This is NOT advisable and you will not be supported with any issues that arise! Please restart FlameCord ASAP." );
++        sender.sendMessage( ChatColor.BOLD.toString() + ChatColor.RED.toString() + "MangoCord has been reloaded."
++                + " This is NOT advisable and you will not be supported with any issues that arise! Please restart MangoCord ASAP." );
      }
  }
 diff --git a/proxy/src/main/java/net/md_5/bungee/conf/YamlConfig.java b/proxy/src/main/java/net/md_5/bungee/conf/YamlConfig.java
@@ -113,7 +113,7 @@ index 0dd69778b..9abae0b61 100644
              String name = entry.getKey();
              String addr = get( "address", "localhost:25565", val );
 -            String motd = ChatColor.translateAlternateColorCodes( '&', get( "motd", "&1Just another Waterfall - Forced Host", val ) );
-+            String motd = ChatColor.translateAlternateColorCodes( '&', get( "motd", "&1Just another FlameCord - Forced Host", val ) );
++            String motd = ChatColor.translateAlternateColorCodes( '&', get( "motd", "&1Just another MangoCord - Forced Host", val ) );
              boolean restricted = get( "restricted", false, val );
              SocketAddress address = Util.getAddr( addr );
              ServerInfo info = ProxyServer.getInstance().constructServerInfo( name, address, motd, restricted );

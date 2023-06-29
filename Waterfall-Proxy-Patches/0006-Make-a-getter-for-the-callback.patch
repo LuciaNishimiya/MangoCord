@@ -13,7 +13,7 @@ index cf85ca06..8a945a99 100644
  public class AsyncEvent<T> extends Event
  {
 -
-+    // FlameCord - Make a getter for the callback
++    // MangoCord - Make a getter for the callback
 +    @Getter
      private final Callback<T> done;
      private final Map<Plugin, AtomicInteger> intents = new ConcurrentHashMap<>();

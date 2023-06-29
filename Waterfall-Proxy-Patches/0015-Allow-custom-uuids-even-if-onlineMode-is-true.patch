@@ -13,7 +13,7 @@ index ac20d5ad..706fb321 100644
      {
          Preconditions.checkState( thisState == State.USERNAME, "Can only set uuid while state is username" );
 -        Preconditions.checkState( !onlineMode, "Can only set uuid when online mode is false" );
-+        // FlameCord - Allow custom uuids even if onlineMode is true
++        // MangoCord - Allow custom uuids even if onlineMode is true
          this.uniqueId = uuid;
      }
  

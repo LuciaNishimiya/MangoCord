@@ -13,7 +13,7 @@ index 70a1192e7..6316143f7 100644
              int packetId = DefinedPacket.readVarInt( in );
              packetTypeInfo = packetId;
 -
-+            // FlameCord Start - Check if packetId is invalid.
++            // MangoCord Start - Check if packetId is invalid.
 +            if (packetId < 0 || packetId > Protocol.MAX_PACKET_ID)
 +            {
 +                throw new FastDecoderException( "[" + ctx.channel().remoteAddress() + "] <-> MinecraftDecoder received invalid packet #1, id " + packetId );

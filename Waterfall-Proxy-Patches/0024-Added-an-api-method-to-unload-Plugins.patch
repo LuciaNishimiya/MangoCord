@@ -35,7 +35,7 @@ index 1ba5b2496..5db665c7c 100644
 +     *
 +     * @param plugin to unload
 +     */
-+    // FlameCord start - Adds a method to unload plugin from proxy
++    // MangoCord start - Adds a method to unload plugin from proxy
 +    public void unloadPlugin(Plugin plugin)
 +    {
 +        plugin.onDisable();
@@ -66,7 +66,7 @@ index 1ba5b2496..5db665c7c 100644
 +            this.pluginloaders.remove( plugin.getDescription().getName() );
 +        }
 +    }
-+    // FlameCord end
++    // MangoCord end
 +
      public void loadPlugins()
      {
@@ -75,9 +75,9 @@ index 1ba5b2496..5db665c7c 100644
                  Plugin clazz = (Plugin) main.getDeclaredConstructor().newInstance();
  
                  plugins.put( plugin.getName(), clazz );
-+                // FlameCord start - cache url classloaders to unload plugins
++                // MangoCord start - cache url classloaders to unload plugins
 +                pluginloaders.put( plugin.getName(),loader );
-+                // FlameCord end
++                // MangoCord end
                  clazz.onLoad();
                  ProxyServer.getInstance().getLogger().log( Level.INFO, "Loaded plugin {0} version {1} by {2}", new Object[]
                  {

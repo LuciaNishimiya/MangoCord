@@ -12,7 +12,7 @@ index 97bd384b2..1e76d1a13 100644
  @Deprecated
  public interface ProxyConfig
  {
-+    // FlameCord - DynDNS Support
++    // MangoCord - DynDNS Support
 +    void updateServerIPs();
  
      /**
@@ -27,7 +27,7 @@ index 021fe8398..4e3982d24 100644
  
 -                    ServerInfo def = updateAndGetNextServer( target );
 -                    if ( request.isRetry() && def != null && ( getServer() == null || def != getServer().getInfo() ) )
-+                    // FlameCord start - DynDNS Support
++                    // MangoCord start - DynDNS Support
 +                    InetSocketAddress updated = (InetSocketAddress) Util.getAddr( target.getAddress().getHostName() + ":" + target.getAddress().getPort() );
 +                    if ( !updated.getAddress().getHostAddress().equals( target.getAddress().getAddress().getHostAddress() ) )
                      {
@@ -41,7 +41,7 @@ index 021fe8398..4e3982d24 100644
                      } else
                      {
 -                        if (request.isSendFeedback()) sendMessage( bungee.getTranslation( "fallback_kick", connectionFailMessage( future.cause() ) ) );
-+                    // FlameCord end - DynDNS Support
++                    // MangoCord end - DynDNS Support
 +                        ServerInfo def = updateAndGetNextServer( target );
 +                        if ( request.isRetry() && def != null && ( getServer() == null || def != getServer().getInfo() ) )
 +                        {
@@ -83,7 +83,7 @@ index b67195ec8..e9fccb2d0 100644
  @Getter
  public abstract class Configuration implements ProxyConfig
  {
-+    // FlameCord start - DynDNS Support
++    // MangoCord start - DynDNS Support
 +    public void updateServerIPs()
 +    {
 +        TMap<String, ServerInfo> newServers = new CaseInsensitiveMap<>();
@@ -97,7 +97,7 @@ index b67195ec8..e9fccb2d0 100644
 +
 +        servers = newServers;
 +    }
-+    // FlameCord end - DynDNS Support
++    // MangoCord end - DynDNS Support
  
      /**
       * Time before users are disconnected due to no network activity.

@@ -13,7 +13,7 @@ index 3d6bdf5c..ac20d5ad 100644
  
                          ServerPing legacy = result.getResponse();
 +
-+                // FlameCord - Close and return if legacy == null
++                // MangoCord - Close and return if legacy == null
 +                if (legacy == null) {
 +                    ch.close();
 +                    return;
@@ -26,18 +26,18 @@ index 3d6bdf5c..ac20d5ad 100644
                      @Override
                      public void done(ProxyPingEvent pingResult, Throwable error)
                      {
-+                        // FlameCord - Close if response is null
++                        // MangoCord - Close if response is null
 +                        if (pingResult.getResponse() == null) {
 +                            ch.close();
 +                            return;
 +                        }
 +                        
-+                        // FlameCord - Return if connection is closed
++                        // MangoCord - Return if connection is closed
 +                        if (ch.isClosed()) {
 +                            return;
 +                        }
 +
-                         // FlameCord start - 1.7.x support
+                         // MangoCord start - 1.7.x support
                          Gson gson = handshake.getProtocolVersion() == ProtocolConstants.MINECRAFT_1_7_2 ? BungeeCord.getInstance().gsonLegacy : BungeeCord.getInstance().gson;
                          if ( ProtocolConstants.isBeforeOrEq( handshake.getProtocolVersion() , ProtocolConstants.MINECRAFT_1_8 ) )
 @@ -337,11 +355,13 @@ public class InitialHandler extends PacketHandler implements PendingConnection
@@ -47,13 +47,13 @@ index 3d6bdf5c..ac20d5ad 100644
 -        if (!ACCEPT_INVALID_PACKETS) {
 -            Preconditions.checkState(thisState == State.PING, "Not expecting PING");
 -        }
-+        // FlameCord - Never accept invalid packets
++        // MangoCord - Never accept invalid packets
 +        Preconditions.checkState( thisState == State.PING, "Not expecting PING" );
 +
          unsafe.sendPacket( ping );
 -        disconnect( "" );
 +
-+        // FlameCord - Close instead of disconnect
++        // MangoCord - Close instead of disconnect
 +        ch.close();
      }
  
@@ -67,12 +67,12 @@ index 6dc5633f..8b0fac0a 100644
              if ( packet != null && ch.isActive() )
              {
 -                ch.writeAndFlush( packet ).addListeners( ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE, ChannelFutureListener.CLOSE );
-+                // FlameCord - Remove the firing of exceptions on failure
++                // MangoCord - Remove the firing of exceptions on failure
 +                ch.writeAndFlush( packet ).addListeners( ChannelFutureListener.CLOSE );
              } else
              {
 -                ch.flush();
-+                // FlameCord - Don't flush just close
++                // MangoCord - Don't flush just close
                  ch.close();
              }
          }
@@ -81,7 +81,7 @@ index 6dc5633f..8b0fac0a 100644
      {
          Preconditions.checkState( ch.eventLoop().inEventLoop(), "cannot add handler outside of event loop" );
 -        ch.pipeline().flush();
-+        // FlameCord - Don't flush if not necessary
++        // MangoCord - Don't flush if not necessary
          ch.pipeline().addBefore( baseName, name, handler );
      }
  
@@ -102,7 +102,7 @@ index 6a045d16..9227db06 100644
              BungeeCord.getInstance().getPluginManager().callEvent(connectionInitEvent);
          }
 +
-+        // FlameCord - Close on exception caught
++        // MangoCord - Close on exception caught
 +        @Override
 +        public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) throws Exception {
 +            cause.printStackTrace();
@@ -117,7 +117,7 @@ index 6a045d16..9227db06 100644
              ch.pipeline().addLast( BOSS_HANDLER, new HandlerBoss() );
          }
 +
-+        // FlameCord - Close on exception caught
++        // MangoCord - Close on exception caught
 +        @Override
 +        public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) throws Exception {
 +            cause.printStackTrace();

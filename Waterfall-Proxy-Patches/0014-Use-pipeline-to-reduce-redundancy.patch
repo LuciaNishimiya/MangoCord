@@ -23,7 +23,7 @@ index 8b0fac0a..b3fa4835 100644
      {
 -        ch.pipeline().get( MinecraftDecoder.class ).setProtocol( protocol );
 -        ch.pipeline().get( MinecraftEncoder.class ).setProtocol( protocol );
-+        // FlameCord - Use pipeline to reduce redundancy
++        // MangoCord - Use pipeline to reduce redundancy
 +        final ChannelPipeline pipeline = ch.pipeline();
 +        pipeline.get( MinecraftDecoder.class ).setProtocol( protocol );
 +        pipeline.get( MinecraftEncoder.class ).setProtocol( protocol );
@@ -33,7 +33,7 @@ index 8b0fac0a..b3fa4835 100644
      {
 -        ch.pipeline().get( MinecraftDecoder.class ).setProtocolVersion( protocol );
 -        ch.pipeline().get( MinecraftEncoder.class ).setProtocolVersion( protocol );
-+        // FlameCord - Use pipeline to reduce redundancy
++        // MangoCord - Use pipeline to reduce redundancy
 +        final ChannelPipeline pipeline = ch.pipeline();
 +        pipeline.get( MinecraftDecoder.class ).setProtocolVersion( protocol );
 +        pipeline.get( MinecraftEncoder.class ).setProtocolVersion( protocol );
@@ -45,7 +45,7 @@ index 8b0fac0a..b3fa4835 100644
      public void setCompressionThreshold(int compressionThreshold)
      {
 -        if ( ch.pipeline().get( PacketCompressor.class ) == null && compressionThreshold != -1 )
-+        // FlameCord - Use pipeline to reduce redundancy
++        // MangoCord - Use pipeline to reduce redundancy
 +        final ChannelPipeline pipeline = ch.pipeline();
 +        if ( pipeline.get( PacketCompressor.class ) == null && compressionThreshold != -1 )
          {

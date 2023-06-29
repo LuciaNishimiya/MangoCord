@@ -13,7 +13,7 @@ index 8911bee85..b67195ec8 100644
       * Time before users are disconnected due to no network activity.
       */
 -    private int timeout = 30000;
-+    // FlameCord - Modify default timeout
++    // MangoCord - Modify default timeout
 +    private int timeout = 17000;
      /**
       * UUID used for metrics.

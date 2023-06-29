@@ -4,10 +4,10 @@ Date: Fri, 4 Mar 2022 13:35:53 -0300
 Subject: [PATCH] Antibot System
 
 
-diff --git a/flamecord/pom.xml b/flamecord/pom.xml
+diff --git a/mangcord/pom.xml b/mangcord/pom.xml
 index 20edd900..95bdf348 100644
---- a/flamecord/pom.xml
-+++ b/flamecord/pom.xml
+--- a/mangcord/pom.xml
++++ b/mangcord/pom.xml
 @@ -30,6 +30,16 @@
              <version>${project.version}</version>
              <scope>compile</scope>
@@ -25,12 +25,12 @@ index 20edd900..95bdf348 100644
      </dependencies>
  
      <build>
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/FlameCord.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/FlameCord.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/MangoCord.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/MangoCord.java
 index 676ba95b..677b4a8e 100644
---- a/flamecord/src/main/java/dev/_2lstudios/flamecord/FlameCord.java
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/FlameCord.java
+--- a/mangcord/src/main/java/dev/_2lstudios/mangcord/MangoCord.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/MangoCord.java
 @@ -1,8 +1,16 @@
- package dev._2lstudios.flamecord;
+ package dev._2lstudios.mangcord;
  
 +import java.io.IOException;
  import java.util.Collection;
@@ -39,32 +39,32 @@ index 676ba95b..677b4a8e 100644
 +import java.util.logging.Level;
  import java.util.logging.Logger;
  
-+import dev._2lstudios.flamecord.antibot.AddressDataManager;
-+import dev._2lstudios.flamecord.antibot.CheckManager;
-+import dev._2lstudios.flamecord.antibot.LoggerWrapper;
-+import dev._2lstudios.flamecord.antibot.StatsData;
- import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
- import dev._2lstudios.flamecord.configuration.MessagesConfiguration;
- import dev._2lstudios.flamecord.configuration.ModulesConfiguration;
++import dev._2lstudios.mangcord.antibot.AddressDataManager;
++import dev._2lstudios.mangcord.antibot.CheckManager;
++import dev._2lstudios.mangcord.antibot.LoggerWrapper;
++import dev._2lstudios.mangcord.antibot.StatsData;
+ import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
+ import dev._2lstudios.mangcord.configuration.MessagesConfiguration;
+ import dev._2lstudios.mangcord.configuration.ModulesConfiguration;
 @@ -13,8 +21,13 @@ import net.md_5.bungee.config.YamlConfiguration;
- public class FlameCord {
+ public class MangoCord {
      @Getter
-     private static FlameCord instance;
+     private static MangoCord instance;
 +    private static Runtime runtime;
  
      public static void initialize(final Logger logger, final Collection<String> whitelistedAddresses) {
-+        if (FlameCord.runtime == null) {
-+            FlameCord.runtime = Runtime.getRuntime();
++        if (MangoCord.runtime == null) {
++            MangoCord.runtime = Runtime.getRuntime();
 +        }
 +
-         if (FlameCord.instance == null) {
-             FlameCord.instance = new FlameCord();
+         if (MangoCord.instance == null) {
+             MangoCord.instance = new MangoCord();
          }
-@@ -31,6 +44,16 @@ public class FlameCord {
+@@ -31,6 +44,16 @@ public class MangoCord {
      @Getter
      private MessagesConfiguration messagesConfiguration;
  
-+    // FlameCord - Antibot System
++    // MangoCord - Antibot System
 +    @Getter
 +    private AddressDataManager addressDataManager;
 +    @Getter
@@ -77,32 +77,32 @@ index 676ba95b..677b4a8e 100644
      public void reload(final Logger logger, final Collection<String> whitelistedAddresses) {
          final ConfigurationProvider configurationProvider = ConfigurationProvider.getProvider(YamlConfiguration.class);
          
-@@ -39,5 +62,106 @@ public class FlameCord {
-         // FlameCord - Module System
+@@ -39,5 +62,106 @@ public class MangoCord {
+         // MangoCord - Module System
          this.modulesConfiguration = new ModulesConfiguration(configurationProvider);
          this.messagesConfiguration = new MessagesConfiguration(logger, configurationProvider);
 +
-+        // FlameCord - Antibot System
++        // MangoCord - Antibot System
 +        if (checkManager != null) checkManager.unload();
 +        this.loggerWrapper = new LoggerWrapper(Logger.getLogger("BungeeCord"));
 +        this.addressDataManager = new AddressDataManager();
-+        this.checkManager = new CheckManager(addressDataManager, flameCordConfiguration);
++        this.checkManager = new CheckManager(addressDataManager, mangoCordConfiguration);
 +        this.statsData = new StatsData();
 +
 +        // Initialize antibot firewall ipset
-+        if (flameCordConfiguration.isAntibotFirewallIpset()) {
++        if (mangoCordConfiguration.isAntibotFirewallIpset()) {
 +            runLinuxCommand("apt install iptables -y"); // Install iptables
 +            runLinuxCommand("apt install ipset -y"); // Install ipset
-+            runLinuxCommand("ipset destroy flamecord-firewall"); // Delete old FlameCord set
-+            runLinuxCommand("ipset create flamecord-firewall hash:ip timeout 60"); // Create new FlameCord set
-+            runLinuxCommand("iptables -I INPUT -m set --match-set flamecord-firewall src -j DROP"); // Create iptables rule to DROP
++            runLinuxCommand("ipset destroy mangcord-firewall"); // Delete old MangoCord set
++            runLinuxCommand("ipset create mangcord-firewall hash:ip timeout 60"); // Create new MangoCord set
++            runLinuxCommand("iptables -I INPUT -m set --match-set mangcord-firewall src -j DROP"); // Create iptables rule to DROP
 +
 +            // Thread to run queued firewall linux commands
 +            new Thread(() -> {
-+                FlameCord flameCord = FlameCord.getInstance();
++                MangoCord mangoCord = MangoCord.getInstance();
 +
-+                while (!flameCord.isShuttingDown()) {
-+                    flameCord.runQueuedLinuxCommands();
++                while (!mangoCord.isShuttingDown()) {
++                    mangoCord.runQueuedLinuxCommands();
 +
 +                    try {
 +                        Thread.sleep(1000);
@@ -185,29 +185,29 @@ index 676ba95b..677b4a8e 100644
      }
  }
 \ No newline at end of file
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/AccountsCheck.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/AccountsCheck.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AccountsCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AccountsCheck.java
 new file mode 100644
 index 00000000..5cd9782a
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/AccountsCheck.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AccountsCheck.java
 @@ -0,0 +1,48 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.Collection;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
 +
 +public class AccountsCheck {
-+    private FlameCordConfiguration config;
++    private MangoCordConfiguration config;
 +    private LoggerWrapper logger;
 +    private AddressDataManager addressDataManager;
 +
 +    public AccountsCheck(final AddressDataManager addressDataManager) {
-+        this.config = FlameCord.getInstance().getFlameCordConfiguration();
-+        this.logger = FlameCord.getInstance().getLoggerWrapper();
++        this.config = MangoCord.getInstance().getMangoCordConfiguration();
++        this.logger = MangoCord.getInstance().getLoggerWrapper();
 +        this.addressDataManager = addressDataManager;
 +    }
 +
@@ -239,23 +239,23 @@ index 00000000..5cd9782a
 +        return false;
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/AddressData.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/AddressData.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AddressData.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AddressData.java
 new file mode 100644
 index 00000000..7aa15796
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/AddressData.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AddressData.java
 @@ -0,0 +1,170 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.util.Collection;
 +import java.util.HashSet;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
 +
 +public class AddressData {
-+    private FlameCordConfiguration config;
++    private MangoCordConfiguration config;
 +    private StatsData statsData;
 +    private Collection<String> nicknames = null;
 +    private final String hostString;
@@ -272,8 +272,8 @@ index 00000000..7aa15796
 +    private int totalConnections = 0;
 +
 +    public AddressData(final String hostString) {
-+        this.config = FlameCord.getInstance().getFlameCordConfiguration();
-+        this.statsData = FlameCord.getInstance().getStatsData();
++        this.config = MangoCord.getInstance().getMangoCordConfiguration();
++        this.statsData = MangoCord.getInstance().getStatsData();
 +        this.hostString = hostString;
 +    }
 +
@@ -373,16 +373,16 @@ index 00000000..7aa15796
 +    }
 +
 +    public void firewall(String reason) {
-+        if (!FlameCord.getInstance().getFlameCordConfiguration().getAntibotFirewallWhitelist().contains(hostString)) {
++        if (!MangoCord.getInstance().getMangoCordConfiguration().getAntibotFirewallWhitelist().contains(hostString)) {
 +            this.lastFirewall = System.currentTimeMillis();
 +            this.firewallReason = reason;
 +
-+            if (FlameCord.getInstance().getFlameCordConfiguration().isAntibotFirewallLog()) {
-+                FlameCord.getInstance().getLoggerWrapper().log( Level.INFO, "[Mangocord] [{0}] was firewalled because of " + reason, hostString );
++            if (MangoCord.getInstance().getMangoCordConfiguration().isAntibotFirewallLog()) {
++                MangoCord.getInstance().getLoggerWrapper().log( Level.INFO, "[Mangocord] [{0}] was firewalled because of " + reason, hostString );
 +            }
 +
 +            // Queue the firewall as a ipset linux command
-+            FlameCord.getInstance().queueLinuxCommand("ipset add flamecord-firewall " + hostString);
++            MangoCord.getInstance().queueLinuxCommand("ipset add mangcord-firewall " + hostString);
 +        }
 +    }
 +
@@ -415,13 +415,13 @@ index 00000000..7aa15796
 +        return nicknames.contains(nickname);
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/AddressDataManager.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/AddressDataManager.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AddressDataManager.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AddressDataManager.java
 new file mode 100644
 index 00000000..007be392
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/AddressDataManager.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AddressDataManager.java
 @@ -0,0 +1,50 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.net.InetSocketAddress;
 +import java.net.SocketAddress;
@@ -471,16 +471,16 @@ index 00000000..007be392
 +        return addressData.size();
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/CheckManager.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/CheckManager.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/CheckManager.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/CheckManager.java
 new file mode 100644
 index 00000000..94fc7613
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/CheckManager.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/CheckManager.java
 @@ -0,0 +1,49 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
 +import lombok.Getter;
 +
 +public class CheckManager {
@@ -503,7 +503,7 @@ index 00000000..94fc7613
 +    @Getter
 +    private final ProxyCheck proxyCheck;
 +
-+    public CheckManager(final AddressDataManager addressDataManager, final FlameCordConfiguration flameCordConfiguration) {
++    public CheckManager(final AddressDataManager addressDataManager, final MangoCordConfiguration mangoCordConfiguration) {
 +        this.accountsCheck = new AccountsCheck(addressDataManager);
 +        this.countryCheck = new CountryCheck(addressDataManager);
 +        this.fastChatCheck = new FastChatCheck(addressDataManager);
@@ -516,7 +516,7 @@ index 00000000..94fc7613
 +
 +        this.countryCheck.load();
 +
-+        if (FlameCord.getInstance().getFlameCordConfiguration().isAntibotProxyEnabled()) {
++        if (MangoCord.getInstance().getMangoCordConfiguration().isAntibotProxyEnabled()) {
 +            // run on a separated thread to avoid lock
 +            new Thread(() -> this.proxyCheck.updateProxies()).start();
 +        }
@@ -526,13 +526,13 @@ index 00000000..94fc7613
 +        this.countryCheck.unload();
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/CountryCheck.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/CountryCheck.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/CountryCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/CountryCheck.java
 new file mode 100644
 index 00000000..9f65a2b3
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/CountryCheck.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/CountryCheck.java
 @@ -0,0 +1,150 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.io.File;
 +import java.io.IOException;
@@ -549,18 +549,18 @@ index 00000000..9f65a2b3
 +import com.maxmind.db.MaxMindDbParameter;
 +import com.maxmind.db.Reader;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
 +
 +public class CountryCheck {
-+    private FlameCordConfiguration config;
++    private MangoCordConfiguration config;
 +    private LoggerWrapper logger;
 +    private AddressDataManager addressDataManager;
 +    private Reader maxMindReader;
 +
 +    public CountryCheck(final AddressDataManager addressDataManager) {
-+        this.config = FlameCord.getInstance().getFlameCordConfiguration();
-+        this.logger = FlameCord.getInstance().getLoggerWrapper();
++        this.config = MangoCord.getInstance().getMangoCordConfiguration();
++        this.logger = MangoCord.getInstance().getLoggerWrapper();
 +        this.addressDataManager = addressDataManager;
 +    }
 +
@@ -597,7 +597,7 @@ index 00000000..9f65a2b3
 +        }
 +    }
 +
-+    private boolean isBlacklisted(final FlameCordConfiguration config, final String isoCode) {
++    private boolean isBlacklisted(final MangoCordConfiguration config, final String isoCode) {
 +        for (final String blacklisted : config.getAntibotCountryBlacklist()) {
 +            if (isoCode.contains(blacklisted)) {
 +                return true;
@@ -682,28 +682,28 @@ index 00000000..9f65a2b3
 +        return false;
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/FastChatCheck.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/FastChatCheck.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/FastChatCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/FastChatCheck.java
 new file mode 100644
 index 00000000..e2140887
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/FastChatCheck.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/FastChatCheck.java
 @@ -0,0 +1,39 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
 +
 +public class FastChatCheck {
-+    private FlameCordConfiguration config;
++    private MangoCordConfiguration config;
 +    private LoggerWrapper logger;
 +    private final AddressDataManager addressDataManager;
 +
 +    public FastChatCheck(final AddressDataManager addressDataManager) {
-+        this.config = FlameCord.getInstance().getFlameCordConfiguration();
-+        this.logger = FlameCord.getInstance().getLoggerWrapper();
++        this.config = MangoCord.getInstance().getMangoCordConfiguration();
++        this.logger = MangoCord.getInstance().getLoggerWrapper();
 +        this.addressDataManager = addressDataManager;
 +    }
 +
@@ -727,13 +727,13 @@ index 00000000..e2140887
 +        return false;
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/LoggerWrapper.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/LoggerWrapper.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/LoggerWrapper.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/LoggerWrapper.java
 new file mode 100644
 index 00000000..5ae7580e
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/LoggerWrapper.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/LoggerWrapper.java
 @@ -0,0 +1,32 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.util.logging.Level;
 +import java.util.logging.Logger;
@@ -765,32 +765,32 @@ index 00000000..5ae7580e
 +        return logger;
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/NicknameCheck.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/NicknameCheck.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/NicknameCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/NicknameCheck.java
 new file mode 100644
 index 00000000..1b35fba5
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/NicknameCheck.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/NicknameCheck.java
 @@ -0,0 +1,52 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
 +
 +public class NicknameCheck {
-+    private FlameCordConfiguration config;
++    private MangoCordConfiguration config;
 +    private LoggerWrapper logger;
 +    private AddressDataManager addressDataManager;
 +
 +    public NicknameCheck(final AddressDataManager addressDataManager) {
-+        this.config = FlameCord.getInstance().getFlameCordConfiguration();
-+        this.logger = FlameCord.getInstance().getLoggerWrapper();
++        this.config = MangoCord.getInstance().getMangoCordConfiguration();
++        this.logger = MangoCord.getInstance().getLoggerWrapper();
 +        this.addressDataManager = addressDataManager;
 +    }
 +
-+    private boolean isBlacklisted(final FlameCordConfiguration config, final String nickname) {
++    private boolean isBlacklisted(final MangoCordConfiguration config, final String nickname) {
 +        String lowerNickname = nickname.toLowerCase();
 +
 +        for (final String blacklisted : config.getAntibotNicknameBlacklist()) {
@@ -823,23 +823,23 @@ index 00000000..1b35fba5
 +        return false;
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/PacketsCheck.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/PacketsCheck.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PacketsCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PacketsCheck.java
 new file mode 100644
 index 00000000..6249fe8e
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/PacketsCheck.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PacketsCheck.java
 @@ -0,0 +1,63 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.HashMap;
 +import java.util.Map;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
-+import dev._2lstudios.flamecord.enums.PacketsCheckResult;
-+import dev._2lstudios.flamecord.enums.PacketsViolationReason;
-+import dev._2lstudios.flamecord.utils.ProtocolUtil;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
++import dev._2lstudios.mangcord.enums.PacketsCheckResult;
++import dev._2lstudios.mangcord.enums.PacketsViolationReason;
++import dev._2lstudios.mangcord.utils.ProtocolUtil;
 +import io.netty.buffer.ByteBuf;
 +
 +public class PacketsCheck {
@@ -866,7 +866,7 @@ index 00000000..6249fe8e
 +    }
 +
 +    public PacketsCheckResult check(SocketAddress socketAddress, ByteBuf byteBuf) {
-+        FlameCordConfiguration config = FlameCord.getInstance().getFlameCordConfiguration();
++        MangoCordConfiguration config = MangoCord.getInstance().getMangoCordConfiguration();
 +
 +        if (!config.isAntibotPacketsEnabled()) {
 +            return PacketsCheckResult.NONE;
@@ -892,21 +892,21 @@ index 00000000..6249fe8e
 +        }
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/PacketsData.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/PacketsData.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PacketsData.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PacketsData.java
 new file mode 100644
 index 00000000..7189a7f3
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/PacketsData.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PacketsData.java
 @@ -0,0 +1,115 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.HashMap;
 +import java.util.Map;
 +import java.util.Map.Entry;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.enums.PacketsViolationReason;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.enums.PacketsViolationReason;
 +
 +public class PacketsData {
 +    // The address related to this data
@@ -939,7 +939,7 @@ index 00000000..7189a7f3
 +    }
 +
 +    public void printKick() {
-+        if (FlameCord.getInstance().getFlameCordConfiguration().isAntibotPacketsLog()) {
++        if (MangoCord.getInstance().getMangoCordConfiguration().isAntibotPacketsLog()) {
 +            System.out
 +                    .println("[Mangocord] [" + address
 +                            + "] was kicked because of too many packets (Total: " + simplify(packetsVls) + "vls Size: "
@@ -948,7 +948,7 @@ index 00000000..7189a7f3
 +    }
 +
 +    public void printCancel() {
-+        if (FlameCord.getInstance().getFlameCordConfiguration().isAntibotPacketsLog() && !cancelPrinted) {
++        if (MangoCord.getInstance().getMangoCordConfiguration().isAntibotPacketsLog() && !cancelPrinted) {
 +            System.out
 +                    .println("[Mangocord] [" + address
 +                            + "] was cancelled because of too many packets (Total: " + simplify(packetsVls) + "vls Size: "
@@ -958,7 +958,7 @@ index 00000000..7189a7f3
 +    }
 +
 +    public void printPackets() {
-+        if (FlameCord.getInstance().getFlameCordConfiguration().isAntibotPacketsDebug()
++        if (MangoCord.getInstance().getMangoCordConfiguration().isAntibotPacketsDebug()
 +                && simplify(this.packetsVls) > 0) {
 +            System.out
 +                    .println("[Mangocord] [" + address
@@ -1013,22 +1013,22 @@ index 00000000..7189a7f3
 +        return packetsVlsRate;
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/PasswordCheck.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/PasswordCheck.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PasswordCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PasswordCheck.java
 new file mode 100644
 index 00000000..68555de3
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/PasswordCheck.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PasswordCheck.java
 @@ -0,0 +1,69 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
 +
 +public class PasswordCheck {
-+    private FlameCordConfiguration config;
++    private MangoCordConfiguration config;
 +    private AddressDataManager addressDataManager;
 +    private LoggerWrapper logger;
 +    private String lastNickname = "";
@@ -1036,12 +1036,12 @@ index 00000000..68555de3
 +    private int repeatCount = 0;
 +
 +    public PasswordCheck(final AddressDataManager addressDataManager) {
-+        this.config = FlameCord.getInstance().getFlameCordConfiguration();
-+        this.logger = FlameCord.getInstance().getLoggerWrapper();
++        this.config = MangoCord.getInstance().getMangoCordConfiguration();
++        this.logger = MangoCord.getInstance().getLoggerWrapper();
 +        this.addressDataManager = addressDataManager;
 +    }
 +
-+    private void updatePassword(final FlameCordConfiguration config, final String nickname, final String password) {
++    private void updatePassword(final MangoCordConfiguration config, final String nickname, final String password) {
 +        if (!nickname.equals(lastNickname)) {
 +            if (password.equals(lastPassword)) {
 +                if (repeatCount < config.getAntibotPasswordLimit()) {
@@ -1088,13 +1088,13 @@ index 00000000..68555de3
 +        return repeatCount;
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/ProxyCheck.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/ProxyCheck.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/ProxyCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/ProxyCheck.java
 new file mode 100644
 index 00000000..3b3d4d2f
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/ProxyCheck.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/ProxyCheck.java
 @@ -0,0 +1,180 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.io.BufferedReader;
 +import java.io.InputStreamReader;
@@ -1104,19 +1104,19 @@ index 00000000..3b3d4d2f
 +import java.util.Collection;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
 +
 +public class ProxyCheck {
-+    private FlameCordConfiguration config;
++    private MangoCordConfiguration config;
 +    private LoggerWrapper logger;
 +    private AddressDataManager addressDataManager;
 +    private String proxies = "";
 +
 +    public ProxyCheck(AddressDataManager addressDataManager) {
 +        this.addressDataManager = addressDataManager;
-+        this.config = FlameCord.getInstance().getFlameCordConfiguration();
-+        this.logger = FlameCord.getInstance().getLoggerWrapper();
++        this.config = MangoCord.getInstance().getMangoCordConfiguration();
++        this.logger = MangoCord.getInstance().getLoggerWrapper();
 +    }
 +
 +    public void updateProxies() {
@@ -1124,7 +1124,7 @@ index 00000000..3b3d4d2f
 +        Collection<String> lists = config.getAntibotProxyLists();
 +
 +        // send updating proxies message
-+        FlameCord.getInstance().getLoggerWrapper().getLogger()
++        MangoCord.getInstance().getLoggerWrapper().getLogger()
 +                .info("[Mangocord] Updating proxy database from " + lists.size() + " websites... (It can take a while!)");
 +
 +        // create a string builder to store the content
@@ -1175,11 +1175,11 @@ index 00000000..3b3d4d2f
 +                    in.close();
 +                } else {
 +                    // print an error message
-+                    FlameCord.getInstance().getLoggerWrapper().log(Level.INFO, "GET request failed for " + website);
++                    MangoCord.getInstance().getLoggerWrapper().log(Level.INFO, "GET request failed for " + website);
 +                }
 +            } catch (Exception ex) {
 +                // print an error message
-+                FlameCord.getInstance().getLoggerWrapper().log(Level.INFO, "GET request failed for " + website);
++                MangoCord.getInstance().getLoggerWrapper().log(Level.INFO, "GET request failed for " + website);
 +            }
 +        }
 +
@@ -1187,7 +1187,7 @@ index 00000000..3b3d4d2f
 +        timeTook = (System.currentTimeMillis() - timeTook) / 1000;
 +
 +        // send updated proxies message
-+        FlameCord.getInstance().getLoggerWrapper().getLogger()
++        MangoCord.getInstance().getLoggerWrapper().getLogger()
 +                .info("[Mangocord] Loaded a total of " + proxyCount + " proxies to the database! (Took " + timeTook + " seconds)");
 +
 +        // set the updated proxy list
@@ -1234,7 +1234,7 @@ index 00000000..3b3d4d2f
 +
 +        try {
 +            // Create a URL object with the API endpoint and the IP parameter
-+            URL url = new URL("https://check.getipintel.net/check.php?ip=" + ip + "&contact=" + FlameCord.getInstance().getFlameCordConfiguration().getAntibotProxyEmail());
++            URL url = new URL("https://check.getipintel.net/check.php?ip=" + ip + "&contact=" + MangoCord.getInstance().getMangoCordConfiguration().getAntibotProxyEmail());
 +
 +            // Open a connection to the URL
 +            HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -1274,28 +1274,28 @@ index 00000000..3b3d4d2f
 +        }
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/RatelimitCheck.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/RatelimitCheck.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/RatelimitCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/RatelimitCheck.java
 new file mode 100644
 index 00000000..51c1866e
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/RatelimitCheck.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/RatelimitCheck.java
 @@ -0,0 +1,52 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
 +
 +public class RatelimitCheck {
-+    private FlameCordConfiguration config;
++    private MangoCordConfiguration config;
 +    private LoggerWrapper logger;
 +    private AddressDataManager addressDataManager;
 +
 +    public RatelimitCheck(final AddressDataManager addressDataManager) {
-+        this.config = FlameCord.getInstance().getFlameCordConfiguration();
-+        this.logger = FlameCord.getInstance().getLoggerWrapper();
++        this.config = MangoCord.getInstance().getMangoCordConfiguration();
++        this.logger = MangoCord.getInstance().getLoggerWrapper();
 +        this.addressDataManager = addressDataManager;
 +    }
 +
@@ -1332,30 +1332,30 @@ index 00000000..51c1866e
 +        return false;
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/ReconnectCheck.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/ReconnectCheck.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/ReconnectCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/ReconnectCheck.java
 new file mode 100644
 index 00000000..d38ffc9e
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/ReconnectCheck.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/ReconnectCheck.java
 @@ -0,0 +1,53 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
 +
 +public class ReconnectCheck {
-+    private FlameCordConfiguration config;
++    private MangoCordConfiguration config;
 +    private LoggerWrapper logger;
 +    private AddressDataManager addressDataManager;
 +    private int connections = 0;
 +    private long lastConnection = 0;
 +
 +    public ReconnectCheck(final AddressDataManager addressDataManager) {
-+        this.config = FlameCord.getInstance().getFlameCordConfiguration();
-+        this.logger = FlameCord.getInstance().getLoggerWrapper();
++        this.config = MangoCord.getInstance().getMangoCordConfiguration();
++        this.logger = MangoCord.getInstance().getLoggerWrapper();
 +        this.addressDataManager = addressDataManager;
 +    }
 +
@@ -1391,13 +1391,13 @@ index 00000000..d38ffc9e
 +        return false;
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/StatsData.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/StatsData.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/StatsData.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/StatsData.java
 new file mode 100644
 index 00000000..44d773ab
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/antibot/StatsData.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/StatsData.java
 @@ -0,0 +1,75 @@
-+package dev._2lstudios.flamecord.antibot;
++package dev._2lstudios.mangcord.antibot;
 +
 +public class StatsData {
 +    // Time of the last second
@@ -1472,14 +1472,14 @@ index 00000000..44d773ab
 +        return totalConnections;
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MangoCordConfiguration.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MangoCordConfiguration.java
 index 14665b1f..241f5a0e 100644
---- a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
+--- a/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MangoCordConfiguration.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MangoCordConfiguration.java
 @@ -15,6 +15,223 @@ import net.md_5.bungee.config.Configuration;
  import net.md_5.bungee.config.ConfigurationProvider;
  
- public class FlameCordConfiguration extends FlameConfig {
+ public class MangoCordConfiguration extends FlameConfig {
 +    // Antibot accounts
 +    @Getter
 +    private boolean antibotAccountsEnabled = true;
@@ -1602,7 +1602,7 @@ index 14665b1f..241f5a0e 100644
 +    @Getter
 +    private boolean antibotProxyOnlineCheck = false;
 +    @Getter
-+    private String antibotProxyEmail = "flamecord@gmail.com";
++    private String antibotProxyEmail = "mangcord@gmail.com";
 +    @Getter
 +    private Collection<String> antibotProxyWhitelist = Arrays.asList("127.0.0.1");
 +    @Getter
@@ -1697,28 +1697,28 @@ index 14665b1f..241f5a0e 100644
 +        this.antibotProxyLists = setIfUnexistant("antibot.proxy.lists", this.antibotProxyLists, config);
 +    }
 +
-     // FlameCord - TCP Fast Open
+     // MangoCord - TCP Fast Open
      @Getter
      private int tcpFastOpen = 3;
-@@ -133,6 +350,9 @@ public class FlameCordConfiguration extends FlameConfig {
+@@ -133,6 +350,9 @@ public class MangoCordConfiguration extends FlameConfig {
  
          this.tcpFastOpen = setIfUnexistant("tcp-fast-open", this.tcpFastOpen, configuration);
  
-+        // FlameCord - Antibot System
++        // MangoCord - Antibot System
 +        loadAntibot(configuration, whitelistedAddresses);
 +
          save(configuration, configurationFile);
      }
  }
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/MessagesConfiguration.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/MessagesConfiguration.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MessagesConfiguration.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MessagesConfiguration.java
 index ae179438..820b012b 100644
---- a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/MessagesConfiguration.java
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/MessagesConfiguration.java
+--- a/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MessagesConfiguration.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MessagesConfiguration.java
 @@ -80,6 +80,23 @@ public class MessagesConfiguration extends FlameConfig {
  		setIfUnexistant("command_ip", "&9IP of {0} is {1}", configuration);
  		setIfUnexistant("illegal_chat_characters", "&cIllegal characters in chat ({0})", configuration);
  
-+		// FlameCord start - Antibot System
++		// MangoCord start - Antibot System
 +		setIfUnexistant("antibot_accounts", "&c&lMangoCord\n\n&cYou have too many accounts! ({0})\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
 +		setIfUnexistant("antibot_fastchat", "&c&lMangoCord\n\n&cYou are chatting too fast!\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
 +		setIfUnexistant("antibot_firewall", "&c&lMangoCord\n\n&cYou are blocked from this server!\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
@@ -1730,43 +1730,43 @@ index ae179438..820b012b 100644
 +		setIfUnexistant("antibot_proxy", "&c&lMangoCord\n\n&cYou are using a Proxy/VPN! ({0})\n\n&cError? Contact us on discord.gg/VmcKYCmQPn", configuration);
 +		setIfUnexistant("antibot_stats", "&c&lMangoCord Antibot Stats\n &7■ Total Pings: &a{0}\n &7■ Total Connections: &b{1}\n\n &7■ Current Pings: &a{2}\n &7■ Current Connections: &b{3}", configuration);
 +		
-+		setIfUnexistant("flamecord_firewall_help", "&c/mangocord firewall <add/remove> <ip>", configuration);
-+		setIfUnexistant("flamecord_firewall_add", "&cThe ip {0} was added to the firewall!", configuration);
-+		setIfUnexistant("flamecord_firewall_remove", "&cThe ip {0} was removed from the firewall!", configuration);
-+		// FlameCord end - Antibot System
++		setIfUnexistant("mangcord_firewall_help", "&c/mangocord firewall <add/remove> <ip>", configuration);
++		setIfUnexistant("mangcord_firewall_add", "&cThe ip {0} was added to the firewall!", configuration);
++		setIfUnexistant("mangcord_firewall_remove", "&cThe ip {0} was removed from the firewall!", configuration);
++		// MangoCord end - Antibot System
 +
  		for (final String key : configuration.getKeys()) {
  			final Object value = configuration.get(key);
  
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/enums/PacketsCheckResult.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/enums/PacketsCheckResult.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/enums/PacketsCheckResult.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/enums/PacketsCheckResult.java
 new file mode 100644
 index 00000000..285810ea
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/enums/PacketsCheckResult.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/enums/PacketsCheckResult.java
 @@ -0,0 +1,5 @@
-+package dev._2lstudios.flamecord.enums;
++package dev._2lstudios.mangcord.enums;
 +
 +public enum PacketsCheckResult {
 +    KICK, CANCEL, NONE
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/enums/PacketsViolationReason.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/enums/PacketsViolationReason.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/enums/PacketsViolationReason.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/enums/PacketsViolationReason.java
 new file mode 100644
 index 00000000..c19c4965
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/enums/PacketsViolationReason.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/enums/PacketsViolationReason.java
 @@ -0,0 +1,5 @@
-+package dev._2lstudios.flamecord.enums;
++package dev._2lstudios.mangcord.enums;
 +
 +public enum PacketsViolationReason {
 +    SIZE, RATE
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/utils/ProtocolUtil.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/utils/ProtocolUtil.java
+diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/utils/ProtocolUtil.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/utils/ProtocolUtil.java
 new file mode 100644
 index 00000000..901ab453
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/utils/ProtocolUtil.java
++++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/utils/ProtocolUtil.java
 @@ -0,0 +1,27 @@
-+package dev._2lstudios.flamecord.utils;
++package dev._2lstudios.mangcord.utils;
 +
 +import io.netty.buffer.ByteBuf;
 +
@@ -1802,10 +1802,10 @@ index 6316143f..f2c8c58b 100644
              }
          }
  
-+        // FlameCord start - Antibot Packet Check
++        // MangoCord start - Antibot Packet Check
 +        if (prot == protocol.TO_SERVER) {
-+            dev._2lstudios.flamecord.antibot.PacketsCheck packetsCheck = FlameCord.getInstance().getCheckManager().getPacketsCheck();
-+            dev._2lstudios.flamecord.enums.PacketsCheckResult result = packetsCheck.check(ctx.channel().remoteAddress(), in);
++            dev._2lstudios.mangcord.antibot.PacketsCheck packetsCheck = MangoCord.getInstance().getCheckManager().getPacketsCheck();
++            dev._2lstudios.mangcord.enums.PacketsCheckResult result = packetsCheck.check(ctx.channel().remoteAddress(), in);
 +
 +            switch (result) {
 +                case KICK:
@@ -1823,14 +1823,14 @@ index 6316143f..f2c8c58b 100644
 +                    break;
 +            }
 +        }
-+        // FlameCord end - Antibot Packet Check
++        // MangoCord end - Antibot Packet Check
 +
-         ByteBuf slice = in.duplicate(); // FlameCord - Duplicate buf instead of Copy
+         ByteBuf slice = in.duplicate(); // MangoCord - Duplicate buf instead of Copy
  
          Object packetTypeInfo = null;
          try
          {
-+            // FlameCord - Duplicate buf instead of Copy
++            // MangoCord - Duplicate buf instead of Copy
 +            slice = in.duplicate(); // Can't slice this one due to EntityMap :(
 +
              // Waterfall start
@@ -1866,16 +1866,16 @@ index 3a802ca4..c23e6856 100644
      private static boolean DIRECT_WARNING;
  
      @Override
-diff --git a/proxy/src/main/java/dev/_2lstudios/flamecord/commands/FlameCordCommand.java b/proxy/src/main/java/dev/_2lstudios/flamecord/commands/FlameCordCommand.java
+diff --git a/proxy/src/main/java/dev/_2lstudios/mangcord/commands/MangoCordCommand.java b/proxy/src/main/java/dev/_2lstudios/mangcord/commands/MangoCordCommand.java
 index fb81adee..56bc46eb 100644
---- a/proxy/src/main/java/dev/_2lstudios/flamecord/commands/FlameCordCommand.java
-+++ b/proxy/src/main/java/dev/_2lstudios/flamecord/commands/FlameCordCommand.java
+--- a/proxy/src/main/java/dev/_2lstudios/mangcord/commands/MangoCordCommand.java
++++ b/proxy/src/main/java/dev/_2lstudios/mangcord/commands/MangoCordCommand.java
 @@ -4,6 +4,7 @@ import java.util.Collection;
  import java.util.HashSet;
  
- import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.antibot.StatsData;
- import dev._2lstudios.flamecord.configuration.MessagesConfiguration;
+ import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.antibot.StatsData;
+ import dev._2lstudios.mangcord.configuration.MessagesConfiguration;
  import net.md_5.bungee.BungeeCord;
  import net.md_5.bungee.api.CommandSender;
 @@ -27,9 +28,7 @@ private final BungeeCord bungeeCord;
@@ -1887,14 +1887,14 @@ index fb81adee..56bc46eb 100644
 -                switch (arg0) {
 +                switch (args[0]) {
                      case "reload": {
-                         // FlameCord - Collect ips from servers
+                         // MangoCord - Collect ips from servers
                          final Collection<String> whitelistedAddresses = new HashSet<>();
 @@ -43,9 +42,44 @@ private final BungeeCord bungeeCord;
-                                 .fromLegacyText(messagesConfiguration.getTranslation("flamecord_reload")));
+                                 .fromLegacyText(messagesConfiguration.getTranslation("mangcord_reload")));
                          break;
                      }
 +                    case "stats": {
-+                        StatsData statsData = FlameCord.getInstance().getStatsData();
++                        StatsData statsData = MangoCord.getInstance().getStatsData();
 +                        int totalPings = statsData.getTotalPings();
 +                        int totalConnections = statsData.getTotalConnections();
 +                        int lastPings = statsData.getLastPings();
@@ -1909,30 +1909,30 @@ index fb81adee..56bc46eb 100644
 +
 +                            switch (args[1]) {
 +                                case "add": {
-+                                    FlameCord.getInstance().getAddressDataManager().getAddressData(ip).firewall("Blacklisted by command");
-+                                    sender.sendMessage(TextComponent.fromLegacyText(messagesConfiguration.getTranslation("flamecord_firewall_add", ip)));
++                                    MangoCord.getInstance().getAddressDataManager().getAddressData(ip).firewall("Blacklisted by command");
++                                    sender.sendMessage(TextComponent.fromLegacyText(messagesConfiguration.getTranslation("mangcord_firewall_add", ip)));
 +                                    break;
 +                                }
 +                                case "remove": {
-+                                    FlameCord.getInstance().getAddressDataManager().getAddressData(ip).unfirewall();
-+                                    sender.sendMessage(TextComponent.fromLegacyText(messagesConfiguration.getTranslation("flamecord_firewall_remove", ip)));
++                                    MangoCord.getInstance().getAddressDataManager().getAddressData(ip).unfirewall();
++                                    sender.sendMessage(TextComponent.fromLegacyText(messagesConfiguration.getTranslation("mangcord_firewall_remove", ip)));
 +                                    break;
 +                                }
 +                                default: {
-+                                    sender.sendMessage(TextComponent.fromLegacyText(messagesConfiguration.getTranslation("flamecord_firewall_help")));
++                                    sender.sendMessage(TextComponent.fromLegacyText(messagesConfiguration.getTranslation("mangcord_firewall_help")));
 +                                    break;
 +                                }
 +                            }
 +                        } else {
-+                            sender.sendMessage(TextComponent.fromLegacyText(messagesConfiguration.getTranslation("flamecord_firewall_help")));
++                            sender.sendMessage(TextComponent.fromLegacyText(messagesConfiguration.getTranslation("mangcord_firewall_help")));
 +                        }
 +
 +                        break;
 +                    }
                      default: {
 -                        sender.sendMessage(TextComponent.fromLegacyText(
--                                messagesConfiguration.getTranslation("flamecord_help", bungeeCord.getVersion())));
-+                        sender.sendMessage(TextComponent.fromLegacyText(messagesConfiguration.getTranslation("flamecord_help", bungeeCord.getVersion())));
+-                                messagesConfiguration.getTranslation("mangcord_help", bungeeCord.getVersion())));
++                        sender.sendMessage(TextComponent.fromLegacyText(messagesConfiguration.getTranslation("mangcord_help", bungeeCord.getVersion())));
                          break;
                      }
                  }
@@ -1944,10 +1944,10 @@ index d4e3ec6f..0d3bed74 100644
                      } catch (InterruptedException ignored) {}
          }
  
-+        // FlameCord start - Antibot System
-+        FlameCord.getInstance().shutdown();
-+        getLogger().info( "Shutting down FlameCord linux command thread" );
-+        // FlameCord end - Antibot System
++        // MangoCord start - Antibot System
++        MangoCord.getInstance().shutdown();
++        getLogger().info( "Shutting down MangoCord linux command thread" );
++        // MangoCord end - Antibot System
 +
          getLogger().info( "Thank you and goodbye" );
          // Need to close loggers after last message!
@@ -1959,12 +1959,12 @@ index 5396029c..443e2718 100644
 @@ -22,8 +22,8 @@ import javax.crypto.SecretKey;
  import javax.crypto.spec.SecretKeySpec;
  
- import dev._2lstudios.flamecord.FlameCord;
+ import dev._2lstudios.mangcord.MangoCord;
 -
--import dev._2lstudios.flamecord.configuration.FlameConfig;
-+import dev._2lstudios.flamecord.antibot.AddressData;
-+import dev._2lstudios.flamecord.antibot.CheckManager;
- import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
+-import dev._2lstudios.mangcord.configuration.FlameConfig;
++import dev._2lstudios.mangcord.antibot.AddressData;
++import dev._2lstudios.mangcord.antibot.CheckManager;
+ import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
  import lombok.Getter;
  import lombok.RequiredArgsConstructor;
 @@ -422,6 +422,22 @@ public class InitialHandler extends PacketHandler implements PendingConnection
@@ -1972,20 +1972,20 @@ index 5396029c..443e2718 100644
      {
          Preconditions.checkState( thisState == State.HANDSHAKE, "Not expecting HANDSHAKE" );
 +
-+        // FlameCord start - Antibot System
++        // MangoCord start - Antibot System
 +        // Close and firewall on invalid protocol
 +        int protocol = handshake.getRequestedProtocol();
 +
 +        if (protocol != 1 && protocol != 2) {
-+            if ( FlameCord.getInstance().getFlameCordConfiguration().isAntibotRatelimitFirewall() )
++            if ( MangoCord.getInstance().getMangoCordConfiguration().isAntibotRatelimitFirewall() )
 +            {
-+                FlameCord.getInstance().getAddressDataManager().getAddressData(ch.getChannel().remoteAddress()).firewall("Invalid handshake protocol");
++                MangoCord.getInstance().getAddressDataManager().getAddressData(ch.getChannel().remoteAddress()).firewall("Invalid handshake protocol");
 +            }
 +
 +            ch.close();
 +            return;
 +        }
-+        // FlameCord end - Antibot System
++        // MangoCord end - Antibot System
 +
          this.handshake = handshake;
          ch.setVersion( handshake.getProtocolVersion() );
@@ -1994,10 +1994,10 @@ index 5396029c..443e2718 100644
  
          this.virtualHost = InetSocketAddress.createUnresolved( handshake.getHost(), handshake.getPort() );
  
-+        // FlameCord start - Antibot System
++        // MangoCord start - Antibot System
 +        SocketAddress remoteAddress = ch.getRemoteAddress();
-+        AddressData addressData = FlameCord.getInstance().getAddressDataManager().getAddressData( remoteAddress );
-+        CheckManager checkManager = FlameCord.getInstance().getCheckManager();
++        AddressData addressData = MangoCord.getInstance().getAddressDataManager().getAddressData( remoteAddress );
++        CheckManager checkManager = MangoCord.getInstance().getCheckManager();
 +
 +        if (protocol == 2) {
 +            // Set state and protocol to prevent errors
@@ -2020,7 +2020,7 @@ index 5396029c..443e2718 100644
 +
 +            if ( checkManager.getReconnectCheck().check( remoteAddress ) )
 +            {
-+                disconnect( bungee.getTranslation( "antibot_reconnect", Math.max(0, FlameCord.getInstance().getFlameCordConfiguration().getAntibotReconnectAttempts() - addressData.getTotalConnections() ), Math.max(0, FlameCord.getInstance().getFlameCordConfiguration().getAntibotReconnectPings() - addressData.getTotalPings() ) ) );
++                disconnect( bungee.getTranslation( "antibot_reconnect", Math.max(0, MangoCord.getInstance().getMangoCordConfiguration().getAntibotReconnectAttempts() - addressData.getTotalConnections() ), Math.max(0, MangoCord.getInstance().getMangoCordConfiguration().getAntibotReconnectPings() - addressData.getTotalPings() ) ) );
 +                return;
 +            }
 +
@@ -2034,9 +2034,9 @@ index 5396029c..443e2718 100644
 +        // Reset state for event
 +        thisState = State.HANDSHAKE;
 +        ch.setProtocol( Protocol.HANDSHAKE );
-+        // FlameCord end - Antibot System
++        // MangoCord end - Antibot System
 +
-         // FlameCord - Make PlayerHandshakeEvent cancellable
+         // MangoCord - Make PlayerHandshakeEvent cancellable
          if (bungee.getPluginManager().callEvent(new PlayerHandshakeEvent(InitialHandler.this, handshake)).isCancelled()) {
              ch.close();
 @@ -463,6 +521,17 @@ public class InitialHandler extends PacketHandler implements PendingConnection
@@ -2044,7 +2044,7 @@ index 5396029c..443e2718 100644
                  thisState = State.STATUS;
                  ch.setProtocol( Protocol.STATUS );
 +
-+                // FlameCord start - Antibot System
++                // MangoCord start - Antibot System
 +                addressData.addPing();
 +
 +                if ( checkManager.getRatelimitCheck().check( remoteAddress, protocol ) )
@@ -2052,7 +2052,7 @@ index 5396029c..443e2718 100644
 +                    ch.close();
 +                    return;
 +                }
-+                // FlameCord end - Antibot System
++                // MangoCord end - Antibot System
 +
                  break;
              case 2:
@@ -2069,9 +2069,9 @@ index 5396029c..443e2718 100644
              return;
          }
  
-+        // FlameCord start - Antibot System
-+        CheckManager checkManager = FlameCord.getInstance().getCheckManager();
-+        AddressData addressData = FlameCord.getInstance().getAddressDataManager().getAddressData( ch.getRemoteAddress() );
++        // MangoCord start - Antibot System
++        CheckManager checkManager = MangoCord.getInstance().getCheckManager();
++        AddressData addressData = MangoCord.getInstance().getAddressDataManager().getAddressData( ch.getRemoteAddress() );
 +        String nickname = loginRequest.getData();
 +
 +        addressData.addNickname( nickname );
@@ -2087,7 +2087,7 @@ index 5396029c..443e2718 100644
 +            disconnect( bungee.getTranslation( "antibot_nickname", loginRequest.getData() ) );
 +            return;
 +        }
-+        // FlameCord end - Antibot System
++        // MangoCord end - Antibot System
 +
          // If offline mode and they are already on, don't allow connect
          // We can just check by UUID here as names are based on UUID
@@ -2101,8 +2101,8 @@ index 86c469ee..a472535a 100644
  import com.mojang.brigadier.suggestion.Suggestion;
  import com.mojang.brigadier.suggestion.Suggestions;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.antibot.CheckManager;
++import dev._2lstudios.mangcord.MangoCord;
++import dev._2lstudios.mangcord.antibot.CheckManager;
  import io.netty.channel.Channel;
  import java.util.ArrayList;
  import java.util.LinkedList;
@@ -2116,8 +2116,8 @@ index 86c469ee..a472535a 100644
              throw CancelSendSignal.INSTANCE;
          }
  
-+        // FlameCord start - Antibot System
-+        CheckManager checkManager = FlameCord.getInstance().getCheckManager();
++        // MangoCord start - Antibot System
++        CheckManager checkManager = MangoCord.getInstance().getCheckManager();
 +        java.net.SocketAddress socketAddress = con.getCh().getRemoteAddress();
 +
 +        if ( checkManager.getFastChatCheck().check( socketAddress ) )
@@ -2131,7 +2131,7 @@ index 86c469ee..a472535a 100644
 +            con.disconnect( bungee.getTranslation( "antibot_password", checkManager.getPasswordCheck().getRepeatCount() ) );
 +            throw CancelSendSignal.INSTANCE;
 +        }
-+        // FlameCord end - Antibot System
++        // MangoCord end - Antibot System
 +
          ChatEvent chatEvent = new ChatEvent( con, con.getServer(), message );
          if ( !bungee.getPluginManager().callEvent( chatEvent ).isCancelled() )
@@ -2145,7 +2145,7 @@ index e2911d5e..d853b404 100644
  import io.netty.handler.codec.http.LastHttpContent;
  import java.nio.charset.Charset;
 +
-+import dev._2lstudios.flamecord.FlameCord;
++import dev._2lstudios.mangcord.MangoCord;
  import lombok.RequiredArgsConstructor;
  import net.md_5.bungee.api.Callback;
  
@@ -2155,9 +2155,9 @@ index e2911d5e..d853b404 100644
      {
 +        // Flamecord start - Antibot System
 +        String reason = cause.getClass().getSimpleName();
-+        if (FlameCord.getInstance().getFlameCordConfiguration().getAntibotFirewalledExceptions().contains(reason))
++        if (MangoCord.getInstance().getMangoCordConfiguration().getAntibotFirewalledExceptions().contains(reason))
 +        {
-+            FlameCord.getInstance().getAddressDataManager().getAddressData(ctx.channel().remoteAddress()).firewall(reason);
++            MangoCord.getInstance().getAddressDataManager().getAddressData(ctx.channel().remoteAddress()).firewall(reason);
 +        }
 +        // Flamecord end - Antibot System
 +
@@ -2173,12 +2173,12 @@ index b3fa4835..6f1d8336 100644
          }
      }
 +
-+    // FlameCord start - Antibot System
++    // MangoCord start - Antibot System
 +    // Make the channel accessible
 +    public Channel getChannel() {
 +        return ch;
 +    }
-+    // FlameCord end - Antibot System
++    // MangoCord end - Antibot System
  }
 diff --git a/proxy/src/main/java/net/md_5/bungee/netty/HandlerBoss.java b/proxy/src/main/java/net/md_5/bungee/netty/HandlerBoss.java
 index 14e3004f..b61ed521 100644
@@ -2198,9 +2198,9 @@ index 14e3004f..b61ed521 100644
      {
 +        // Flamecord start - Antibot System
 +        String reason = cause.getClass().getSimpleName();
-+        if (FlameCord.getInstance().getFlameCordConfiguration().getAntibotFirewalledExceptions().contains(reason))
++        if (MangoCord.getInstance().getMangoCordConfiguration().getAntibotFirewalledExceptions().contains(reason))
 +        {
-+            FlameCord.getInstance().getAddressDataManager().getAddressData(ctx.channel().remoteAddress()).firewall(reason);
++            MangoCord.getInstance().getAddressDataManager().getAddressData(ctx.channel().remoteAddress()).firewall(reason);
 +        }
 +        // Flamecord end - Antibot System
 +
@@ -2215,20 +2215,20 @@ index 1a5a0e08..9266ba8f 100644
          {
              SocketAddress remoteAddress = ( ch.remoteAddress() == null ) ? ch.parent().localAddress() : ch.remoteAddress();
  
-+            // FlameCord start - Antibot System
-+            dev._2lstudios.flamecord.FlameCord flameCord = FlameCord.getInstance();
-+            String firewallReason = flameCord.getAddressDataManager().getAddressData(remoteAddress).getFirewallReason();
++            // MangoCord start - Antibot System
++            dev._2lstudios.mangcord.MangoCord mangoCord = MangoCord.getInstance();
++            String firewallReason = mangoCord.getAddressDataManager().getAddressData(remoteAddress).getFirewallReason();
 +            if ( firewallReason != null )
 +            {
-+                if ( flameCord.getFlameCordConfiguration().isAntibotFirewallLog() )
++                if ( mangoCord.getMangoCordConfiguration().isAntibotFirewallLog() )
 +                {
-+                    flameCord.getLoggerWrapper().log( Level.INFO, "[Mangocord] [{0}] is firewalled from the server. ({1})", new Object[]{ remoteAddress, firewallReason } );
++                    mangoCord.getLoggerWrapper().log( Level.INFO, "[Mangocord] [{0}] is firewalled from the server. ({1})", new Object[]{ remoteAddress, firewallReason } );
 +                }
 +
 +                ch.close();
 +                return;
 +            }
-+            // FlameCord end - Antibot System
++            // MangoCord end - Antibot System
 +
              if ( BungeeCord.getInstance().getConnectionThrottle() != null && BungeeCord.getInstance().getConnectionThrottle().throttle( remoteAddress ) )
              {
