@@ -12,7 +12,7 @@
     <url>https://github.com/LuciaNishimiya/MangoCord</url>
 
     <modules>
-        <module>FlameCord-Proxy</module>
+        <module>MangoCord-Proxy</module>
     </modules>
 
     <build>
