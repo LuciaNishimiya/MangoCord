@@ -18,7 +18,7 @@ index 70a1192e7..6316143f7 100644
 +            {
 +                throw new FastDecoderException( "[" + ctx.channel().remoteAddress() + "] <-> MinecraftDecoder received invalid packet #1, id " + packetId );
 +            }
-+            // Flamecord End
++            // Mangocord End
              DefinedPacket packet = prot.createPacket( packetId, protocolVersion, supportsForge );
              if ( packet != null )
              {

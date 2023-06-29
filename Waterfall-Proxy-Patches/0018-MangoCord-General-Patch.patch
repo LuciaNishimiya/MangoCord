@@ -17,25 +17,25 @@ index 20edd900..fb80f233 100644
          <relativePath>../pom.xml</relativePath>
      </parent>
  
-     <groupId>dev._2lstudios</groupId>
+     <groupId>dev.lucianishimiya</groupId>
      <artifactId>waterfall-mangocord</artifactId>
 -    <version>1.19-R0.1-SNAPSHOT</version>
 +    <version>1.20-R0.1-SNAPSHOT</version>
      <packaging>jar</packaging>
  
      <name>Waterfall-MangoCord</name>
-diff --git a/mangocord/src/main/java/dev/_2lstudios/mangocord/MangoCord.java b/mangocord/src/main/java/dev/_2lstudios/mangocord/MangoCord.java
+diff --git a/mangocord/src/main/java/dev/lucianishimiya/mangocord/MangoCord.java b/mangocord/src/main/java/dev/lucianishimiya/mangocord/MangoCord.java
 new file mode 100644
 index 00000000..f3d5c029
 --- /dev/null
-+++ b/mangocord/src/main/java/dev/_2lstudios/mangocord/MangoCord.java
++++ b/mangocord/src/main/java/dev/lucianishimiya/mangocord/MangoCord.java
 @@ -0,0 +1,31 @@
-+package dev._2lstudios.mangocord;
++package dev.lucianishimiya.mangocord;
 +
 +import java.util.Collection;
 +import java.util.logging.Logger;
 +
-+import dev._2lstudios.mangocord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangocord.configuration.MangoCordConfiguration;
 +import lombok.Getter;
 +import net.md_5.bungee.config.ConfigurationProvider;
 +import net.md_5.bungee.config.YamlConfiguration;
@@ -62,13 +62,13 @@ index 00000000..f3d5c029
 +    }
 +}
 \ No newline at end of file
-diff --git a/mangocord/src/main/java/dev/_2lstudios/mangocord/configuration/FlameConfig.java b/mangocord/src/main/java/dev/_2lstudios/mangocord/configuration/FlameConfig.java
+diff --git a/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MangoConfig.java b/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MangoConfig.java
 new file mode 100644
 index 00000000..e6c660d1
 --- /dev/null
-+++ b/mangocord/src/main/java/dev/_2lstudios/mangocord/configuration/FlameConfig.java
++++ b/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MangoConfig.java
 @@ -0,0 +1,74 @@
-+package dev._2lstudios.mangocord.configuration;
++package dev.lucianishimiya.mangocord.configuration;
 +
 +import java.io.File;
 +import java.io.IOException;
@@ -80,7 +80,7 @@ index 00000000..e6c660d1
 +import net.md_5.bungee.config.ConfigurationProvider;
 +import net.md_5.bungee.config.YamlConfiguration;
 +
-+public class FlameConfig {
++public class MangoConfig {
 +    Configuration load(File file) {
 +        ConfigurationProvider configurationProvider = ConfigurationProvider.getProvider(YamlConfiguration.class);
 +
@@ -142,13 +142,13 @@ index 00000000..e6c660d1
 +        }
 +    }
 +}
-diff --git a/mangocord/src/main/java/dev/_2lstudios/mangocord/configuration/MangoCordConfiguration.java b/mangocord/src/main/java/dev/_2lstudios/mangocord/configuration/MangoCordConfiguration.java
+diff --git a/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MangoCordConfiguration.java b/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MangoCordConfiguration.java
 new file mode 100644
 index 00000000..241e8ed9
 --- /dev/null
-+++ b/mangocord/src/main/java/dev/_2lstudios/mangocord/configuration/MangoCordConfiguration.java
++++ b/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MangoCordConfiguration.java
 @@ -0,0 +1,20 @@
-+package dev._2lstudios.mangocord.configuration;
++package dev.lucianishimiya.mangocord.configuration;
 +
 +import java.io.File;
 +import java.util.ArrayList;
@@ -160,7 +160,7 @@ index 00000000..241e8ed9
 +import net.md_5.bungee.config.Configuration;
 +import net.md_5.bungee.config.ConfigurationProvider;
 +
-+public class MangoCordConfiguration extends FlameConfig {
++public class MangoCordConfiguration extends MangoConfig {
 +    public MangoCordConfiguration(final ConfigurationProvider configurationProvider, final Collection<String> whitelistedAddresses) {
 +        final File configurationFile = new File("./mangocord.yml");
 +        final Configuration configuration = load(configurationFile);
@@ -175,22 +175,22 @@ index 640f0ea2..70a1192e 100644
 @@ -1,5 +1,6 @@
  package net.md_5.bungee.protocol;
  
-+import dev._2lstudios.mangocord.MangoCord;
++import dev.lucianishimiya.mangocord.MangoCord;
  import io.netty.buffer.ByteBuf;
  import io.netty.buffer.ByteBufUtil;
  import io.netty.channel.ChannelHandlerContext;
-diff --git a/proxy/src/main/java/dev/_2lstudios/mangocord/commands/MangoCordCommand.java b/proxy/src/main/java/dev/_2lstudios/mangocord/commands/MangoCordCommand.java
+diff --git a/proxy/src/main/java/dev/lucianishimiya/mangocord/commands/MangoCordCommand.java b/proxy/src/main/java/dev/lucianishimiya/mangocord/commands/MangoCordCommand.java
 new file mode 100644
 index 00000000..021b38d4
 --- /dev/null
-+++ b/proxy/src/main/java/dev/_2lstudios/mangocord/commands/MangoCordCommand.java
++++ b/proxy/src/main/java/dev/lucianishimiya/mangocord/commands/MangoCordCommand.java
 @@ -0,0 +1,58 @@
-+package dev._2lstudios.mangocord.commands;
++package dev.lucianishimiya.mangocord.commands;
 +
 +import java.util.Collection;
 +import java.util.HashSet;
 +
-+import dev._2lstudios.mangocord.MangoCord;
++import dev.lucianishimiya.mangocord.MangoCord;
 +import net.md_5.bungee.BungeeCord;
 +import net.md_5.bungee.api.CommandSender;
 +import net.md_5.bungee.api.chat.TextComponent;
@@ -252,7 +252,7 @@ index f4333c6f..91eaa39c 100644
  import com.google.gson.Gson;
  import com.google.gson.GsonBuilder;
 +
-+import dev._2lstudios.mangocord.MangoCord;
++import dev.lucianishimiya.mangocord.MangoCord;
  import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  import io.github.waterfallmc.waterfall.conf.WaterfallConfiguration;
  import io.github.waterfallmc.waterfall.event.ProxyExceptionEvent;
@@ -281,7 +281,7 @@ index cba1515b..900d0e4d 100644
  import com.google.common.base.Joiner;
  import com.google.common.base.Preconditions;
 +
-+import dev._2lstudios.mangocord.MangoCord;
++import dev.lucianishimiya.mangocord.MangoCord;
  import io.netty.buffer.ByteBuf;
  import io.netty.buffer.ByteBufAllocator;
  import java.net.InetSocketAddress;
@@ -338,7 +338,7 @@ index 32c57dad..ac004603 100644
  import javax.crypto.SecretKey;
  import javax.crypto.spec.SecretKeySpec;
  
-+import dev._2lstudios.mangocord.MangoCord;
++import dev.lucianishimiya.mangocord.MangoCord;
 +
  import lombok.Getter;
  import lombok.RequiredArgsConstructor;
@@ -375,7 +375,7 @@ index 4820267b..694ecdb0 100644
  
  import com.google.common.base.Preconditions;
 +
-+import dev._2lstudios.mangocord.MangoCord;
++import dev.lucianishimiya.mangocord.MangoCord;
  import io.netty.channel.ChannelHandlerContext;
  import io.netty.channel.ChannelInboundHandlerAdapter;
  import io.netty.handler.codec.CorruptedFrameException;
@@ -388,7 +388,7 @@ index 9227db06..f9227e01 100644
  
  import com.google.common.base.Preconditions;
 +
-+import dev._2lstudios.mangocord.MangoCord;
++import dev.lucianishimiya.mangocord.MangoCord;
  import io.github.waterfallmc.waterfall.event.ConnectionInitEvent;
  import io.netty.buffer.PooledByteBufAllocator;
  import io.netty.channel.Channel;

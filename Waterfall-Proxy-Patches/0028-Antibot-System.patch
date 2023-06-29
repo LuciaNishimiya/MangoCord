@@ -25,12 +25,12 @@ index 20edd900..95bdf348 100644
      </dependencies>
  
      <build>
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/MangoCord.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/MangoCord.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/MangoCord.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/MangoCord.java
 index 676ba95b..677b4a8e 100644
---- a/mangcord/src/main/java/dev/_2lstudios/mangcord/MangoCord.java
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/MangoCord.java
+--- a/mangcord/src/main/java/dev/lucianishimiya/mangcord/MangoCord.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/MangoCord.java
 @@ -1,8 +1,16 @@
- package dev._2lstudios.mangcord;
+ package dev.lucianishimiya.mangcord;
  
 +import java.io.IOException;
  import java.util.Collection;
@@ -39,13 +39,13 @@ index 676ba95b..677b4a8e 100644
 +import java.util.logging.Level;
  import java.util.logging.Logger;
  
-+import dev._2lstudios.mangcord.antibot.AddressDataManager;
-+import dev._2lstudios.mangcord.antibot.CheckManager;
-+import dev._2lstudios.mangcord.antibot.LoggerWrapper;
-+import dev._2lstudios.mangcord.antibot.StatsData;
- import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
- import dev._2lstudios.mangcord.configuration.MessagesConfiguration;
- import dev._2lstudios.mangcord.configuration.ModulesConfiguration;
++import dev.lucianishimiya.mangcord.antibot.AddressDataManager;
++import dev.lucianishimiya.mangcord.antibot.CheckManager;
++import dev.lucianishimiya.mangcord.antibot.LoggerWrapper;
++import dev.lucianishimiya.mangcord.antibot.StatsData;
+ import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
+ import dev.lucianishimiya.mangcord.configuration.MessagesConfiguration;
+ import dev.lucianishimiya.mangcord.configuration.ModulesConfiguration;
 @@ -13,8 +21,13 @@ import net.md_5.bungee.config.YamlConfiguration;
  public class MangoCord {
      @Getter
@@ -185,20 +185,20 @@ index 676ba95b..677b4a8e 100644
      }
  }
 \ No newline at end of file
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AccountsCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AccountsCheck.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/AccountsCheck.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/AccountsCheck.java
 new file mode 100644
 index 00000000..5cd9782a
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AccountsCheck.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/AccountsCheck.java
 @@ -0,0 +1,48 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.Collection;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
 +
 +public class AccountsCheck {
 +    private MangoCordConfiguration config;
@@ -239,20 +239,20 @@ index 00000000..5cd9782a
 +        return false;
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AddressData.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AddressData.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/AddressData.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/AddressData.java
 new file mode 100644
 index 00000000..7aa15796
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AddressData.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/AddressData.java
 @@ -0,0 +1,170 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.util.Collection;
 +import java.util.HashSet;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
 +
 +public class AddressData {
 +    private MangoCordConfiguration config;
@@ -415,13 +415,13 @@ index 00000000..7aa15796
 +        return nicknames.contains(nickname);
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AddressDataManager.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AddressDataManager.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/AddressDataManager.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/AddressDataManager.java
 new file mode 100644
 index 00000000..007be392
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/AddressDataManager.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/AddressDataManager.java
 @@ -0,0 +1,50 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.net.InetSocketAddress;
 +import java.net.SocketAddress;
@@ -471,16 +471,16 @@ index 00000000..007be392
 +        return addressData.size();
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/CheckManager.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/CheckManager.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/CheckManager.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/CheckManager.java
 new file mode 100644
 index 00000000..94fc7613
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/CheckManager.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/CheckManager.java
 @@ -0,0 +1,49 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
 +import lombok.Getter;
 +
 +public class CheckManager {
@@ -526,13 +526,13 @@ index 00000000..94fc7613
 +        this.countryCheck.unload();
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/CountryCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/CountryCheck.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/CountryCheck.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/CountryCheck.java
 new file mode 100644
 index 00000000..9f65a2b3
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/CountryCheck.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/CountryCheck.java
 @@ -0,0 +1,150 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.io.File;
 +import java.io.IOException;
@@ -549,8 +549,8 @@ index 00000000..9f65a2b3
 +import com.maxmind.db.MaxMindDbParameter;
 +import com.maxmind.db.Reader;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
 +
 +public class CountryCheck {
 +    private MangoCordConfiguration config;
@@ -682,19 +682,19 @@ index 00000000..9f65a2b3
 +        return false;
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/FastChatCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/FastChatCheck.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/FastChatCheck.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/FastChatCheck.java
 new file mode 100644
 index 00000000..e2140887
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/FastChatCheck.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/FastChatCheck.java
 @@ -0,0 +1,39 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
 +
 +public class FastChatCheck {
 +    private MangoCordConfiguration config;
@@ -727,13 +727,13 @@ index 00000000..e2140887
 +        return false;
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/LoggerWrapper.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/LoggerWrapper.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/LoggerWrapper.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/LoggerWrapper.java
 new file mode 100644
 index 00000000..5ae7580e
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/LoggerWrapper.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/LoggerWrapper.java
 @@ -0,0 +1,32 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.util.logging.Level;
 +import java.util.logging.Logger;
@@ -765,19 +765,19 @@ index 00000000..5ae7580e
 +        return logger;
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/NicknameCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/NicknameCheck.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/NicknameCheck.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/NicknameCheck.java
 new file mode 100644
 index 00000000..1b35fba5
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/NicknameCheck.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/NicknameCheck.java
 @@ -0,0 +1,52 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
 +
 +public class NicknameCheck {
 +    private MangoCordConfiguration config;
@@ -823,23 +823,23 @@ index 00000000..1b35fba5
 +        return false;
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PacketsCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PacketsCheck.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/PacketsCheck.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/PacketsCheck.java
 new file mode 100644
 index 00000000..6249fe8e
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PacketsCheck.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/PacketsCheck.java
 @@ -0,0 +1,63 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.HashMap;
 +import java.util.Map;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
-+import dev._2lstudios.mangcord.enums.PacketsCheckResult;
-+import dev._2lstudios.mangcord.enums.PacketsViolationReason;
-+import dev._2lstudios.mangcord.utils.ProtocolUtil;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangcord.enums.PacketsCheckResult;
++import dev.lucianishimiya.mangcord.enums.PacketsViolationReason;
++import dev.lucianishimiya.mangcord.utils.ProtocolUtil;
 +import io.netty.buffer.ByteBuf;
 +
 +public class PacketsCheck {
@@ -892,21 +892,21 @@ index 00000000..6249fe8e
 +        }
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PacketsData.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PacketsData.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/PacketsData.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/PacketsData.java
 new file mode 100644
 index 00000000..7189a7f3
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PacketsData.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/PacketsData.java
 @@ -0,0 +1,115 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.HashMap;
 +import java.util.Map;
 +import java.util.Map.Entry;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.enums.PacketsViolationReason;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.enums.PacketsViolationReason;
 +
 +public class PacketsData {
 +    // The address related to this data
@@ -1013,19 +1013,19 @@ index 00000000..7189a7f3
 +        return packetsVlsRate;
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PasswordCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PasswordCheck.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/PasswordCheck.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/PasswordCheck.java
 new file mode 100644
 index 00000000..68555de3
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/PasswordCheck.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/PasswordCheck.java
 @@ -0,0 +1,69 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
 +
 +public class PasswordCheck {
 +    private MangoCordConfiguration config;
@@ -1088,13 +1088,13 @@ index 00000000..68555de3
 +        return repeatCount;
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/ProxyCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/ProxyCheck.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/ProxyCheck.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/ProxyCheck.java
 new file mode 100644
 index 00000000..3b3d4d2f
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/ProxyCheck.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/ProxyCheck.java
 @@ -0,0 +1,180 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.io.BufferedReader;
 +import java.io.InputStreamReader;
@@ -1104,8 +1104,8 @@ index 00000000..3b3d4d2f
 +import java.util.Collection;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
 +
 +public class ProxyCheck {
 +    private MangoCordConfiguration config;
@@ -1274,19 +1274,19 @@ index 00000000..3b3d4d2f
 +        }
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/RatelimitCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/RatelimitCheck.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/RatelimitCheck.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/RatelimitCheck.java
 new file mode 100644
 index 00000000..51c1866e
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/RatelimitCheck.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/RatelimitCheck.java
 @@ -0,0 +1,52 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
 +
 +public class RatelimitCheck {
 +    private MangoCordConfiguration config;
@@ -1332,19 +1332,19 @@ index 00000000..51c1866e
 +        return false;
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/ReconnectCheck.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/ReconnectCheck.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/ReconnectCheck.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/ReconnectCheck.java
 new file mode 100644
 index 00000000..d38ffc9e
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/ReconnectCheck.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/ReconnectCheck.java
 @@ -0,0 +1,53 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +import java.net.SocketAddress;
 +import java.util.logging.Level;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
 +
 +public class ReconnectCheck {
 +    private MangoCordConfiguration config;
@@ -1391,13 +1391,13 @@ index 00000000..d38ffc9e
 +        return false;
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/StatsData.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/StatsData.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/StatsData.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/StatsData.java
 new file mode 100644
 index 00000000..44d773ab
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/antibot/StatsData.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/antibot/StatsData.java
 @@ -0,0 +1,75 @@
-+package dev._2lstudios.mangcord.antibot;
++package dev.lucianishimiya.mangcord.antibot;
 +
 +public class StatsData {
 +    // Time of the last second
@@ -1472,14 +1472,14 @@ index 00000000..44d773ab
 +        return totalConnections;
 +    }
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MangoCordConfiguration.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MangoCordConfiguration.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MangoCordConfiguration.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MangoCordConfiguration.java
 index 14665b1f..241f5a0e 100644
---- a/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MangoCordConfiguration.java
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MangoCordConfiguration.java
+--- a/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MangoCordConfiguration.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MangoCordConfiguration.java
 @@ -15,6 +15,223 @@ import net.md_5.bungee.config.Configuration;
  import net.md_5.bungee.config.ConfigurationProvider;
  
- public class MangoCordConfiguration extends FlameConfig {
+ public class MangoCordConfiguration extends MangoConfig {
 +    // Antibot accounts
 +    @Getter
 +    private boolean antibotAccountsEnabled = true;
@@ -1700,7 +1700,7 @@ index 14665b1f..241f5a0e 100644
      // MangoCord - TCP Fast Open
      @Getter
      private int tcpFastOpen = 3;
-@@ -133,6 +350,9 @@ public class MangoCordConfiguration extends FlameConfig {
+@@ -133,6 +350,9 @@ public class MangoCordConfiguration extends MangoConfig {
  
          this.tcpFastOpen = setIfUnexistant("tcp-fast-open", this.tcpFastOpen, configuration);
  
@@ -1710,11 +1710,11 @@ index 14665b1f..241f5a0e 100644
          save(configuration, configurationFile);
      }
  }
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MessagesConfiguration.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MessagesConfiguration.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MessagesConfiguration.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MessagesConfiguration.java
 index ae179438..820b012b 100644
---- a/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MessagesConfiguration.java
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/configuration/MessagesConfiguration.java
-@@ -80,6 +80,23 @@ public class MessagesConfiguration extends FlameConfig {
+--- a/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MessagesConfiguration.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MessagesConfiguration.java
+@@ -80,6 +80,23 @@ public class MessagesConfiguration extends MangoConfig {
  		setIfUnexistant("command_ip", "&9IP of {0} is {1}", configuration);
  		setIfUnexistant("illegal_chat_characters", "&cIllegal characters in chat ({0})", configuration);
  
@@ -1738,35 +1738,35 @@ index ae179438..820b012b 100644
  		for (final String key : configuration.getKeys()) {
  			final Object value = configuration.get(key);
  
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/enums/PacketsCheckResult.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/enums/PacketsCheckResult.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/enums/PacketsCheckResult.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/enums/PacketsCheckResult.java
 new file mode 100644
 index 00000000..285810ea
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/enums/PacketsCheckResult.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/enums/PacketsCheckResult.java
 @@ -0,0 +1,5 @@
-+package dev._2lstudios.mangcord.enums;
++package dev.lucianishimiya.mangcord.enums;
 +
 +public enum PacketsCheckResult {
 +    KICK, CANCEL, NONE
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/enums/PacketsViolationReason.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/enums/PacketsViolationReason.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/enums/PacketsViolationReason.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/enums/PacketsViolationReason.java
 new file mode 100644
 index 00000000..c19c4965
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/enums/PacketsViolationReason.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/enums/PacketsViolationReason.java
 @@ -0,0 +1,5 @@
-+package dev._2lstudios.mangcord.enums;
++package dev.lucianishimiya.mangcord.enums;
 +
 +public enum PacketsViolationReason {
 +    SIZE, RATE
 +}
-diff --git a/mangcord/src/main/java/dev/_2lstudios/mangcord/utils/ProtocolUtil.java b/mangcord/src/main/java/dev/_2lstudios/mangcord/utils/ProtocolUtil.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/utils/ProtocolUtil.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/utils/ProtocolUtil.java
 new file mode 100644
 index 00000000..901ab453
 --- /dev/null
-+++ b/mangcord/src/main/java/dev/_2lstudios/mangcord/utils/ProtocolUtil.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/utils/ProtocolUtil.java
 @@ -0,0 +1,27 @@
-+package dev._2lstudios.mangcord.utils;
++package dev.lucianishimiya.mangcord.utils;
 +
 +import io.netty.buffer.ByteBuf;
 +
@@ -1804,8 +1804,8 @@ index 6316143f..f2c8c58b 100644
  
 +        // MangoCord start - Antibot Packet Check
 +        if (prot == protocol.TO_SERVER) {
-+            dev._2lstudios.mangcord.antibot.PacketsCheck packetsCheck = MangoCord.getInstance().getCheckManager().getPacketsCheck();
-+            dev._2lstudios.mangcord.enums.PacketsCheckResult result = packetsCheck.check(ctx.channel().remoteAddress(), in);
++            dev.lucianishimiya.mangcord.antibot.PacketsCheck packetsCheck = MangoCord.getInstance().getCheckManager().getPacketsCheck();
++            dev.lucianishimiya.mangcord.enums.PacketsCheckResult result = packetsCheck.check(ctx.channel().remoteAddress(), in);
 +
 +            switch (result) {
 +                case KICK:
@@ -1866,16 +1866,16 @@ index 3a802ca4..c23e6856 100644
      private static boolean DIRECT_WARNING;
  
      @Override
-diff --git a/proxy/src/main/java/dev/_2lstudios/mangcord/commands/MangoCordCommand.java b/proxy/src/main/java/dev/_2lstudios/mangcord/commands/MangoCordCommand.java
+diff --git a/proxy/src/main/java/dev/lucianishimiya/mangcord/commands/MangoCordCommand.java b/proxy/src/main/java/dev/lucianishimiya/mangcord/commands/MangoCordCommand.java
 index fb81adee..56bc46eb 100644
---- a/proxy/src/main/java/dev/_2lstudios/mangcord/commands/MangoCordCommand.java
-+++ b/proxy/src/main/java/dev/_2lstudios/mangcord/commands/MangoCordCommand.java
+--- a/proxy/src/main/java/dev/lucianishimiya/mangcord/commands/MangoCordCommand.java
++++ b/proxy/src/main/java/dev/lucianishimiya/mangcord/commands/MangoCordCommand.java
 @@ -4,6 +4,7 @@ import java.util.Collection;
  import java.util.HashSet;
  
- import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.antibot.StatsData;
- import dev._2lstudios.mangcord.configuration.MessagesConfiguration;
+ import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.antibot.StatsData;
+ import dev.lucianishimiya.mangcord.configuration.MessagesConfiguration;
  import net.md_5.bungee.BungeeCord;
  import net.md_5.bungee.api.CommandSender;
 @@ -27,9 +28,7 @@ private final BungeeCord bungeeCord;
@@ -1959,12 +1959,12 @@ index 5396029c..443e2718 100644
 @@ -22,8 +22,8 @@ import javax.crypto.SecretKey;
  import javax.crypto.spec.SecretKeySpec;
  
- import dev._2lstudios.mangcord.MangoCord;
+ import dev.lucianishimiya.mangcord.MangoCord;
 -
--import dev._2lstudios.mangcord.configuration.FlameConfig;
-+import dev._2lstudios.mangcord.antibot.AddressData;
-+import dev._2lstudios.mangcord.antibot.CheckManager;
- import dev._2lstudios.mangcord.configuration.MangoCordConfiguration;
+-import dev.lucianishimiya.mangcord.configuration.MangoConfig;
++import dev.lucianishimiya.mangcord.antibot.AddressData;
++import dev.lucianishimiya.mangcord.antibot.CheckManager;
+ import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
  import lombok.Getter;
  import lombok.RequiredArgsConstructor;
 @@ -422,6 +422,22 @@ public class InitialHandler extends PacketHandler implements PendingConnection
@@ -2101,8 +2101,8 @@ index 86c469ee..a472535a 100644
  import com.mojang.brigadier.suggestion.Suggestion;
  import com.mojang.brigadier.suggestion.Suggestions;
 +
-+import dev._2lstudios.mangcord.MangoCord;
-+import dev._2lstudios.mangcord.antibot.CheckManager;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.antibot.CheckManager;
  import io.netty.channel.Channel;
  import java.util.ArrayList;
  import java.util.LinkedList;
@@ -2145,7 +2145,7 @@ index e2911d5e..d853b404 100644
  import io.netty.handler.codec.http.LastHttpContent;
  import java.nio.charset.Charset;
 +
-+import dev._2lstudios.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.MangoCord;
  import lombok.RequiredArgsConstructor;
  import net.md_5.bungee.api.Callback;
  
@@ -2153,13 +2153,13 @@ index e2911d5e..d853b404 100644
      @Override
      public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception
      {
-+        // Flamecord start - Antibot System
++        // Mangocord start - Antibot System
 +        String reason = cause.getClass().getSimpleName();
 +        if (MangoCord.getInstance().getMangoCordConfiguration().getAntibotFirewalledExceptions().contains(reason))
 +        {
 +            MangoCord.getInstance().getAddressDataManager().getAddressData(ctx.channel().remoteAddress()).firewall(reason);
 +        }
-+        // Flamecord end - Antibot System
++        // Mangocord end - Antibot System
 +
          try
          {
@@ -2196,13 +2196,13 @@ index 14e3004f..b61ed521 100644
      @Override
      public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception
      {
-+        // Flamecord start - Antibot System
++        // Mangocord start - Antibot System
 +        String reason = cause.getClass().getSimpleName();
 +        if (MangoCord.getInstance().getMangoCordConfiguration().getAntibotFirewalledExceptions().contains(reason))
 +        {
 +            MangoCord.getInstance().getAddressDataManager().getAddressData(ctx.channel().remoteAddress()).firewall(reason);
 +        }
-+        // Flamecord end - Antibot System
++        // Mangocord end - Antibot System
 +
          if ( ctx.channel().isActive() )
          {
@@ -2216,7 +2216,7 @@ index 1a5a0e08..9266ba8f 100644
              SocketAddress remoteAddress = ( ch.remoteAddress() == null ) ? ch.parent().localAddress() : ch.remoteAddress();
  
 +            // MangoCord start - Antibot System
-+            dev._2lstudios.mangcord.MangoCord mangoCord = MangoCord.getInstance();
++            dev.lucianishimiya.mangcord.MangoCord mangoCord = MangoCord.getInstance();
 +            String firewallReason = mangoCord.getAddressDataManager().getAddressData(remoteAddress).getFirewallReason();
 +            if ( firewallReason != null )
 +            {

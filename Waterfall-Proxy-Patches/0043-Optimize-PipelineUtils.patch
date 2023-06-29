@@ -8,7 +8,7 @@ diff --git a/proxy/src/main/java/net/md_5/bungee/netty/PipelineUtils.java b/prox
 index 00d3096a..faccdc6c 100644
 --- a/proxy/src/main/java/net/md_5/bungee/netty/PipelineUtils.java
 +++ b/proxy/src/main/java/net/md_5/bungee/netty/PipelineUtils.java
-@@ -6,11 +6,13 @@ import dev._2lstudios.mangcord.MangoCord;
+@@ -6,11 +6,13 @@ import dev.lucianishimiya.mangcord.MangoCord;
  import io.github.waterfallmc.waterfall.event.ConnectionInitEvent;
  import io.netty.buffer.PooledByteBufAllocator;
  import io.netty.channel.Channel;
