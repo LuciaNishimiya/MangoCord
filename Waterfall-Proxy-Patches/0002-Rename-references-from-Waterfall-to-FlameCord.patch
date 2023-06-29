@@ -13,7 +13,7 @@ index 688f1b995..b0b0d33eb 100644
  
      <build>
 -        <finalName>Waterfall</finalName>
-+        <finalName>Mangocord</finalName>
++        <finalName>MangoCord</finalName>
          <plugins>
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
