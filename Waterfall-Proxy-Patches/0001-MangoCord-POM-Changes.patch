@@ -26,7 +26,7 @@ index 00000000..20edd900
 +    <version>1.19-R0.1-SNAPSHOT</version>
 +    <packaging>jar</packaging>
 +
-+    <name>MangoCord</name>
++    <name>Waterfall-MangoCord</name>
 +    <description>Mangocord adds security essentials and new configuration options</description>
 +
 +    <dependencies>
