@@ -13,7 +13,7 @@ index ac83e3253..c31ec1ce7 100644
  
          Protocol.DirectionData prot = ( server ) ? protocol.TO_SERVER : protocol.TO_CLIENT;
 -        ByteBuf slice = in.copy(); // Can't slice this one due to EntityMap :(
-+        ByteBuf slice = in.duplicate(); // FlameCord - Duplicate buf instead of Copy
++        ByteBuf slice = in.duplicate(); // MangoCord - Duplicate buf instead of Copy
  
          Object packetTypeInfo = null;
          try
@@ -22,7 +22,7 @@ index ac83e3253..c31ec1ce7 100644
              }
  
 -            out.add( new PacketWrapper( packet, slice ) );
-+            // FlameCord - Duplicate buf instead of Copy
++            // MangoCord - Duplicate buf instead of Copy
 +            out.add( new PacketWrapper( packet, slice.retain() ) );
              slice = null;
          } catch (BadPacketException | IndexOutOfBoundsException e) {

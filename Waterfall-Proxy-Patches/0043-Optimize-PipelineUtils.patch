@@ -8,7 +8,7 @@ diff --git a/proxy/src/main/java/net/md_5/bungee/netty/PipelineUtils.java b/prox
 index 00d3096a..faccdc6c 100644
 --- a/proxy/src/main/java/net/md_5/bungee/netty/PipelineUtils.java
 +++ b/proxy/src/main/java/net/md_5/bungee/netty/PipelineUtils.java
-@@ -6,11 +6,13 @@ import dev._2lstudios.flamecord.FlameCord;
+@@ -6,11 +6,13 @@ import dev.lucianishimiya.mangcord.MangoCord;
  import io.github.waterfallmc.waterfall.event.ConnectionInitEvent;
  import io.netty.buffer.PooledByteBufAllocator;
  import io.netty.channel.Channel;
@@ -34,7 +34,7 @@ index 00d3096a..faccdc6c 100644
          @Override
          public void initChannel(Channel ch) throws Exception
          {
-+            // FlameCord start - Optimize PipelineUtils
++            // MangoCord start - Optimize PipelineUtils
 +            ChannelPipeline pipeline = ch.pipeline();
 +            ChannelConfig channelConfig = ch.config();
              try
@@ -47,11 +47,11 @@ index 00d3096a..faccdc6c 100644
              }
 -            ch.config().setOption( ChannelOption.TCP_NODELAY, true );
 +            channelConfig.setOption( ChannelOption.TCP_NODELAY, true );
-             // FlameCord - TCP Fast Open
--            ch.config().setOption( ChannelOption.TCP_FASTOPEN, FlameCord.getInstance().getFlameCordConfiguration().getTcpFastOpen() );
+             // MangoCord - TCP Fast Open
+-            ch.config().setOption( ChannelOption.TCP_FASTOPEN, MangoCord.getInstance().getMangoCordConfiguration().getTcpFastOpen() );
 -            ch.config().setAllocator( PooledByteBufAllocator.DEFAULT );
 -            ch.config().setWriteBufferWaterMark( MARK );
-+            channelConfig.setOption( ChannelOption.TCP_FASTOPEN, FlameCord.getInstance().getFlameCordConfiguration().getTcpFastOpen() );
++            channelConfig.setOption( ChannelOption.TCP_FASTOPEN, MangoCord.getInstance().getMangoCordConfiguration().getTcpFastOpen() );
 +            channelConfig.setAllocator( PooledByteBufAllocator.DEFAULT );
 +            channelConfig.setWriteBufferWaterMark( MARK );
  
@@ -66,10 +66,10 @@ index 00d3096a..faccdc6c 100644
  
 -            ch.pipeline().addLast( BOSS_HANDLER, new HandlerBoss() );
 +            pipeline.addLast( BOSS_HANDLER, new HandlerBoss() );
-+            // FlameCord end - Optimize PipelineUtils
++            // MangoCord end - Optimize PipelineUtils
          }
  
-         // FlameCord - Close on exception caught
+         // MangoCord - Close on exception caught
 -- 
 2.37.3.windows.1
 

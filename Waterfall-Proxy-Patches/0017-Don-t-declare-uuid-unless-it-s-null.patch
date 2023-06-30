@@ -13,7 +13,7 @@ index 706fb321..32c57dad 100644
                          loginProfile = obj;
                          name = obj.getName();
 -                        uniqueId = Util.getUUID( obj.getId() );
-+                        // FlameCord - Don't declare uuid unless it's null
++                        // MangoCord - Don't declare uuid unless it's null
 +                        if (uniqueId == null) {
 +                            uniqueId = Util.getUUID(obj.getId());
 +                        }

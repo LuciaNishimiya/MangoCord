@@ -4,34 +4,34 @@ Date: Wed, 11 Jan 2023 10:14:12 -0300
 Subject: [PATCH] Bungee Plugins Command
 
 
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/MessagesConfiguration.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/MessagesConfiguration.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MessagesConfiguration.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MessagesConfiguration.java
 index 820b012b..9269a6ec 100644
---- a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/MessagesConfiguration.java
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/MessagesConfiguration.java
-@@ -97,6 +97,11 @@ public class MessagesConfiguration extends FlameConfig {
- 		setIfUnexistant("flamecord_firewall_remove", "&cThe ip {0} was removed from the firewall!", configuration);
- 		// FlameCord end - Antibot System
+--- a/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MessagesConfiguration.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MessagesConfiguration.java
+@@ -97,6 +97,11 @@ public class MessagesConfiguration extends MangoConfig {
+ 		setIfUnexistant("mangcord_firewall_remove", "&cThe ip {0} was removed from the firewall!", configuration);
+ 		// MangoCord end - Antibot System
  
-+		// FlameCord - Bungee Plugins Command
-+		setIfUnexistant("flamecord_bplugins_nopermission", "&cYou don't have permission to do this!", configuration);
-+		setIfUnexistant("flamecord_bplugins_separator", ", ", configuration);
-+		setIfUnexistant("flamecord_bplugins_header", "&aPlugins ({0}): ", configuration);
++		// MangoCord - Bungee Plugins Command
++		setIfUnexistant("mangcord_bplugins_nopermission", "&cYou don't have permission to do this!", configuration);
++		setIfUnexistant("mangcord_bplugins_separator", ", ", configuration);
++		setIfUnexistant("mangcord_bplugins_header", "&aPlugins ({0}): ", configuration);
 +
  		for (final String key : configuration.getKeys()) {
  			final Object value = configuration.get(key);
  
-diff --git a/proxy/src/main/java/dev/_2lstudios/flamecord/commands/BungeePluginsCommand.java b/proxy/src/main/java/dev/_2lstudios/flamecord/commands/BungeePluginsCommand.java
+diff --git a/proxy/src/main/java/dev/lucianishimiya/mangcord/commands/BungeePluginsCommand.java b/proxy/src/main/java/dev/lucianishimiya/mangcord/commands/BungeePluginsCommand.java
 new file mode 100644
 index 00000000..2e20e9dc
 --- /dev/null
-+++ b/proxy/src/main/java/dev/_2lstudios/flamecord/commands/BungeePluginsCommand.java
++++ b/proxy/src/main/java/dev/lucianishimiya/mangcord/commands/BungeePluginsCommand.java
 @@ -0,0 +1,45 @@
-+package dev._2lstudios.flamecord.commands;
++package dev.lucianishimiya.mangcord.commands;
 +
 +import java.util.Collection;
 +
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.MessagesConfiguration;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MessagesConfiguration;
 +import net.md_5.bungee.BungeeCord;
 +import net.md_5.bungee.api.CommandSender;
 +import net.md_5.bungee.api.chat.TextComponent;
@@ -45,14 +45,14 @@ index 00000000..2e20e9dc
 +
 +    @Override
 +    public void execute(final CommandSender sender, final String[] args) {
-+        final FlameCord flameCord = FlameCord.getInstance();
-+        final MessagesConfiguration messagesConfiguration = flameCord.getMessagesConfiguration();
++        final MangoCord mangoCord = MangoCord.getInstance();
++        final MessagesConfiguration messagesConfiguration = mangoCord.getMessagesConfiguration();
 +
 +        if (sender.hasPermission("mangocord.usage")) {
 +            Collection<Plugin> plugins = BungeeCord.getInstance().getPluginManager().getPlugins();
 +            int amount = plugins.size();
-+            String header = FlameCord.getInstance().getMessagesConfiguration().getTranslation("flamecord_bplugins_header", amount);
-+            String separator = FlameCord.getInstance().getMessagesConfiguration().getTranslation("flamecord_bplugins_separator");
++            String header = MangoCord.getInstance().getMessagesConfiguration().getTranslation("mangcord_bplugins_header", amount);
++            String separator = MangoCord.getInstance().getMessagesConfiguration().getTranslation("mangcord_bplugins_separator");
 +            StringBuilder stringBuilder = new StringBuilder(header);
 +            boolean first = true;
 +
@@ -67,7 +67,7 @@ index 00000000..2e20e9dc
 +            sender.sendMessage(TextComponent.fromLegacyText(stringBuilder.toString()));
 +        } else {
 +            sender.sendMessage(TextComponent
-+                    .fromLegacyText(messagesConfiguration.getTranslation("flamecord_bplugins_nopermission")));
++                    .fromLegacyText(messagesConfiguration.getTranslation("mangcord_bplugins_nopermission")));
 +        }
 +    }
 +}
@@ -78,17 +78,17 @@ index 0d3bed74..ee1fc481 100644
 @@ -11,6 +11,7 @@ import com.google.gson.Gson;
  import com.google.gson.GsonBuilder;
  
- import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.commands.BungeePluginsCommand;
- import dev._2lstudios.flamecord.commands.FlameCordCommand;
- import dev._2lstudios.flamecord.configuration.ModulesConfiguration;
+ import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.commands.BungeePluginsCommand;
+ import dev.lucianishimiya.mangcord.commands.MangoCordCommand;
+ import dev.lucianishimiya.mangcord.configuration.ModulesConfiguration;
  import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @@ -916,5 +917,8 @@ public class BungeeCord extends ProxyServer
  
-         // Flamecord Command
-         pluginManager.registerCommand(null, new FlameCordCommand(this));
+         // Mangocord Command
+         pluginManager.registerCommand(null, new MangoCordCommand(this));
 +        
-+        // FlameCord - Bungee Plugins Command
++        // MangoCord - Bungee Plugins Command
 +        pluginManager.registerCommand(null, new BungeePluginsCommand());
      }
  }

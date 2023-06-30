@@ -69,13 +69,13 @@ index 4ee05067..6063be02 100644
 -            TO_CLIENT.registerPacket(
 -                    EntityEffect.class,
 -                    EntityEffect::new,
--                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x1D ), // FlameCord - 1.7.x support
+-                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x1D ), // MangoCord - 1.7.x support
 -                    map(ProtocolConstants.MINECRAFT_1_9, -1)
 -            );
 -            TO_CLIENT.registerPacket(
 -                    EntityRemoveEffect.class,
 -                    EntityRemoveEffect::new,
--                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x1E ), // FlameCord - 1.7.x support
+-                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x1E ), // MangoCord - 1.7.x support
 -                    map(ProtocolConstants.MINECRAFT_1_9, -1)
 -            );
 -            // Waterfall end
@@ -113,21 +113,21 @@ index 0ed78a8c..00000000
 -
 -    @Override
 -    public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion) {
--        this.entityId = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt(buf) : buf.readInt(); // FlameCord - 1.7.x support
+-        this.entityId = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt(buf) : buf.readInt(); // MangoCord - 1.7.x support
 -        this.effectId = buf.readUnsignedByte();
 -        this.amplifier = buf.readUnsignedByte();
--        this.duration = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt(buf) : buf.readShort(); // FlameCord - 1.7.x support
--        // FlameCord start - 1.7.x support
+-        this.duration = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt(buf) : buf.readShort(); // MangoCord - 1.7.x support
+-        // MangoCord start - 1.7.x support
 -        if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_8 )
 -        {
 -            this.hideParticles = buf.readBoolean();
 -        }
--        // FlameCord end - 1.7.x support
+-        // MangoCord end - 1.7.x support
 -    }
 -
 -    @Override
 -    public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion) {
--        // FlameCord start - 1.7.x support
+-        // MangoCord start - 1.7.x support
 -        if (protocolVersion >= ProtocolConstants.MINECRAFT_1_8)
 -        {
 -            writeVarInt(this.entityId, buf);
@@ -135,10 +135,10 @@ index 0ed78a8c..00000000
 -        {
 -            buf.writeInt(effectId);
 -        }
--        // FlameCord end - 1.7.x support
+-        // MangoCord end - 1.7.x support
 -        buf.writeByte(this.effectId);
 -        buf.writeByte(this.amplifier);
--        // FlameCord start - 1.7.x support
+-        // MangoCord start - 1.7.x support
 -        if (protocolVersion >= ProtocolConstants.MINECRAFT_1_8)
 -        {
 -            writeVarInt(this.duration, buf);
@@ -146,7 +146,7 @@ index 0ed78a8c..00000000
 -        {
 -            buf.writeShort(duration);
 -        }
--        // FlameCord end - 1.7.x support
+-        // MangoCord end - 1.7.x support
 -        buf.writeBoolean(this.hideParticles);
 -    }
 -
@@ -183,13 +183,13 @@ index 435b8578..00000000
 -
 -    @Override
 -    public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion) {
--        this.entityId = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt(buf) : buf.readInt(); // FlameCord - 1.7.x support
+-        this.entityId = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt(buf) : buf.readInt(); // MangoCord - 1.7.x support
 -        this.effectId = buf.readUnsignedByte();
 -    }
 -
 -    @Override
 -    public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion) {
--        // FlameCord start - 1.7.x support
+-        // MangoCord start - 1.7.x support
 -        if (protocolVersion >= ProtocolConstants.MINECRAFT_1_8)
 -        {
 -            writeVarInt(this.entityId, buf);
@@ -197,7 +197,7 @@ index 435b8578..00000000
 -        {
 -            buf.writeInt(entityId);
 -        }
--        // FlameCord end - 1.7.x support
+-        // MangoCord end - 1.7.x support
 -        buf.writeByte(effectId);
 -    }
 -
@@ -261,7 +261,7 @@ index 900d0e4d..ceb2b421 100644
 -            if ( !user.isDisableEntityMetadataRewrite() ) { // Waterfall
 -            for ( Objective objective : serverScoreboard.getObjectives() )
 -            {
--                user.unsafe().sendPacket( new ScoreboardObjective( objective.getName(), objective.getValue(), objective.getType() == null ? null : ScoreboardObjective.HealthDisplay.fromString(objective.getType()), (byte) 1 ) ); // FlameCord - 1.7 support
+-                user.unsafe().sendPacket( new ScoreboardObjective( objective.getName(), objective.getValue(), objective.getType() == null ? null : ScoreboardObjective.HealthDisplay.fromString(objective.getType()), (byte) 1 ) ); // MangoCord - 1.7 support
 -            }
 -            for ( Score score : serverScoreboard.getScores() )
 -            {
@@ -496,12 +496,12 @@ index b8b9245b..00000000
 -        // Waterfall end
 -        switch ( version )
 -        {
--            // FlameCord start - 1.7.x support
+-            // MangoCord start - 1.7.x support
 -            case ProtocolConstants.MINECRAFT_1_7_2:
 -                return EntityMap_1_7_2.INSTANCE;
 -            case ProtocolConstants.MINECRAFT_1_7_6:
 -                return EntityMap_1_7_6.INSTANCE;
--            // FlameCord end - 1.7.x support
+-            // MangoCord end - 1.7.x support
 -            case ProtocolConstants.MINECRAFT_1_8:
 -                return EntityMap_1_8.INSTANCE;
 -            case ProtocolConstants.MINECRAFT_1_9:
@@ -2447,7 +2447,7 @@ index cdc07dc4..00000000
 --- a/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap_1_7_2.java
 +++ /dev/null
 @@ -1,102 +0,0 @@
--// FlameCord start - 1.7.x support
+-// MangoCord start - 1.7.x support
 -package net.md_5.bungee.entitymap;
 -
 -import io.netty.buffer.ByteBuf;
@@ -2548,7 +2548,7 @@ index cdc07dc4..00000000
 -        packet.readerIndex( readerIndex );
 -    }
 -}
--// FlameCord end - 1.7.x support
+-// MangoCord end - 1.7.x support
 \ No newline at end of file
 diff --git a/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap_1_7_6.java b/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap_1_7_6.java
 deleted file mode 100644
@@ -2556,7 +2556,7 @@ index cb9174b3..00000000
 --- a/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap_1_7_6.java
 +++ /dev/null
 @@ -1,62 +0,0 @@
--// FlameCord start - 1.7.x support
+-// MangoCord start - 1.7.x support
 -package net.md_5.bungee.entitymap;
 -
 -import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -2617,7 +2617,7 @@ index cb9174b3..00000000
 -        packet.readerIndex( readerIndex );
 -    }
 -}
--// FlameCord end - 1.7.x support
+-// MangoCord end - 1.7.x support
 \ No newline at end of file
 diff --git a/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap_1_8.java b/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap_1_8.java
 deleted file mode 100644

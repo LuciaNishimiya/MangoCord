@@ -4,11 +4,11 @@ Date: Fri, 27 Jan 2023 14:12:44 +0100
 Subject: [PATCH] Implement libdeflate
 
 
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MangoCordConfiguration.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MangoCordConfiguration.java
 index 59b2d94f..cc277990 100644
---- a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
-@@ -59,6 +59,8 @@ public class FlameCordConfiguration extends FlameConfig {
+--- a/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MangoCordConfiguration.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MangoCordConfiguration.java
+@@ -59,6 +59,8 @@ public class MangoCordConfiguration extends MangoConfig {
      @Getter
      private int antibotFirewallExpire = 60;
      @Getter
@@ -17,11 +17,11 @@ index 59b2d94f..cc277990 100644
      private boolean antibotFirewallLog = true;
      @Getter
      private boolean antibotFirewallIpset = true;
-@@ -360,6 +362,9 @@ public class FlameCordConfiguration extends FlameConfig {
-         // FlameCord - Allow Invalid Names
+@@ -360,6 +362,9 @@ public class MangoCordConfiguration extends MangoConfig {
+         // MangoCord - Allow Invalid Names
          this.allowInvalidNames = setIfUnexistant("allow-invalid-names", this.allowInvalidNames, configuration);
  
-+        // FlameCord - Implement libdeflate
++        // MangoCord - Implement libdeflate
 +        this.compressionLevel = setIfUnexistant("compression-level", this.compressionLevel, configuration);
 +
          save(configuration, configurationFile);
@@ -393,15 +393,15 @@ index 00000000..81d92e75
 +
 +    public static native boolean process(long ctx, long sourceAddress, int sourceLength, long destinationAddress, int destinationLength) throws DataFormatException;
 +}
-diff --git a/native/src/main/java/dev/_2lstudios/flamecord/natives/MoreByteBufUtils.java b/native/src/main/java/dev/_2lstudios/flamecord/natives/MoreByteBufUtils.java
+diff --git a/native/src/main/java/dev/lucianishimiya/mangcord/natives/MoreByteBufUtils.java b/native/src/main/java/dev/lucianishimiya/mangcord/natives/MoreByteBufUtils.java
 new file mode 100644
 index 00000000..a16a2584
 --- /dev/null
-+++ b/native/src/main/java/dev/_2lstudios/flamecord/natives/MoreByteBufUtils.java
++++ b/native/src/main/java/dev/lucianishimiya/mangcord/natives/MoreByteBufUtils.java
 @@ -0,0 +1,28 @@
-+package dev._2lstudios.flamecord.natives;
++package dev.lucianishimiya.mangcord.natives;
 +
-+import dev._2lstudios.flamecord.natives.compress.Compressor;
++import dev.lucianishimiya.mangcord.natives.compress.Compressor;
 +import io.netty.buffer.ByteBuf;
 +import io.netty.buffer.ByteBufAllocator;
 +
@@ -428,13 +428,13 @@ index 00000000..a16a2584
 +
 +}
 \ No newline at end of file
-diff --git a/native/src/main/java/dev/_2lstudios/flamecord/natives/NativeEnvironmentDetector.java b/native/src/main/java/dev/_2lstudios/flamecord/natives/NativeEnvironmentDetector.java
+diff --git a/native/src/main/java/dev/lucianishimiya/mangcord/natives/NativeEnvironmentDetector.java b/native/src/main/java/dev/lucianishimiya/mangcord/natives/NativeEnvironmentDetector.java
 new file mode 100644
 index 00000000..50f042bd
 --- /dev/null
-+++ b/native/src/main/java/dev/_2lstudios/flamecord/natives/NativeEnvironmentDetector.java
++++ b/native/src/main/java/dev/lucianishimiya/mangcord/natives/NativeEnvironmentDetector.java
 @@ -0,0 +1,36 @@
-+package dev._2lstudios.flamecord.natives;
++package dev.lucianishimiya.mangcord.natives;
 +
 +import io.netty.buffer.ByteBuf;
 +import io.netty.buffer.Unpooled;
@@ -471,18 +471,18 @@ index 00000000..50f042bd
 +
 +}
 \ No newline at end of file
-diff --git a/native/src/main/java/dev/_2lstudios/flamecord/natives/Natives.java b/native/src/main/java/dev/_2lstudios/flamecord/natives/Natives.java
+diff --git a/native/src/main/java/dev/lucianishimiya/mangcord/natives/Natives.java b/native/src/main/java/dev/lucianishimiya/mangcord/natives/Natives.java
 new file mode 100644
 index 00000000..a6709a86
 --- /dev/null
-+++ b/native/src/main/java/dev/_2lstudios/flamecord/natives/Natives.java
++++ b/native/src/main/java/dev/lucianishimiya/mangcord/natives/Natives.java
 @@ -0,0 +1,138 @@
-+package dev._2lstudios.flamecord.natives;
++package dev.lucianishimiya.mangcord.natives;
 +
-+import dev._2lstudios.flamecord.natives.compress.Compressor;
-+import dev._2lstudios.flamecord.natives.compress.CompressorFactory;
-+import dev._2lstudios.flamecord.natives.compress.JavaCompressor;
-+import dev._2lstudios.flamecord.natives.compress.LibdeflateCompressor;
++import dev.lucianishimiya.mangcord.natives.compress.Compressor;
++import dev.lucianishimiya.mangcord.natives.compress.CompressorFactory;
++import dev.lucianishimiya.mangcord.natives.compress.JavaCompressor;
++import dev.lucianishimiya.mangcord.natives.compress.LibdeflateCompressor;
 +
 +import java.io.IOException;
 +import java.io.InputStream;
@@ -616,13 +616,13 @@ index 00000000..a6709a86
 +    }
 +}
 \ No newline at end of file
-diff --git a/native/src/main/java/dev/_2lstudios/flamecord/natives/compress/Compressor.java b/native/src/main/java/dev/_2lstudios/flamecord/natives/compress/Compressor.java
+diff --git a/native/src/main/java/dev/lucianishimiya/mangcord/natives/compress/Compressor.java b/native/src/main/java/dev/lucianishimiya/mangcord/natives/compress/Compressor.java
 new file mode 100644
 index 00000000..f28ae314
 --- /dev/null
-+++ b/native/src/main/java/dev/_2lstudios/flamecord/natives/compress/Compressor.java
++++ b/native/src/main/java/dev/lucianishimiya/mangcord/natives/compress/Compressor.java
 @@ -0,0 +1,16 @@
-+package dev._2lstudios.flamecord.natives.compress;
++package dev.lucianishimiya.mangcord.natives.compress;
 +
 +import io.netty.buffer.ByteBuf;
 +
@@ -639,13 +639,13 @@ index 00000000..f28ae314
 +
 +}
 \ No newline at end of file
-diff --git a/native/src/main/java/dev/_2lstudios/flamecord/natives/compress/CompressorFactory.java b/native/src/main/java/dev/_2lstudios/flamecord/natives/compress/CompressorFactory.java
+diff --git a/native/src/main/java/dev/lucianishimiya/mangcord/natives/compress/CompressorFactory.java b/native/src/main/java/dev/lucianishimiya/mangcord/natives/compress/CompressorFactory.java
 new file mode 100644
 index 00000000..3aed690a
 --- /dev/null
-+++ b/native/src/main/java/dev/_2lstudios/flamecord/natives/compress/CompressorFactory.java
++++ b/native/src/main/java/dev/lucianishimiya/mangcord/natives/compress/CompressorFactory.java
 @@ -0,0 +1,13 @@
-+package dev._2lstudios.flamecord.natives.compress;
++package dev.lucianishimiya.mangcord.natives.compress;
 +
 +public interface CompressorFactory {
 +
@@ -659,13 +659,13 @@ index 00000000..3aed690a
 +
 +}
 \ No newline at end of file
-diff --git a/native/src/main/java/dev/_2lstudios/flamecord/natives/compress/JavaCompressor.java b/native/src/main/java/dev/_2lstudios/flamecord/natives/compress/JavaCompressor.java
+diff --git a/native/src/main/java/dev/lucianishimiya/mangcord/natives/compress/JavaCompressor.java b/native/src/main/java/dev/lucianishimiya/mangcord/natives/compress/JavaCompressor.java
 new file mode 100644
 index 00000000..7d99eb02
 --- /dev/null
-+++ b/native/src/main/java/dev/_2lstudios/flamecord/natives/compress/JavaCompressor.java
++++ b/native/src/main/java/dev/lucianishimiya/mangcord/natives/compress/JavaCompressor.java
 @@ -0,0 +1,90 @@
-+package dev._2lstudios.flamecord.natives.compress;
++package dev.lucianishimiya.mangcord.natives.compress;
 +
 +import io.netty.buffer.ByteBuf;
 +
@@ -755,13 +755,13 @@ index 00000000..7d99eb02
 +    }
 +
 +}
-diff --git a/native/src/main/java/dev/_2lstudios/flamecord/natives/compress/LibdeflateCompressor.java b/native/src/main/java/dev/_2lstudios/flamecord/natives/compress/LibdeflateCompressor.java
+diff --git a/native/src/main/java/dev/lucianishimiya/mangcord/natives/compress/LibdeflateCompressor.java b/native/src/main/java/dev/lucianishimiya/mangcord/natives/compress/LibdeflateCompressor.java
 new file mode 100644
 index 00000000..fd9f9007
 --- /dev/null
-+++ b/native/src/main/java/dev/_2lstudios/flamecord/natives/compress/LibdeflateCompressor.java
++++ b/native/src/main/java/dev/lucianishimiya/mangcord/natives/compress/LibdeflateCompressor.java
 @@ -0,0 +1,83 @@
-+package dev._2lstudios.flamecord.natives.compress;
++package dev.lucianishimiya.mangcord.natives.compress;
 +
 +import com.google.common.base.Preconditions;
 +import com.velocitypowered.natives.compression.NativeZlibDeflate;
@@ -2121,11 +2121,11 @@ diff --git a/proxy/src/main/java/net/md_5/bungee/BungeeCord.java b/proxy/src/mai
 index ebbeae08..8de4bcae 100644
 --- a/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
 +++ b/proxy/src/main/java/net/md_5/bungee/BungeeCord.java
-@@ -17,6 +17,7 @@ import dev._2lstudios.flamecord.commands.FlameCordCommand;
- import dev._2lstudios.flamecord.configuration.ModulesConfiguration;
+@@ -17,6 +17,7 @@ import dev.lucianishimiya.mangcord.commands.MangoCordCommand;
+ import dev.lucianishimiya.mangcord.configuration.ModulesConfiguration;
  import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  import io.github.waterfallmc.waterfall.conf.WaterfallConfiguration;
-+import dev._2lstudios.flamecord.natives.Natives;
++import dev.lucianishimiya.mangcord.natives.Natives;
  import io.github.waterfallmc.waterfall.event.ProxyExceptionEvent;
  import io.github.waterfallmc.waterfall.exception.ProxyPluginEnableDisableException;
  import io.netty.bootstrap.ServerBootstrap;
@@ -2163,8 +2163,8 @@ index d07cf462..10cb0430 100644
  
 +import java.util.zip.DataFormatException;
 +
-+import dev._2lstudios.flamecord.natives.MoreByteBufUtils;
-+import dev._2lstudios.flamecord.natives.compress.Compressor;
++import dev.lucianishimiya.mangcord.natives.MoreByteBufUtils;
++import dev.lucianishimiya.mangcord.natives.compress.Compressor;
  import io.netty.buffer.ByteBuf;
 +import io.netty.buffer.ByteBufAllocator;
  import io.netty.channel.ChannelHandlerContext;
@@ -2263,7 +2263,7 @@ index eaedf4bc..066bdafc 100644
 @@ -1,5 +1,6 @@
  package net.md_5.bungee.compress;
  
-+import dev._2lstudios.flamecord.natives.compress.Compressor;
++import dev.lucianishimiya.mangcord.natives.compress.Compressor;
  import lombok.*;
  
  import com.google.common.base.Preconditions;
@@ -2274,7 +2274,7 @@ index eaedf4bc..066bdafc 100644
 +import net.md_5.bungee.protocol.BadPacketException;
  import net.md_5.bungee.protocol.DefinedPacket;
  
-+import static dev._2lstudios.flamecord.natives.MoreByteBufUtils.ensureCompatible;
++import static dev.lucianishimiya.mangcord.natives.MoreByteBufUtils.ensureCompatible;
 +
 +
  @RequiredArgsConstructor
@@ -2392,7 +2392,7 @@ index 8d4439ab..95ed3441 100644
                  ByteBuf buffer = payload.slice();
 -                int modCount = DefinedPacket.readVarInt( buffer, 2 );
 -                for ( int i = 0; i < modCount; i++ )
-+                int modCount = DefinedPacket.readVarInt( buffer ); // FlameCord - Remove length check for compression
++                int modCount = DefinedPacket.readVarInt( buffer ); // MangoCord - Remove length check for compression
 +                 for ( int i = 0; i < modCount; i++ )
                  {
                      modTags.put( DefinedPacket.readString( buffer ), DefinedPacket.readString( buffer ) );
@@ -2405,10 +2405,10 @@ index b98ee6a7..ffe03816 100644
  package net.md_5.bungee.netty;
  
  import com.google.common.base.Preconditions;
-+import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
-+import dev._2lstudios.flamecord.natives.Natives;
-+import dev._2lstudios.flamecord.natives.compress.Compressor;
++import dev.lucianishimiya.mangcord.MangoCord;
++import dev.lucianishimiya.mangcord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangcord.natives.Natives;
++import dev.lucianishimiya.mangcord.natives.compress.Compressor;
  import io.netty.channel.Channel;
  import io.netty.channel.ChannelFutureListener;
  import io.netty.channel.ChannelHandler;
@@ -2419,9 +2419,9 @@ index b98ee6a7..ffe03816 100644
 -    public void setCompressionThreshold(int compressionThreshold)
 -    {
 +    public void setCompressionThreshold(int compressionThreshold) {
-+        Compressor compressor = Natives.getCompressorFactory().create( FlameCord.getInstance().getFlameCordConfiguration().getCompressionLevel() );
++        Compressor compressor = Natives.getCompressorFactory().create( MangoCord.getInstance().getMangoCordConfiguration().getCompressionLevel() );
 +
-         // FlameCord - Use pipeline to reduce redundancy
+         // MangoCord - Use pipeline to reduce redundancy
          final ChannelPipeline pipeline = ch.pipeline();
          if ( pipeline.get( PacketCompressor.class ) == null && compressionThreshold != -1 )
          {
@@ -2438,7 +2438,7 @@ index b98ee6a7..ffe03816 100644
          if ( pipeline.get( PacketDecompressor.class ) == null && compressionThreshold != -1 )
          {
 -            addBefore( PipelineUtils.PACKET_DECODER, "decompress", new PacketDecompressor(compressionThreshold) );
-+            addBefore( PipelineUtils.PACKET_DECODER, "decompress",  new PacketDecompressor( compressor, compressionThreshold ) ); // FlameCord - Implement Libdeflate
++            addBefore( PipelineUtils.PACKET_DECODER, "decompress",  new PacketDecompressor( compressor, compressionThreshold ) ); // MangoCord - Implement Libdeflate
          }
          if ( compressionThreshold == -1 )
          {
@@ -2447,7 +2447,7 @@ index b98ee6a7..ffe03816 100644
      }
  
 +
-     // FlameCord start - Antibot System
+     // MangoCord start - Antibot System
      // Make the channel accessible
      public Channel getChannel() {
 diff --git a/proxy/src/main/java/net/md_5/bungee/netty/PipelineUtils.java b/proxy/src/main/java/net/md_5/bungee/netty/PipelineUtils.java
@@ -2459,7 +2459,7 @@ index 9266ba8f..00d3096a 100644
      public static final Base BASE_SERVERSIDE = new Base( true );
      private static final KickStringWriter legacyKicker = new KickStringWriter();
 -    private static final Varint21LengthFieldPrepender framePrepender = new Varint21LengthFieldPrepender();
-+    public static final Varint21LengthFieldPrepender framePrepender = new Varint21LengthFieldPrepender(); // FlameCord - Implement Libdeflate
++    public static final Varint21LengthFieldPrepender framePrepender = new Varint21LengthFieldPrepender(); // MangoCord - Implement Libdeflate
      private static final Varint21LengthFieldExtraBufPrepender serverFramePrepender = new Varint21LengthFieldExtraBufPrepender();
      public static final String TIMEOUT_HANDLER = "timeout";
      public static final String PACKET_DECODER = "packet-decoder";

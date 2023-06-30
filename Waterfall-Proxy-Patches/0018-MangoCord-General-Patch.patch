@@ -1,13 +1,13 @@
 From 25f0ce813e1f0dc75dda1fa9fc2dfba5da636f39 Mon Sep 17 00:00:00 2001
 From: Juan Cruz Linsalata <LinsaFTW@users.noreply.github.com>
 Date: Mon, 12 Oct 2020 15:40:53 -0300
-Subject: [PATCH] FlameCord General Patch
+Subject: [PATCH] MangoCord General Patch
 
 
-diff --git a/flamecord/pom.xml b/flamecord/pom.xml
+diff --git a/mangocord/pom.xml b/mangocord/pom.xml
 index 20edd900..fb80f233 100644
---- a/flamecord/pom.xml
-+++ b/flamecord/pom.xml
+--- a/mangocord/pom.xml
++++ b/mangocord/pom.xml
 @@ -5,13 +5,13 @@
      <parent>
          <groupId>io.github.waterfallmc</groupId>
@@ -17,58 +17,58 @@ index 20edd900..fb80f233 100644
          <relativePath>../pom.xml</relativePath>
      </parent>
  
-     <groupId>dev._2lstudios</groupId>
-     <artifactId>waterfall-flamecord</artifactId>
+     <groupId>dev.lucianishimiya</groupId>
+     <artifactId>waterfall-mangocord</artifactId>
 -    <version>1.19-R0.1-SNAPSHOT</version>
 +    <version>1.20-R0.1-SNAPSHOT</version>
      <packaging>jar</packaging>
  
-     <name>Waterfall-FlameCord</name>
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/FlameCord.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/FlameCord.java
+     <name>Waterfall-MangoCord</name>
+diff --git a/mangocord/src/main/java/dev/lucianishimiya/mangocord/MangoCord.java b/mangocord/src/main/java/dev/lucianishimiya/mangocord/MangoCord.java
 new file mode 100644
 index 00000000..f3d5c029
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/FlameCord.java
++++ b/mangocord/src/main/java/dev/lucianishimiya/mangocord/MangoCord.java
 @@ -0,0 +1,31 @@
-+package dev._2lstudios.flamecord;
++package dev.lucianishimiya.mangocord;
 +
 +import java.util.Collection;
 +import java.util.logging.Logger;
 +
-+import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
++import dev.lucianishimiya.mangocord.configuration.MangoCordConfiguration;
 +import lombok.Getter;
 +import net.md_5.bungee.config.ConfigurationProvider;
 +import net.md_5.bungee.config.YamlConfiguration;
 +
-+public class FlameCord {
++public class MangoCord {
 +    @Getter
-+    private static FlameCord instance;
++    private static MangoCord instance;
 +
 +    public static void initialize(final Logger logger, final Collection<String> whitelistedAddresses) {
-+        if (FlameCord.instance == null) {
-+            FlameCord.instance = new FlameCord();
++        if (MangoCord.instance == null) {
++            MangoCord.instance = new MangoCord();
 +        }
 +
 +        instance.reload(logger, whitelistedAddresses);
 +    }
 +
 +    @Getter
-+    private FlameCordConfiguration flameCordConfiguration;
++    private MangoCordConfiguration mangoCordConfiguration;
 +
 +    public void reload(final Logger logger, final Collection<String> whitelistedAddresses) {
 +        final ConfigurationProvider configurationProvider = ConfigurationProvider.getProvider(YamlConfiguration.class);
 +        
-+        this.flameCordConfiguration = new FlameCordConfiguration(configurationProvider, whitelistedAddresses);
++        this.mangoCordConfiguration = new MangoCordConfiguration(configurationProvider, whitelistedAddresses);
 +    }
 +}
 \ No newline at end of file
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameConfig.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameConfig.java
+diff --git a/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MangoConfig.java b/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MangoConfig.java
 new file mode 100644
 index 00000000..e6c660d1
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameConfig.java
++++ b/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MangoConfig.java
 @@ -0,0 +1,74 @@
-+package dev._2lstudios.flamecord.configuration;
++package dev.lucianishimiya.mangocord.configuration;
 +
 +import java.io.File;
 +import java.io.IOException;
@@ -80,7 +80,7 @@ index 00000000..e6c660d1
 +import net.md_5.bungee.config.ConfigurationProvider;
 +import net.md_5.bungee.config.YamlConfiguration;
 +
-+public class FlameConfig {
++public class MangoConfig {
 +    Configuration load(File file) {
 +        ConfigurationProvider configurationProvider = ConfigurationProvider.getProvider(YamlConfiguration.class);
 +
@@ -142,13 +142,13 @@ index 00000000..e6c660d1
 +        }
 +    }
 +}
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
+diff --git a/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MangoCordConfiguration.java b/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MangoCordConfiguration.java
 new file mode 100644
 index 00000000..241e8ed9
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
++++ b/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MangoCordConfiguration.java
 @@ -0,0 +1,20 @@
-+package dev._2lstudios.flamecord.configuration;
++package dev.lucianishimiya.mangocord.configuration;
 +
 +import java.io.File;
 +import java.util.ArrayList;
@@ -160,8 +160,8 @@ index 00000000..241e8ed9
 +import net.md_5.bungee.config.Configuration;
 +import net.md_5.bungee.config.ConfigurationProvider;
 +
-+public class FlameCordConfiguration extends FlameConfig {
-+    public FlameCordConfiguration(final ConfigurationProvider configurationProvider, final Collection<String> whitelistedAddresses) {
++public class MangoCordConfiguration extends MangoConfig {
++    public MangoCordConfiguration(final ConfigurationProvider configurationProvider, final Collection<String> whitelistedAddresses) {
 +        final File configurationFile = new File("./mangocord.yml");
 +        final Configuration configuration = load(configurationFile);
 +
@@ -175,32 +175,32 @@ index 640f0ea2..70a1192e 100644
 @@ -1,5 +1,6 @@
  package net.md_5.bungee.protocol;
  
-+import dev._2lstudios.flamecord.FlameCord;
++import dev.lucianishimiya.mangocord.MangoCord;
  import io.netty.buffer.ByteBuf;
  import io.netty.buffer.ByteBufUtil;
  import io.netty.channel.ChannelHandlerContext;
-diff --git a/proxy/src/main/java/dev/_2lstudios/flamecord/commands/FlameCordCommand.java b/proxy/src/main/java/dev/_2lstudios/flamecord/commands/FlameCordCommand.java
+diff --git a/proxy/src/main/java/dev/lucianishimiya/mangocord/commands/MangoCordCommand.java b/proxy/src/main/java/dev/lucianishimiya/mangocord/commands/MangoCordCommand.java
 new file mode 100644
 index 00000000..021b38d4
 --- /dev/null
-+++ b/proxy/src/main/java/dev/_2lstudios/flamecord/commands/FlameCordCommand.java
++++ b/proxy/src/main/java/dev/lucianishimiya/mangocord/commands/MangoCordCommand.java
 @@ -0,0 +1,58 @@
-+package dev._2lstudios.flamecord.commands;
++package dev.lucianishimiya.mangocord.commands;
 +
 +import java.util.Collection;
 +import java.util.HashSet;
 +
-+import dev._2lstudios.flamecord.FlameCord;
++import dev.lucianishimiya.mangocord.MangoCord;
 +import net.md_5.bungee.BungeeCord;
 +import net.md_5.bungee.api.CommandSender;
 +import net.md_5.bungee.api.chat.TextComponent;
 +import net.md_5.bungee.api.config.ServerInfo;
 +import net.md_5.bungee.api.plugin.Command;
 +
-+public class FlameCordCommand extends Command {
++public class MangoCordCommand extends Command {
 +private final BungeeCord bungeeCord;
 +
-+    public FlameCordCommand(final BungeeCord bungeeCord) {
++    public MangoCordCommand(final BungeeCord bungeeCord) {
 +        super("mangocord");
 +
 +        this.bungeeCord = bungeeCord;
@@ -208,7 +208,7 @@ index 00000000..021b38d4
 +
 +    @Override
 +    public void execute(final CommandSender sender, final String[] args) {
-+        final FlameCord flameCord = FlameCord.getInstance();
++        final MangoCord mangoCord = MangoCord.getInstance();
 +
 +        if (sender.hasPermission("mangocord.usage")) {
 +            if (args.length > 0) {
@@ -216,30 +216,30 @@ index 00000000..021b38d4
 +
 +                switch (arg0) {
 +                    case "reload": {
-+                        // FlameCord - Collect ips from servers
++                        // MangoCord - Collect ips from servers
 +                        final Collection<String> whitelistedAddresses = new HashSet<>();
 +
 +                        for (final ServerInfo serverInfo : bungeeCord.getServers().values()) {
 +                            whitelistedAddresses.add(serverInfo.getSocketAddress().toString());
 +                        }
 +
-+                        FlameCord.initialize(bungeeCord.getLogger(), whitelistedAddresses);
++                        MangoCord.initialize(bungeeCord.getLogger(), whitelistedAddresses);
 +                        sender.sendMessage(TextComponent
-+                                .fromLegacyText("flamecord_reload"));
++                                .fromLegacyText("mangocord_reload"));
 +                        break;
 +                    }
 +                    default: {
-+                        sender.sendMessage(TextComponent.fromLegacyText("flamecord_help"));
++                        sender.sendMessage(TextComponent.fromLegacyText("mangocord_help"));
 +                        break;
 +                    }
 +                }
 +            } else {
 +                sender.sendMessage(TextComponent
-+                        .fromLegacyText("flamecord_help"));
++                        .fromLegacyText("mangocord_help"));
 +            }
 +        } else {
 +            sender.sendMessage(TextComponent
-+                    .fromLegacyText("flamecord_nopermission"));
++                    .fromLegacyText("mangocord_nopermission"));
 +        }
 +    }
 +}
@@ -252,7 +252,7 @@ index f4333c6f..91eaa39c 100644
  import com.google.gson.Gson;
  import com.google.gson.GsonBuilder;
 +
-+import dev._2lstudios.flamecord.FlameCord;
++import dev.lucianishimiya.mangocord.MangoCord;
  import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  import io.github.waterfallmc.waterfall.conf.WaterfallConfiguration;
  import io.github.waterfallmc.waterfall.event.ProxyExceptionEvent;
@@ -260,14 +260,14 @@ index f4333c6f..91eaa39c 100644
          pluginManager.loadPlugins();
          config.load();
  
-+        // FlameCord - Renew and register modules
++        // MangoCord - Renew and register modules
 +        final Collection<String> whitelistedAddresses = new HashSet<>();
 +
 +        for (final ServerInfo serverInfo : getServers().values()) {
 +            whitelistedAddresses.add(serverInfo.getSocketAddress().toString());
 +        }
 +
-+        FlameCord.initialize(logger, whitelistedAddresses);
++        MangoCord.initialize(logger, whitelistedAddresses);
 +
          if ( config.isForgeSupport() )
          {
@@ -281,7 +281,7 @@ index cba1515b..900d0e4d 100644
  import com.google.common.base.Joiner;
  import com.google.common.base.Preconditions;
 +
-+import dev._2lstudios.flamecord.FlameCord;
++import dev.lucianishimiya.mangocord.MangoCord;
  import io.netty.buffer.ByteBuf;
  import io.netty.buffer.ByteBufAllocator;
  import java.net.InetSocketAddress;
@@ -290,7 +290,7 @@ index cba1515b..900d0e4d 100644
          if ( packet.packet == null )
          {
 -            throw new QuietException( "Unexpected packet received during server login process!\n" + BufUtil.dump( packet.buf, 16 ) );
-+            // FlameCord - FlameCord General Patch
++            // MangoCord - MangoCord General Patch
 +            // More specific invalid packet exceptions
 +            throw new QuietException( "Unexpected packet received during server connector process!\n" + BufUtil.dump(packet.buf, 16) );
          }
@@ -321,7 +321,7 @@ index 1c0827f1..b809e848 100644
                  .remoteAddress( target.getAddress() );
          // Windows is bugged, multi homed users will just have to live with random connecting IPs
 -        if ( getPendingConnection().getListener().isSetLocalAddress() && !PlatformDependent.isWindows() && getPendingConnection().getListener().getSocketAddress() instanceof InetSocketAddress )
-+        // FlameCord - Use listenerInfo
++        // MangoCord - Use listenerInfo
 +        final ListenerInfo listenerInfo = getPendingConnection().getListener();
 +        if ( listenerInfo.isSetLocalAddress() && !PlatformDependent.isWindows() && listenerInfo.getSocketAddress() instanceof InetSocketAddress )
          {
@@ -338,7 +338,7 @@ index 32c57dad..ac004603 100644
  import javax.crypto.SecretKey;
  import javax.crypto.spec.SecretKeySpec;
  
-+import dev._2lstudios.flamecord.FlameCord;
++import dev.lucianishimiya.mangocord.MangoCord;
 +
  import lombok.Getter;
  import lombok.RequiredArgsConstructor;
@@ -348,7 +348,7 @@ index 32c57dad..ac004603 100644
          if ( packet.packet == null )
          {
 -            throw new QuietException( "Unexpected packet received during login process! " + BufUtil.dump( packet.buf, 16 ) );
-+            // FlameCord - FlameCord General Patch
++            // MangoCord - MangoCord General Patch
 +            // More specific invalid packet exceptions
 +            throw new QuietException( "Unexpected packet received during initial handler process!\n" + BufUtil.dump(packet.buf, 16) );
          }
@@ -375,7 +375,7 @@ index 4820267b..694ecdb0 100644
  
  import com.google.common.base.Preconditions;
 +
-+import dev._2lstudios.flamecord.FlameCord;
++import dev.lucianishimiya.mangocord.MangoCord;
  import io.netty.channel.ChannelHandlerContext;
  import io.netty.channel.ChannelInboundHandlerAdapter;
  import io.netty.handler.codec.CorruptedFrameException;
@@ -388,7 +388,7 @@ index 9227db06..f9227e01 100644
  
  import com.google.common.base.Preconditions;
 +
-+import dev._2lstudios.flamecord.FlameCord;
++import dev.lucianishimiya.mangocord.MangoCord;
  import io.github.waterfallmc.waterfall.event.ConnectionInitEvent;
  import io.netty.buffer.PooledByteBufAllocator;
  import io.netty.channel.Channel;

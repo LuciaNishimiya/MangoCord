@@ -12,9 +12,9 @@ index a72b7520..a4860814 100644
          HANDSHAKE, STATUS, PING, USERNAME, ENCRYPT, FINISHING;
      }
  
-+    // FlameCord start - InitialHandler Processing State
++    // MangoCord start - InitialHandler Processing State
 +    private boolean processing = false;
-+    // FlameCord end - InitialHandler Processing State
++    // MangoCord end - InitialHandler Processing State
 +
      private boolean canSendKickMessage()
      {
@@ -23,10 +23,10 @@ index a72b7520..a4860814 100644
      public void handle(StatusRequest statusRequest) throws Exception
      {
          Preconditions.checkState( thisState == State.STATUS, "Not expecting STATUS" );
-+        // FlameCord start - InitialHandler Processing State
++        // MangoCord start - InitialHandler Processing State
 +        Preconditions.checkState( !processing, "Cannot request STATUS while processing another packet");
 +        this.processing = true;
-+        // FlameCord end - InitialHandler Processing State
++        // MangoCord end - InitialHandler Processing State
  
          ServerInfo forced = AbstractReconnectHandler.getForcedHost( this );
          final int protocol = ( ProtocolConstants.SUPPORTED_VERSION_IDS.contains( handshake.getProtocolVersion() ) ) ? handshake.getProtocolVersion() : bungee.getProtocolVersion();
@@ -34,20 +34,20 @@ index a72b7520..a4860814 100644
          }
  
          thisState = State.PING;
-+        // FlameCord start - InitialHandler Processing State
++        // MangoCord start - InitialHandler Processing State
 +        processing = false;
-+        // FlameCord end - InitialHandler Processing State
++        // MangoCord end - InitialHandler Processing State
      }
  
      private static final boolean ACCEPT_INVALID_PACKETS = Boolean.parseBoolean(System.getProperty("waterfall.acceptInvalidPackets", "false"));
 @@ -411,6 +422,10 @@ public class InitialHandler extends PacketHandler implements PendingConnection
      {
-         // FlameCord - Never accept invalid packets
+         // MangoCord - Never accept invalid packets
          Preconditions.checkState( thisState == State.PING, "Not expecting PING" );
-+        // FlameCord start - InitialHandler Processing State
++        // MangoCord start - InitialHandler Processing State
 +        Preconditions.checkState( !processing, "Cannot request PING while processing another packet");
 +        this.processing = true;
-+        // FlameCord end - InitialHandler Processing State
++        // MangoCord end - InitialHandler Processing State
  
          unsafe.sendPacket( ping );
  
@@ -55,21 +55,21 @@ index a72b7520..a4860814 100644
      public void handle(Handshake handshake) throws Exception
      {
          Preconditions.checkState( thisState == State.HANDSHAKE, "Not expecting HANDSHAKE" );
-+        // FlameCord start - InitialHandler Processing State
++        // MangoCord start - InitialHandler Processing State
 +        Preconditions.checkState( !processing, "Cannot request HANDSHAKE while processing another packet");
 +        this.processing = true;
-+        // FlameCord end - InitialHandler Processing State
++        // MangoCord end - InitialHandler Processing State
  
-         // FlameCord start - Antibot System
+         // MangoCord start - Antibot System
          // Close and firewall on invalid protocol
 @@ -531,6 +550,10 @@ public class InitialHandler extends PacketHandler implements PendingConnection
                      return;
                  }
-                 // FlameCord end - Antibot System
+                 // MangoCord end - Antibot System
 +                
-+                // FlameCord start - InitialHandler Processing State
++                // MangoCord start - InitialHandler Processing State
 +                processing = false;
-+                // FlameCord end - InitialHandler Processing State
++                // MangoCord end - InitialHandler Processing State
  
                  break;
              case 2:
@@ -78,9 +78,9 @@ index a72b7520..a4860814 100644
                      return;
                  }
 +
-+                // FlameCord start - InitialHandler Processing State
++                // MangoCord start - InitialHandler Processing State
 +                processing = false;
-+                // FlameCord end - InitialHandler Processing State
++                // MangoCord end - InitialHandler Processing State
 +
                  break;
              default:
@@ -89,20 +89,20 @@ index a72b7520..a4860814 100644
      public void handle(LoginRequest loginRequest) throws Exception
      {
          Preconditions.checkState( thisState == State.USERNAME, "Not expecting USERNAME" );
-+        // FlameCord start - InitialHandler Processing State
++        // MangoCord start - InitialHandler Processing State
 +        Preconditions.checkState( !processing, "Cannot request USERNAME while processing another packet");
 +        this.processing = true;
-+        // FlameCord end - InitialHandler Processing State
++        // MangoCord end - InitialHandler Processing State
  
-         if ( !FlameCord.getInstance().getFlameCordConfiguration().isAllowInvalidNames() && !AllowedCharacters.isValidName( loginRequest.getData(), onlineMode ) )
+         if ( !MangoCord.getInstance().getMangoCordConfiguration().isAllowInvalidNames() && !AllowedCharacters.isValidName( loginRequest.getData(), onlineMode ) )
          {
 @@ -660,6 +692,9 @@ public class InitialHandler extends PacketHandler implements PendingConnection
                      thisState = State.FINISHING;
                      finish();
                  }
-+                // FlameCord start - InitialHandler Processing State
++                // MangoCord start - InitialHandler Processing State
 +                processing = false;
-+                // FlameCord end - InitialHandler Processing State
++                // MangoCord end - InitialHandler Processing State
              }
          };
  
@@ -110,10 +110,10 @@ index a72b7520..a4860814 100644
          Preconditions.checkState( thisState == State.ENCRYPT, "Not expecting ENCRYPT" );
          Preconditions.checkState( EncryptionUtil.check( loginRequest.getPublicKey(), encryptResponse, request ), "Invalid verification" );
          thisState = State.FINISHING; // Waterfall - move earlier - There is no verification of this later (and this is not API)
-+        // FlameCord start - InitialHandler Processing State
++        // MangoCord start - InitialHandler Processing State
 +        Preconditions.checkState( !processing, "Cannot request ENCRYPT while processing another packet");
 +        this.processing = true;
-+        // FlameCord end - InitialHandler Processing State
++        // MangoCord end - InitialHandler Processing State
  
          SecretKey sharedKey = EncryptionUtil.getSecret( encryptResponse, request );
          // Waterfall start

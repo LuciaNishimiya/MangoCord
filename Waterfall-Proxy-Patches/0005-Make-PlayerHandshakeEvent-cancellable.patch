@@ -26,7 +26,7 @@ index 2f7b38d9..e29b0ed3 100644
  @EqualsAndHashCode(callSuper = false)
 -public class PlayerHandshakeEvent extends Event
 -{
-+// FlameCord - Implement cancellable
++// MangoCord - Implement cancellable
 +public class PlayerHandshakeEvent extends Event implements Cancellable {
 +    @Getter
 +    @Setter
@@ -43,7 +43,7 @@ index 2d3182b9..3d6bdf5c 100644
          this.virtualHost = InetSocketAddress.createUnresolved( handshake.getHost(), handshake.getPort() );
  
 -        bungee.getPluginManager().callEvent( new PlayerHandshakeEvent( InitialHandler.this, handshake ) );
-+        // FlameCord - Make PlayerHandshakeEvent cancellable
++        // MangoCord - Make PlayerHandshakeEvent cancellable
 +        if (bungee.getPluginManager().callEvent(new PlayerHandshakeEvent(InitialHandler.this, handshake)).isCancelled()) {
 +            ch.close();
 +            return;

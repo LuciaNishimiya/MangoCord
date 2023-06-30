@@ -12,7 +12,7 @@ index 4371374a..2bb27e67 100644
          return components.toArray( new BaseComponent[ 0 ] );
      }
  
-+    // FlameCord start - Dont Process Links For Kick Messages
++    // MangoCord start - Dont Process Links For Kick Messages
 +    public static BaseComponent[] fromLegacyTextFast(String message)
 +    {
 +        return fromLegacyTextFast( message, ChatColor.WHITE );
@@ -111,7 +111,7 @@ index 4371374a..2bb27e67 100644
 +
 +        return components.toArray( new BaseComponent[ 0 ] );
 +    }
-+    // FlameCord end - Dont Process Links For Kick Messages
++    // MangoCord end - Dont Process Links For Kick Messages
 +
      /**
       * The text of the component that will be displayed to the client
@@ -125,7 +125,7 @@ index 6f336346..a72b7520 100644
          if ( canSendKickMessage() )
          {
 -            disconnect( TextComponent.fromLegacyText( reason ) );
-+            disconnect( TextComponent.fromLegacyTextFast( reason ) ); // FlameCord - Dont Process Links For Kick Messages
++            disconnect( TextComponent.fromLegacyTextFast( reason ) ); // MangoCord - Dont Process Links For Kick Messages
          } else
          {
              ch.close();

@@ -1,14 +1,14 @@
 From 26e96485a5f9ae0a87a69dbf7754f9920aec7aa0 Mon Sep 17 00:00:00 2001
 From: foss-mc <69294560+foss-mc@users.noreply.github.com>
 Date: Wed, 16 Dec 2020 17:59:15 +0800
-Subject: [PATCH] FlameCord POM Changes
+Subject: [PATCH] MangoCord POM Changes
 
 
-diff --git a/flamecord/pom.xml b/flamecord/pom.xml
+diff --git a/mangocord/pom.xml b/mangocord/pom.xml
 new file mode 100644
 index 00000000..20edd900
 --- /dev/null
-+++ b/flamecord/pom.xml
++++ b/mangocord/pom.xml
 @@ -0,0 +1,44 @@
 +<project xmlns="http://maven.apache.org/POM/4.0.0"
 +    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -21,12 +21,12 @@ index 00000000..20edd900
 +        <relativePath>../pom.xml</relativePath>
 +    </parent>
 +
-+    <groupId>dev._2lstudios</groupId>
-+    <artifactId>waterfall-flamecord</artifactId>
++    <groupId>dev.lucianishimiya</groupId>
++    <artifactId>waterfall-mangocord</artifactId>
 +    <version>1.19-R0.1-SNAPSHOT</version>
 +    <packaging>jar</packaging>
 +
-+    <name>Waterfall-FlameCord</name>
++    <name>Waterfall-MangoCord</name>
 +    <description>Mangocord adds security essentials and new configuration options</description>
 +
 +    <dependencies>
@@ -62,7 +62,7 @@ index d333a528..88d0f3fa 100644
          <module>query</module>
          <!--<module>slf4j</module>-->
          <module>native</module>
-+        <module>flamecord</module> <!-- FlameCord - POM Changes -->
++        <module>mangocord</module> <!-- MangoCord - POM Changes -->
      </modules>
  
      <scm>
@@ -75,14 +75,14 @@ index c6105b87..ae7cf9f7 100644
              <scope>compile</scope>
          </dependency>
 +
-+        <!-- FlameCord start - Add our dependencies -->
++        <!-- MangoCord start - Add our dependencies -->
 +        <dependency>
-+            <groupId>dev._2lstudios</groupId>
-+            <artifactId>waterfall-flamecord</artifactId>
++            <groupId>dev.lucianishimiya</groupId>
++            <artifactId>waterfall-mangocord</artifactId>
 +            <version>${project.version}</version>
 +            <scope>compile</scope>
 +        </dependency>
-+        <!-- FlameCord end -->
++        <!-- MangoCord end -->
      </dependencies>
  </project>
 diff --git a/proxy/pom.xml b/proxy/pom.xml
@@ -94,10 +94,10 @@ index 83d8719b..896770ae 100644
          </dependency>
          <!-- Waterfall end -->
 +        
-+        <!-- FlameCord start - Add our dependencies -->
++        <!-- MangoCord start - Add our dependencies -->
 +        <dependency>
-+            <groupId>dev._2lstudios</groupId>
-+            <artifactId>waterfall-flamecord</artifactId>
++            <groupId>dev.lucianishimiya</groupId>
++            <artifactId>waterfall-mangocord</artifactId>
 +            <version>${project.version}</version>
 +            <scope>compile</scope>
 +        </dependency>
@@ -137,7 +137,7 @@ index 83d8719b..896770ae 100644
 +            <version>${project.version}</version>
 +            <scope>compile</scope>
 +        </dependency>
-+        <!-- FlameCord end -->
++        <!-- MangoCord end -->
      </dependencies>
  
      <!-- Waterfall start - copy license files into jar -->

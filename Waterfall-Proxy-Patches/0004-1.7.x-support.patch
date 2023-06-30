@@ -13,7 +13,7 @@ index 59f2cb73..f33ce913 100644
      }
      // Waterfall end
 +
-+    // FlameCord start - 1.7.x support
++    // MangoCord start - 1.7.x support
 +    public static byte[] v17readArray(ByteBuf buf)
 +    {
 +        // Read in a 2 or 3 byte number that represents the length of the packet. (3 byte "shorts" for Forge only)
@@ -43,7 +43,7 @@ index 59f2cb73..f33ce913 100644
 +        writeVarShort( buf, b.length );
 +        buf.writeBytes( b );
 +    }
-+    // FlameCord end - 1.7.x support
++    // MangoCord end - 1.7.x support
  }
 diff --git a/protocol/src/main/java/net/md_5/bungee/protocol/Protocol.java b/protocol/src/main/java/net/md_5/bungee/protocol/Protocol.java
 index 8bf14d56..c433ac4a 100644
@@ -54,7 +54,7 @@ index 8bf14d56..c433ac4a 100644
                      Handshake.class,
                      Handshake::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x00 )
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ) // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ) // MangoCord - 1.7.x support
              );
          }
      },
@@ -63,7 +63,7 @@ index 8bf14d56..c433ac4a 100644
                      KeepAlive.class,
                      KeepAlive::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x00 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x1F ),
                      map( ProtocolConstants.MINECRAFT_1_13, 0x21 ),
                      map( ProtocolConstants.MINECRAFT_1_14, 0x20 ),
@@ -72,7 +72,7 @@ index 8bf14d56..c433ac4a 100644
                      Login.class,
                      Login::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x01 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x01 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x01 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x23 ),
                      map( ProtocolConstants.MINECRAFT_1_13, 0x25 ),
                      map( ProtocolConstants.MINECRAFT_1_15, 0x26 ),
@@ -81,7 +81,7 @@ index 8bf14d56..c433ac4a 100644
              TO_CLIENT.registerPacket( Chat.class,
                      Chat::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x02 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x02 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x02 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x0F ),
                      map( ProtocolConstants.MINECRAFT_1_13, 0x0E ),
                      map( ProtocolConstants.MINECRAFT_1_15, 0x0F ),
@@ -90,7 +90,7 @@ index 8bf14d56..c433ac4a 100644
                      Respawn.class,
                      Respawn::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x07 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x07 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x07 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x33 ),
                      map( ProtocolConstants.MINECRAFT_1_12, 0x34 ),
                      map( ProtocolConstants.MINECRAFT_1_12_1, 0x35 ),
@@ -99,14 +99,14 @@ index 8bf14d56..c433ac4a 100644
                      EntityEffect.class,
                      EntityEffect::new,
 -                    map(ProtocolConstants.MINECRAFT_1_8, 0x1D),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x1D ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x1D ), // MangoCord - 1.7.x support
                      map(ProtocolConstants.MINECRAFT_1_9, -1)
              );
              TO_CLIENT.registerPacket(
                      EntityRemoveEffect.class,
                      EntityRemoveEffect::new,
 -                    map(ProtocolConstants.MINECRAFT_1_8, 0x1E),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x1E ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x1E ), // MangoCord - 1.7.x support
                      map(ProtocolConstants.MINECRAFT_1_9, -1)
              );
              // Waterfall end
@@ -114,7 +114,7 @@ index 8bf14d56..c433ac4a 100644
                      PlayerListItem.class, // PlayerInfo
                      PlayerListItem::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x38 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x38 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x38 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x2D ),
                      map( ProtocolConstants.MINECRAFT_1_12_1, 0x2E ),
                      map( ProtocolConstants.MINECRAFT_1_13, 0x30 ),
@@ -123,7 +123,7 @@ index 8bf14d56..c433ac4a 100644
                      TabCompleteResponse.class,
                      TabCompleteResponse::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x3A ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x3A ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x3A ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x0E ),
                      map( ProtocolConstants.MINECRAFT_1_13, 0x10 ),
                      map( ProtocolConstants.MINECRAFT_1_15, 0x11 ),
@@ -132,7 +132,7 @@ index 8bf14d56..c433ac4a 100644
                      ScoreboardObjective.class,
                      ScoreboardObjective::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x3B ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x3B ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x3B ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x3F ),
                      map( ProtocolConstants.MINECRAFT_1_12, 0x41 ),
                      map( ProtocolConstants.MINECRAFT_1_12_1, 0x42 ),
@@ -141,7 +141,7 @@ index 8bf14d56..c433ac4a 100644
                      ScoreboardScore.class,
                      ScoreboardScore::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x3C ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x3C ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x3C ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x42 ),
                      map( ProtocolConstants.MINECRAFT_1_12, 0x44 ),
                      map( ProtocolConstants.MINECRAFT_1_12_1, 0x45 ),
@@ -150,7 +150,7 @@ index 8bf14d56..c433ac4a 100644
                      ScoreboardDisplay.class,
                      ScoreboardDisplay::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x3D ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x3D ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x3D ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x38 ),
                      map( ProtocolConstants.MINECRAFT_1_12, 0x3A ),
                      map( ProtocolConstants.MINECRAFT_1_12_1, 0x3B ),
@@ -159,7 +159,7 @@ index 8bf14d56..c433ac4a 100644
                      Team.class,
                      Team::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x3E ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x3E ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x3E ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x41 ),
                      map( ProtocolConstants.MINECRAFT_1_12, 0x43 ),
                      map( ProtocolConstants.MINECRAFT_1_12_1, 0x44 ),
@@ -168,7 +168,7 @@ index 8bf14d56..c433ac4a 100644
                      PluginMessage.class,
                      PluginMessage::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x3F ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x3F ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x3F ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x18 ),
                      map( ProtocolConstants.MINECRAFT_1_13, 0x19 ),
                      map( ProtocolConstants.MINECRAFT_1_14, 0x18 ),
@@ -177,7 +177,7 @@ index 8bf14d56..c433ac4a 100644
                      Kick.class,
                      Kick::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x40 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x40 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x40 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x1A ),
                      map( ProtocolConstants.MINECRAFT_1_13, 0x1B ),
                      map( ProtocolConstants.MINECRAFT_1_14, 0x1A ),
@@ -186,7 +186,7 @@ index 8bf14d56..c433ac4a 100644
                      Title.class,
                      Title::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x45 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x45 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x45 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_12, 0x47 ),
                      map( ProtocolConstants.MINECRAFT_1_12_1, 0x48 ),
                      map( ProtocolConstants.MINECRAFT_1_13, 0x4B ),
@@ -195,7 +195,7 @@ index 8bf14d56..c433ac4a 100644
                      PlayerListHeaderFooter.class,
                      PlayerListHeaderFooter::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x47 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x47 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x47 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x48 ),
                      map( ProtocolConstants.MINECRAFT_1_9_4, 0x47 ),
                      map( ProtocolConstants.MINECRAFT_1_12, 0x49 ),
@@ -204,7 +204,7 @@ index 8bf14d56..c433ac4a 100644
                      EntityStatus.class,
                      EntityStatus::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x1A ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x1A ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x1A ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x1B ),
                      map( ProtocolConstants.MINECRAFT_1_13, 0x1C ),
                      map( ProtocolConstants.MINECRAFT_1_14, 0x1B ),
@@ -213,7 +213,7 @@ index 8bf14d56..c433ac4a 100644
                      KeepAlive.class,
                      KeepAlive::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x00 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x0B ),
                      map( ProtocolConstants.MINECRAFT_1_12, 0x0C ),
                      map( ProtocolConstants.MINECRAFT_1_12_1, 0x0B ),
@@ -222,7 +222,7 @@ index 8bf14d56..c433ac4a 100644
              TO_SERVER.registerPacket( Chat.class,
                      Chat::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x01 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x01 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x01 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x02 ),
                      map( ProtocolConstants.MINECRAFT_1_12, 0x03 ),
                      map( ProtocolConstants.MINECRAFT_1_12_1, 0x02 ),
@@ -231,7 +231,7 @@ index 8bf14d56..c433ac4a 100644
                      TabCompleteRequest.class,
                      TabCompleteRequest::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x14 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x14 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x14 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x01 ),
                      map( ProtocolConstants.MINECRAFT_1_12, 0x02 ),
                      map( ProtocolConstants.MINECRAFT_1_12_1, 0x01 ),
@@ -240,7 +240,7 @@ index 8bf14d56..c433ac4a 100644
                      ClientSettings.class,
                      ClientSettings::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x15 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x15 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x15 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x04 ),
                      map( ProtocolConstants.MINECRAFT_1_12, 0x05 ),
                      map( ProtocolConstants.MINECRAFT_1_12_1, 0x04 ),
@@ -249,7 +249,7 @@ index 8bf14d56..c433ac4a 100644
                      PluginMessage.class,
                      PluginMessage::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x17 ),
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x17 ), // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x17 ), // MangoCord - 1.7.x support
                      map( ProtocolConstants.MINECRAFT_1_9, 0x09 ),
                      map( ProtocolConstants.MINECRAFT_1_12, 0x0A ),
                      map( ProtocolConstants.MINECRAFT_1_12_1, 0x09 ),
@@ -258,26 +258,26 @@ index 8bf14d56..c433ac4a 100644
                      StatusResponse.class,
                      StatusResponse::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x00 )
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ) // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ) // MangoCord - 1.7.x support
              );
              TO_CLIENT.registerPacket(
                      PingPacket.class,
                      PingPacket::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x01 )
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x01 ) // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x01 ) // MangoCord - 1.7.x support
              );
  
              TO_SERVER.registerPacket(
                      StatusRequest.class,
                      StatusRequest::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x00 )
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ) // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ) // MangoCord - 1.7.x support
              );
              TO_SERVER.registerPacket(
                      PingPacket.class,
                      PingPacket::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x01 )
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x01 ) // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x01 ) // MangoCord - 1.7.x support
              );
          }
      },
@@ -286,25 +286,25 @@ index 8bf14d56..c433ac4a 100644
                      Kick.class,
                      Kick::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x00 )
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ) // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ) // MangoCord - 1.7.x support
              );
              TO_CLIENT.registerPacket(
                      EncryptionRequest.class,
                      EncryptionRequest::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x01 )
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x01 ) // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x01 ) // MangoCord - 1.7.x support
              );
              TO_CLIENT.registerPacket(
                      LoginSuccess.class,
                      LoginSuccess::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x02 )
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x02 ) // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x02 ) // MangoCord - 1.7.x support
              );
              TO_CLIENT.registerPacket(
                      SetCompression.class,
                      SetCompression::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x03 )
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x03 ) // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x03 ) // MangoCord - 1.7.x support
              );
              TO_CLIENT.registerPacket(
                      LoginPayloadRequest.class,
@@ -313,13 +313,13 @@ index 8bf14d56..c433ac4a 100644
                      LoginRequest.class,
                      LoginRequest::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x00 )
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ) // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x00 ) // MangoCord - 1.7.x support
              );
              TO_SERVER.registerPacket(
                      EncryptionResponse.class,
                      EncryptionResponse::new,
 -                    map( ProtocolConstants.MINECRAFT_1_8, 0x01 )
-+                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x01 ) // FlameCord - 1.7.x support
++                    map( ProtocolConstants.MINECRAFT_1_7_2, 0x01 ) // MangoCord - 1.7.x support
              );
              TO_SERVER.registerPacket(
                      LoginPayloadResponse.class,
@@ -331,10 +331,10 @@ index 18574b30..d7f430bd 100644
  {
  
      private static final boolean SNAPSHOT_SUPPORT = Boolean.getBoolean( "net.md_5.bungee.protocol.snapshot" );
-+    // FlameCord start - 1.7.x support
++    // MangoCord start - 1.7.x support
 +    public static final int MINECRAFT_1_7_2 = 4;
 +    public static final int MINECRAFT_1_7_6 = 5;
-+    // FlameCord end - 1.7.x support
++    // MangoCord end - 1.7.x support
      public static final int MINECRAFT_1_8 = 47;
      public static final int MINECRAFT_1_9 = 107;
      public static final int MINECRAFT_1_9_1 = 108;
@@ -342,7 +342,7 @@ index 18574b30..d7f430bd 100644
      static
      {
          ImmutableList.Builder<String> supportedVersions = ImmutableList.<String>builder().add(
-+                "1.7.x", // FlameCord - 1.7.x support
++                "1.7.x", // MangoCord - 1.7.x support
                  "1.8.x",
                  "1.9.x",
                  "1.10.x",
@@ -350,10 +350,10 @@ index 18574b30..d7f430bd 100644
                  "1.20.x"
          );
          ImmutableList.Builder<Integer> supportedVersionIds = ImmutableList.<Integer>builder().add(
-+                // FlameCord start - 1.7.x support
++                // MangoCord start - 1.7.x support
 +                ProtocolConstants.MINECRAFT_1_7_2,
 +                ProtocolConstants.MINECRAFT_1_7_6,
-+                // FlameCord end - 1.7.x support
++                // MangoCord end - 1.7.x support
                  ProtocolConstants.MINECRAFT_1_8,
                  ProtocolConstants.MINECRAFT_1_9,
                  ProtocolConstants.MINECRAFT_1_9_1,
@@ -365,7 +365,7 @@ index dc986609..230018ae 100644
      public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
          message = readString( buf, ( direction == ProtocolConstants.Direction.TO_CLIENT ) ? 262144 : ( protocolVersion >= ProtocolConstants.MINECRAFT_1_11 ? 256 : 100 ) );
-+        if ( ProtocolConstants.isAfterOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_8 ) ) // FlameCord - 1.7.x support
++        if ( ProtocolConstants.isAfterOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_8 ) ) // MangoCord - 1.7.x support
          if ( direction == ProtocolConstants.Direction.TO_CLIENT )
          {
              position = buf.readByte();
@@ -373,7 +373,7 @@ index dc986609..230018ae 100644
      public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
          writeString( message, buf, ( direction == ProtocolConstants.Direction.TO_CLIENT ) ? 262144 : ( protocolVersion >= ProtocolConstants.MINECRAFT_1_11 ? 256 : 100 ) );
-+        if ( ProtocolConstants.isAfterOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_8 ) ) // FlameCord - 1.7.x support
++        if ( ProtocolConstants.isAfterOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_8 ) ) // MangoCord - 1.7.x support
          if ( direction == ProtocolConstants.Direction.TO_CLIENT )
          {
              buf.writeByte( position );
@@ -385,12 +385,12 @@ index d7d4e6ab..570a89f0 100644
          chatFlags = protocolVersion >= ProtocolConstants.MINECRAFT_1_9 ? DefinedPacket.readVarInt( buf ) : buf.readUnsignedByte();
          chatColours = buf.readBoolean();
          skinParts = buf.readByte();
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            difficulty = buf.readByte();
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
          if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_9 )
          {
              mainHand = DefinedPacket.readVarInt( buf );
@@ -398,7 +398,7 @@ index d7d4e6ab..570a89f0 100644
      @Override
      public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            writeString( locale, buf );
@@ -409,7 +409,7 @@ index d7d4e6ab..570a89f0 100644
 +            buf.writeByte( difficulty );
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          writeString( locale, buf );
          buf.writeByte( viewDistance );
@@ -422,7 +422,7 @@ index a29524ca..e7851996 100644
      @Override
      public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            serverId = readString( buf );
@@ -430,7 +430,7 @@ index a29524ca..e7851996 100644
 +            verifyToken = v17readArray( buf );
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          serverId = readString( buf );
          publicKey = readArray( buf );
@@ -439,7 +439,7 @@ index a29524ca..e7851996 100644
      @Override
      public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            writeString( serverId, buf );
@@ -447,7 +447,7 @@ index a29524ca..e7851996 100644
 +            v17writeArray( verifyToken, buf, false );
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          writeString( serverId, buf );
          writeArray( publicKey, buf );
@@ -460,14 +460,14 @@ index 545eec72..eacdbe78 100644
  
      public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            sharedSecret = v17readArray( buf );
 +            verifyToken = v17readArray( buf );
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          sharedSecret = readArray( buf, 128 );
          if ( protocolVersion < ProtocolConstants.MINECRAFT_1_19 || protocolVersion >= ProtocolConstants.MINECRAFT_1_19_3 || buf.readBoolean() )
@@ -476,14 +476,14 @@ index 545eec72..eacdbe78 100644
      @Override
      public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            v17writeArray( sharedSecret, buf, false );
 +            v17writeArray( verifyToken, buf, false );
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          writeArray( sharedSecret, buf );
          if ( verifyToken != null )
@@ -507,25 +507,25 @@ index d11a9ea9..0ed78a8c 100644
 -    public void read(ByteBuf buf) {
 -        this.entityId = readVarInt(buf);
 +    public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion) {
-+        this.entityId = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt(buf) : buf.readInt(); // FlameCord - 1.7.x support
++        this.entityId = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt(buf) : buf.readInt(); // MangoCord - 1.7.x support
          this.effectId = buf.readUnsignedByte();
          this.amplifier = buf.readUnsignedByte();
 -        this.duration = readVarInt(buf);
 -        this.hideParticles = buf.readBoolean();
-+        this.duration = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt(buf) : buf.readShort(); // FlameCord - 1.7.x support
-+        // FlameCord start - 1.7.x support
++        this.duration = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt(buf) : buf.readShort(); // MangoCord - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_8 )
 +        {
 +            this.hideParticles = buf.readBoolean();
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
      }
  
      @Override
 -    public void write(ByteBuf buf) {
 -        writeVarInt(this.entityId, buf);
 +    public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion) {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if (protocolVersion >= ProtocolConstants.MINECRAFT_1_8)
 +        {
 +            writeVarInt(this.entityId, buf);
@@ -533,11 +533,11 @@ index d11a9ea9..0ed78a8c 100644
 +        {
 +            buf.writeInt(effectId);
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
          buf.writeByte(this.effectId);
          buf.writeByte(this.amplifier);
 -        writeVarInt(this.duration, buf);
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if (protocolVersion >= ProtocolConstants.MINECRAFT_1_8)
 +        {
 +            writeVarInt(this.duration, buf);
@@ -545,7 +545,7 @@ index d11a9ea9..0ed78a8c 100644
 +        {
 +            buf.writeShort(duration);
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
          buf.writeBoolean(this.hideParticles);
      }
  
@@ -568,7 +568,7 @@ index 7ed2dc3a..435b8578 100644
 -    public void read(ByteBuf buf) {
 -        this.entityId = readVarInt(buf);
 +    public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion) {
-+        this.entityId = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt(buf) : buf.readInt(); // FlameCord - 1.7.x support
++        this.entityId = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt(buf) : buf.readInt(); // MangoCord - 1.7.x support
          this.effectId = buf.readUnsignedByte();
      }
  
@@ -576,7 +576,7 @@ index 7ed2dc3a..435b8578 100644
 -    public void write(ByteBuf buf) {
 -        writeVarInt(this.entityId, buf);
 +    public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion) {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if (protocolVersion >= ProtocolConstants.MINECRAFT_1_8)
 +        {
 +            writeVarInt(this.entityId, buf);
@@ -584,7 +584,7 @@ index 7ed2dc3a..435b8578 100644
 +        {
 +            buf.writeInt(entityId);
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
          buf.writeByte(effectId);
      }
  
@@ -596,13 +596,13 @@ index b004bc41..a8c3e773 100644
      @Override
      public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            randomId = buf.readInt();
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          randomId = ( protocolVersion >= ProtocolConstants.MINECRAFT_1_12_2 ) ? buf.readLong() : readVarInt( buf );
      }
@@ -610,13 +610,13 @@ index b004bc41..a8c3e773 100644
      @Override
      public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            buf.writeInt((int) randomId);
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_12_2 )
          {
@@ -629,11 +629,11 @@ index 07fb3d79..7d03cd10 100644
      @Override
      public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( protocolVersion <= ProtocolConstants.MINECRAFT_1_7_2 ) {
 +            uuid = readUndashedUUID( buf );
 +        } else
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
          if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_16 )
          {
              uuid = readUUID( buf );
@@ -641,11 +641,11 @@ index 07fb3d79..7d03cd10 100644
      @Override
      public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( protocolVersion <= ProtocolConstants.MINECRAFT_1_7_2 ) {
 +            writeUndashedUUID( uuid.toString(), buf );
 +        } else
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
          if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_16 )
          {
              writeUUID( uuid, buf );
@@ -654,7 +654,7 @@ index 07fb3d79..7d03cd10 100644
          handler.handle( this );
      }
 +
-+    // FlameCord start - 1.7.x support
++    // MangoCord start - 1.7.x support
 +    private static UUID readUndashedUUID(ByteBuf buf) {
 +        return UUID.fromString( new StringBuilder( readString( buf ) ).insert( 20, '-' ).insert( 16, '-' ).insert( 12, '-' ).insert( 8, '-' ).toString() );
 +    }
@@ -662,7 +662,7 @@ index 07fb3d79..7d03cd10 100644
 +    private static void writeUndashedUUID(String uuid, ByteBuf buf) {
 +        writeString( new StringBuilder( 32 ).append( uuid, 0, 8 ).append( uuid, 9, 13 ).append( uuid, 14, 18 ).append( uuid, 19, 23 ).append( uuid, 24, 36 ).toString(), buf );
 +    }
-+    // FlameCord end - 1.7.x support
++    // MangoCord end - 1.7.x support
  }
 diff --git a/protocol/src/main/java/net/md_5/bungee/protocol/packet/PlayerListItem.java b/protocol/src/main/java/net/md_5/bungee/protocol/packet/PlayerListItem.java
 index 9b9c412d..4c50d237 100644
@@ -672,7 +672,7 @@ index 9b9c412d..4c50d237 100644
      @Override
      public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            items = new Item[ 1 ];
@@ -682,7 +682,7 @@ index 9b9c412d..4c50d237 100644
 +            item.ping = (int) buf.readShort();
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          action = Action.values()[DefinedPacket.readVarInt( buf )];
          items = new Item[ DefinedPacket.readVarInt( buf ) ];
@@ -691,7 +691,7 @@ index 9b9c412d..4c50d237 100644
      @Override
      public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            Item item = items[0]; // Only one at a time
@@ -700,7 +700,7 @@ index 9b9c412d..4c50d237 100644
 +            buf.writeShort( item.ping );
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          DefinedPacket.writeVarInt( action.ordinal(), buf );
          DefinedPacket.writeVarInt( items.length, buf );
@@ -713,14 +713,14 @@ index 91f71c09..57a82d29 100644
      @Override
      public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            tag = readString( buf );
 +            data = v17readArray( buf );
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          tag = ( protocolVersion >= ProtocolConstants.MINECRAFT_1_13 ) ? MODERNISE.apply( readString( buf ) ) : readString( buf, 20 );
          int maxSize = ( direction == ProtocolConstants.Direction.TO_SERVER ) ? Short.MAX_VALUE : 0x100000;
@@ -729,14 +729,14 @@ index 91f71c09..57a82d29 100644
      @Override
      public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            writeString( tag, buf );
 +            v17writeArray( data, buf, allowExtendedPacket );
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          writeString( ( protocolVersion >= ProtocolConstants.MINECRAFT_1_13 ) ? MODERNISE.apply( tag ) : tag, buf );
          buf.writeBytes( data );
@@ -749,7 +749,7 @@ index 3c7905d5..75b371e9 100644
      @Override
      public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            name = readString( buf );
@@ -757,7 +757,7 @@ index 3c7905d5..75b371e9 100644
 +            action = buf.readByte();
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          name = readString( buf );
          action = buf.readByte();
@@ -766,7 +766,7 @@ index 3c7905d5..75b371e9 100644
      @Override
      public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            writeString( name, buf );
@@ -774,7 +774,7 @@ index 3c7905d5..75b371e9 100644
 +            buf.writeByte( action );
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          writeString( name, buf );
          buf.writeByte( action );
@@ -787,7 +787,7 @@ index 0b27fc86..a812441d 100644
      @Override
      public void read(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            itemName = readString( buf );
@@ -799,7 +799,7 @@ index 0b27fc86..a812441d 100644
 +            }
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          itemName = readString( buf );
          action = buf.readByte();
@@ -808,7 +808,7 @@ index 0b27fc86..a812441d 100644
      @Override
      public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            writeString( itemName, buf );
@@ -820,7 +820,7 @@ index 0b27fc86..a812441d 100644
 +            }
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          writeString( itemName, buf );
          buf.writeByte( action );
@@ -833,7 +833,7 @@ index 80e4f85a..cab28b99 100644
          }
          cursor = readString( buf, ( protocolVersion > ProtocolConstants.MINECRAFT_1_13 ? 32500 : ( protocolVersion == ProtocolConstants.MINECRAFT_1_13 ? 256 : 32767 ) ) );
  
-+        if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ) // FlameCord - 1.7.x support
++        if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ) // MangoCord - 1.7.x support
          if ( protocolVersion < ProtocolConstants.MINECRAFT_1_13 )
          {
              if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_9 )
@@ -841,7 +841,7 @@ index 80e4f85a..cab28b99 100644
          }
          writeString( cursor, buf );
  
-+        if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ) // FlameCord - 1.7.x support
++        if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ) // MangoCord - 1.7.x support
          if ( protocolVersion < ProtocolConstants.MINECRAFT_1_13 )
          {
              if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_9 )
@@ -854,23 +854,23 @@ index a5555f6a..1eb458b6 100644
              }
              friendlyFire = buf.readByte();
 -            nameTagVisibility = readString( buf );
-+            // FlameCord start - 1.7.x support
++            // MangoCord start - 1.7.x support
 +            if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_8 )
 +            {
 +                nameTagVisibility = readString( buf );
 +            }
-+            // FlameCord end - 1.7.x support
++            // MangoCord end - 1.7.x support
              if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_9 )
              {
                  collisionRule = readString( buf );
              }
 -            color = ( protocolVersion >= ProtocolConstants.MINECRAFT_1_13 ) ? readVarInt( buf ) : buf.readByte();
-+            // FlameCord start - 1.7.x support
++            // MangoCord start - 1.7.x support
 +            if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_8 )
 +            {
 +                color = ( protocolVersion >= ProtocolConstants.MINECRAFT_1_13 ) ? readVarInt( buf ) : buf.readByte();
 +            }
-+            // FlameCord end - 1.7.x support
++            // MangoCord end - 1.7.x support
              if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_13 )
              {
                  prefix = readString( buf );
@@ -879,7 +879,7 @@ index a5555f6a..1eb458b6 100644
          if ( mode == 0 || mode == 3 || mode == 4 )
          {
 -            int len = readVarInt( buf );
-+            int len = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt( buf ) : buf.readShort(); // FlameCord - 1.7.x support
++            int len = protocolVersion >= ProtocolConstants.MINECRAFT_1_8 ? readVarInt( buf ) : buf.readShort(); // MangoCord - 1.7.x support
              players = new String[ len ];
              for ( int i = 0; i < len; i++ )
              {
@@ -887,7 +887,7 @@ index a5555f6a..1eb458b6 100644
      @Override
      public void write(ByteBuf buf, ProtocolConstants.Direction direction, int protocolVersion)
      {
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocolVersion, ProtocolConstants.MINECRAFT_1_7_6 ) )
 +        {
 +            writeString( name, buf );
@@ -909,7 +909,7 @@ index a5555f6a..1eb458b6 100644
 +            }
 +            return;
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
 +
          writeString( name, buf );
          buf.writeByte( mode );
@@ -922,14 +922,14 @@ index f4667e30..f4333c6f 100644
              .registerTypeAdapter( SelectorComponent.class, new SelectorComponentSerializer() )
              .registerTypeAdapter( ServerPing.PlayerInfo.class, new PlayerInfoSerializer() )
              .registerTypeAdapter( Favicon.class, Favicon.getFaviconTypeAdapter() ).create();
-+    // FlameCord start - 1.7.x support
++    // MangoCord start - 1.7.x support
 +    public final Gson gsonLegacy = new GsonBuilder()
 +            .registerTypeAdapter( BaseComponent.class, new ComponentSerializer() )
 +            .registerTypeAdapter( TextComponent.class, new TextComponentSerializer() )
 +            .registerTypeAdapter( TranslatableComponent.class, new TranslatableComponentSerializer() )
 +            .registerTypeAdapter( ServerPing.PlayerInfo.class, new PlayerInfoSerializer( ProtocolConstants.MINECRAFT_1_7_2 ) )
 +            .registerTypeAdapter( Favicon.class, Favicon.getFaviconTypeAdapter() ).create();
-+    // FlameCord end - 1.7.x support
++    // MangoCord end - 1.7.x support
      @Getter
      private ConnectionThrottle connectionThrottle;
      private final ModuleManager moduleManager = new ModuleManager();
@@ -941,7 +941,7 @@ index 1d377a65..0ea5f90b 100644
      @Override
      public Title send(ProxiedPlayer player)
      {
-+        if ( ProtocolConstants.isBeforeOrEq( player.getPendingConnection().getVersion(), ProtocolConstants.MINECRAFT_1_7_6 ) ) return this; // FlameCord - 1.7.x support
++        if ( ProtocolConstants.isBeforeOrEq( player.getPendingConnection().getVersion(), ProtocolConstants.MINECRAFT_1_7_6 ) ) return this; // MangoCord - 1.7.x support
          sendPacket( player, clear );
          sendPacket( player, reset );
          sendPacket( player, times );
@@ -957,7 +957,7 @@ index 491cf1a1..6cd8ec3b 100644
  
  public class PlayerInfoSerializer implements JsonSerializer<ServerPing.PlayerInfo>, JsonDeserializer<ServerPing.PlayerInfo>
  {
-+    // FlameCord start - 1.7.x support
++    // MangoCord start - 1.7.x support
 +    private final int protocol;
 +
 +    public PlayerInfoSerializer()
@@ -969,7 +969,7 @@ index 491cf1a1..6cd8ec3b 100644
 +    {
 +        this.protocol = protocol;
 +    }
-+    // FlameCord end - 1.7.x support
++    // MangoCord end - 1.7.x support
  
      @Override
      public ServerPing.PlayerInfo deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
@@ -978,7 +978,7 @@ index 491cf1a1..6cd8ec3b 100644
          ServerPing.PlayerInfo info = new ServerPing.PlayerInfo( js.get( "name" ).getAsString(), (UUID) null );
          String id = js.get( "id" ).getAsString();
 -        if ( !id.contains( "-" ) )
-+        if ( ProtocolConstants.isBeforeOrEq( protocol, ProtocolConstants.MINECRAFT_1_7_2 ) || !id.contains( "-" ) ) // FlameCord - 1.7.x support
++        if ( ProtocolConstants.isBeforeOrEq( protocol, ProtocolConstants.MINECRAFT_1_7_2 ) || !id.contains( "-" ) ) // MangoCord - 1.7.x support
          {
              info.setId( id );
          } else
@@ -987,7 +987,7 @@ index 491cf1a1..6cd8ec3b 100644
          JsonObject out = new JsonObject();
          out.addProperty( "name", src.getName() );
 -        out.addProperty( "id", src.getUniqueId().toString() );
-+        // FlameCord start - 1.7.x support
++        // MangoCord start - 1.7.x support
 +        if ( ProtocolConstants.isBeforeOrEq( protocol, ProtocolConstants.MINECRAFT_1_7_2 ) )
 +        {
 +            out.addProperty( "id", src.getId() );
@@ -995,7 +995,7 @@ index 491cf1a1..6cd8ec3b 100644
 +        {
 +            out.addProperty( "id", src.getUniqueId().toString() );
 +        }
-+        // FlameCord end - 1.7.x support
++        // MangoCord end - 1.7.x support
          return out;
      }
  }
@@ -1011,7 +1011,7 @@ index 60232e52..3c77da32 100644
 -                DefinedPacket.writeString( bungee.getName() + " (" + bungee.getVersion() + ")", brand );
 -                user.unsafe().sendPacket( new PluginMessage( user.getPendingConnection().getVersion() >= ProtocolConstants.MINECRAFT_1_13 ? "minecraft:brand" : "MC|Brand", brand, handshakeHandler.isServerForge() ) );
 -                brand.release();
-+                // FlameCord start - 1.7.x support
++                // MangoCord start - 1.7.x support
 +                String brandString = bungee.getName() + " (" + bungee.getVersion() + ")";
 +
 +                if ( ProtocolConstants.isBeforeOrEq( user.getPendingConnection().getVersion(), ProtocolConstants.MINECRAFT_1_7_6 ) )
@@ -1024,7 +1024,7 @@ index 60232e52..3c77da32 100644
 +                    user.unsafe().sendPacket( new PluginMessage( user.getPendingConnection().getVersion() >= ProtocolConstants.MINECRAFT_1_13 ? "minecraft:brand" : "MC|Brand", brand, handshakeHandler.isServerForge() ) );
 +                    brand.release();
 +                }
-+                 // FlameCord end - 1.7.x support
++                 // MangoCord end - 1.7.x support
              }
  
              user.setDimension( login.getDimension() );
@@ -1033,7 +1033,7 @@ index 60232e52..3c77da32 100644
              for ( Objective objective : serverScoreboard.getObjectives() )
              {
 -                user.unsafe().sendPacket( new ScoreboardObjective( objective.getName(), objective.getValue(), ScoreboardObjective.HealthDisplay.fromString( objective.getType() ), (byte) 1 ) );
-+                user.unsafe().sendPacket( new ScoreboardObjective( objective.getName(), objective.getValue(), objective.getType() == null ? null : ScoreboardObjective.HealthDisplay.fromString(objective.getType()), (byte) 1 ) ); // FlameCord - 1.7 support
++                user.unsafe().sendPacket( new ScoreboardObjective( objective.getName(), objective.getValue(), objective.getType() == null ? null : ScoreboardObjective.HealthDisplay.fromString(objective.getType()), (byte) 1 ) ); // MangoCord - 1.7 support
              }
              for ( Score score : serverScoreboard.getScores() )
              {
@@ -1042,13 +1042,13 @@ index 60232e52..3c77da32 100644
              {
                  this.handshakeHandler.handle( pluginMessage );
 -
-+                // FlameCord start - 1.7.x support
++                // MangoCord start - 1.7.x support
 +                if ( user.getForgeClientHandler().checkUserOutdated() )
 +                {
 +                    ch.close();
 +                    user.getPendingConnects().remove(target);
 +                }
-+                // FlameCord end - 1.7.x support
++                // MangoCord end - 1.7.x support
                  // We send the message as part of the handler, so don't send it here.
                  throw CancelSendSignal.INSTANCE;
              }
@@ -1061,7 +1061,7 @@ index cf82c182..9fe97384 100644
      {
          Preconditions.checkNotNull( name, "displayName" );
 +        // Its "spigot" responsability to choose wether to support 1.7 or not.
-+        //Preconditions.checkArgument( name.length() <= 16, "Display name cannot be longer than 16 characters" ); // FlameCord - 1.7.x support
++        //Preconditions.checkArgument( name.length() <= 16, "Display name cannot be longer than 16 characters" ); // MangoCord - 1.7.x support
          displayName = name;
      }
  
@@ -1070,7 +1070,7 @@ index cf82c182..9fe97384 100644
          message = ChatComponentTransformer.getInstance().transform( this, true, message );
  
 -        if ( position == ChatMessageType.ACTION_BAR && getPendingConnection().getVersion() < ProtocolConstants.MINECRAFT_1_17 )
-+        if ( position == ChatMessageType.ACTION_BAR && getPendingConnection().getVersion() < ProtocolConstants.MINECRAFT_1_17 && getPendingConnection().getVersion() >= ProtocolConstants.MINECRAFT_1_8 ) // FlameCord - 1.7.x support
++        if ( position == ChatMessageType.ACTION_BAR && getPendingConnection().getVersion() < ProtocolConstants.MINECRAFT_1_17 && getPendingConnection().getVersion() >= ProtocolConstants.MINECRAFT_1_8 ) // MangoCord - 1.7.x support
          {
              // Versions older than 1.11 cannot send the Action bar with the new JSON formattings
              // Fix by converting to a legacy message, see https://bugs.mojang.com/browse/MC-119145
@@ -1078,7 +1078,7 @@ index cf82c182..9fe97384 100644
      @Override
      public void setTabHeader(BaseComponent header, BaseComponent footer)
      {
-+        if ( ProtocolConstants.isBeforeOrEq( pendingConnection.getVersion(), ProtocolConstants.MINECRAFT_1_7_6 ) ) return; // FlameCord
++        if ( ProtocolConstants.isBeforeOrEq( pendingConnection.getVersion(), ProtocolConstants.MINECRAFT_1_7_6 ) ) return; // MangoCord
          header = ChatComponentTransformer.getInstance().transform( this, true, header )[0];
          footer = ChatComponentTransformer.getInstance().transform( this, true, footer )[0];
  
@@ -1086,7 +1086,7 @@ index cf82c182..9fe97384 100644
      @Override
      public void setTabHeader(BaseComponent[] header, BaseComponent[] footer)
      {
-+        if ( ProtocolConstants.isBeforeOrEq( pendingConnection.getVersion(), ProtocolConstants.MINECRAFT_1_7_6 ) ) return; // FlameCord
++        if ( ProtocolConstants.isBeforeOrEq( pendingConnection.getVersion(), ProtocolConstants.MINECRAFT_1_7_6 ) ) return; // MangoCord
          header = ChatComponentTransformer.getInstance().transform( this, true, header );
          footer = ChatComponentTransformer.getInstance().transform( this, true, footer );
  
@@ -1094,7 +1094,7 @@ index cf82c182..9fe97384 100644
  
      public void setCompressionThreshold(int compressionThreshold)
      {
-+        if ( ProtocolConstants.isBeforeOrEq( pendingConnection.getVersion(), ProtocolConstants.MINECRAFT_1_7_6 ) ) return; // FlameCord
++        if ( ProtocolConstants.isBeforeOrEq( pendingConnection.getVersion(), ProtocolConstants.MINECRAFT_1_7_6 ) ) return; // MangoCord
          if ( !ch.isClosing() && this.compressionThreshold == -1 && compressionThreshold >= 0 )
          {
              this.compressionThreshold = compressionThreshold;
@@ -1115,7 +1115,7 @@ index e01f65ac..c532d7f4 100644
          {
              case 0:
 -                serverScoreboard.addObjective( new Objective( objective.getName(), objective.getValue(), objective.getType().toString() ) );
-+                serverScoreboard.addObjective( new Objective( objective.getName(), objective.getValue(), objective.getType() != null ? objective.getType().toString() : null) ); // FlameCord - 1.7.x support
++                serverScoreboard.addObjective( new Objective( objective.getName(), objective.getValue(), objective.getType() != null ? objective.getType().toString() : null) ); // MangoCord - 1.7.x support
                  break;
              case 1:
                  serverScoreboard.removeObjective( objective.getName() );
@@ -1124,7 +1124,7 @@ index e01f65ac..c532d7f4 100644
                  {
                      oldObjective.setValue( objective.getValue() );
 -                    oldObjective.setType( objective.getType().toString() );
-+                    oldObjective.setType( objective.getType() != null ? objective.getType().toString() : null ); // FlameCord - 1.7.x support
++                    oldObjective.setType( objective.getType() != null ? objective.getType().toString() : null ); // MangoCord - 1.7.x support
                  }
                  break;
              default:
@@ -1142,7 +1142,7 @@ index e01f65ac..c532d7f4 100644
 -            DefinedPacket.writeString( bungee.getName() + " <- " + serverBrand, brand ); // Waterfall
 -            pluginMessage.setData( brand );
 -            brand.release();
-+            // FlameCord start - 1.7.x support
++            // MangoCord start - 1.7.x support
 +            if ( ProtocolConstants.isAfterOrEq( con.getPendingConnection().getVersion(), ProtocolConstants.MINECRAFT_1_8 ) )
 +            {
 +                try
@@ -1161,9 +1161,9 @@ index e01f65ac..c532d7f4 100644
 +            } else
 +            {
 +                String serverBrand = new String( pluginMessage.getData(), StandardCharsets.UTF_8);
-+                pluginMessage.setData( ( bungee.getName() + " <- " + serverBrand ).getBytes(StandardCharsets.UTF_8) ); // FlameCord - 1.7.x support
++                pluginMessage.setData( ( bungee.getName() + " <- " + serverBrand ).getBytes(StandardCharsets.UTF_8) ); // MangoCord - 1.7.x support
 +            }
-+            // FlameCord end - 1.7.x support
++            // MangoCord end - 1.7.x support
              // changes in the packet are ignored so we need to send it manually
              con.unsafe().sendPacket( pluginMessage );
              throw CancelSendSignal.INSTANCE;
@@ -1187,7 +1187,7 @@ index ca0e3764..2d3182b9 100644
                      {
 -                        Gson gson = BungeeCord.getInstance().gson;
 -                        unsafe.sendPacket( new StatusResponse( gson.toJson( pingResult.getResponse() ) ) );
-+                        // FlameCord start - 1.7.x support
++                        // MangoCord start - 1.7.x support
 +                        Gson gson = handshake.getProtocolVersion() == ProtocolConstants.MINECRAFT_1_7_2 ? BungeeCord.getInstance().gsonLegacy : BungeeCord.getInstance().gson;
 +                        if ( ProtocolConstants.isBeforeOrEq( handshake.getProtocolVersion() , ProtocolConstants.MINECRAFT_1_8 ) )
 +                        {
@@ -1203,7 +1203,7 @@ index ca0e3764..2d3182b9 100644
 +                        {
 +                            unsafe.sendPacket( new StatusResponse( gson.toJson( pingResult.getResponse() ) ) );
 +                        }
-+                        // FlameCord end - 1.7.x support
++                        // MangoCord end - 1.7.x support
                          if ( bungee.getConnectionThrottle() != null )
                          {
                              bungee.getConnectionThrottle().unthrottle( getSocketAddress() );
@@ -1224,7 +1224,7 @@ index 6df3f3dd..a409d440 100644
      public void handle(StatusResponse statusResponse) throws Exception
      {
 -        Gson gson = BungeeCord.getInstance().gson;
-+        Gson gson = protocol == ProtocolConstants.MINECRAFT_1_7_2 ? BungeeCord.getInstance().gsonLegacy : BungeeCord.getInstance().gson; // FlameCord - 1.7.x support
++        Gson gson = protocol == ProtocolConstants.MINECRAFT_1_7_2 ? BungeeCord.getInstance().gsonLegacy : BungeeCord.getInstance().gson; // MangoCord - 1.7.x support
          ServerPing serverPing = gson.fromJson( statusResponse.getResponse(), ServerPing.class );
          ( (BungeeServerInfo) target ).cachePing( serverPing );
          callback.done( serverPing, null );
@@ -1237,12 +1237,12 @@ index 7fb79bfd..86c469ee 100644
                  } else
                  {
 -                    player.unsafe().sendPacket( oldPacket );
-+                    // FlameCord start - 1.7.x support
++                    // MangoCord start - 1.7.x support
 +                    if ( ProtocolConstants.isAfterOrEq( player.getPendingConnection().getVersion(), ProtocolConstants.MINECRAFT_1_8 ) )
 +                    {
 +                        player.unsafe().sendPacket( oldPacket );
 +                    }
-+                    // FlameCord end - 1.7.x support
++                    // MangoCord end - 1.7.x support
                  }
              }
              con.getServer().disconnect( "Quitting" );
@@ -1254,12 +1254,12 @@ index 65ea8044..2fc16c5d 100644
          // Waterfall end
          switch ( version )
          {
-+            // FlameCord start - 1.7.x support
++            // MangoCord start - 1.7.x support
 +            case ProtocolConstants.MINECRAFT_1_7_2:
 +                return EntityMap_1_7_2.INSTANCE;
 +            case ProtocolConstants.MINECRAFT_1_7_6:
 +                return EntityMap_1_7_6.INSTANCE;
-+            // FlameCord end - 1.7.x support
++            // MangoCord end - 1.7.x support
              case ProtocolConstants.MINECRAFT_1_8:
                  return EntityMap_1_8.INSTANCE;
              case ProtocolConstants.MINECRAFT_1_9:
@@ -1269,7 +1269,7 @@ index 00000000..cdc07dc4
 --- /dev/null
 +++ b/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap_1_7_2.java
 @@ -0,0 +1,102 @@
-+// FlameCord start - 1.7.x support
++// MangoCord start - 1.7.x support
 +package net.md_5.bungee.entitymap;
 +
 +import io.netty.buffer.ByteBuf;
@@ -1370,7 +1370,7 @@ index 00000000..cdc07dc4
 +        packet.readerIndex( readerIndex );
 +    }
 +}
-+// FlameCord end - 1.7.x support
++// MangoCord end - 1.7.x support
 \ No newline at end of file
 diff --git a/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap_1_7_6.java b/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap_1_7_6.java
 new file mode 100644
@@ -1378,7 +1378,7 @@ index 00000000..cb9174b3
 --- /dev/null
 +++ b/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap_1_7_6.java
 @@ -0,0 +1,62 @@
-+// FlameCord start - 1.7.x support
++// MangoCord start - 1.7.x support
 +package net.md_5.bungee.entitymap;
 +
 +import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -1439,7 +1439,7 @@ index 00000000..cb9174b3
 +        packet.readerIndex( readerIndex );
 +    }
 +}
-+// FlameCord end - 1.7.x support
++// MangoCord end - 1.7.x support
 \ No newline at end of file
 diff --git a/proxy/src/main/java/net/md_5/bungee/forge/ForgeClientHandler.java b/proxy/src/main/java/net/md_5/bungee/forge/ForgeClientHandler.java
 index bea2bbff..caed4384 100644
@@ -1457,11 +1457,11 @@ index bea2bbff..caed4384 100644
      @NonNull
      private final UserConnection con;
  
-+    // FlameCord start - 1.7.x support
++    // MangoCord start - 1.7.x support
 +    @Getter
 +    @Setter(AccessLevel.PACKAGE)
 +    private boolean forgeOutdated = false;
-+    // FlameCord end - 1.7.x support
++    // MangoCord end - 1.7.x support
 +
      /**
       * The users' mod list.
@@ -1471,7 +1471,7 @@ index bea2bbff..caed4384 100644
          return fmlTokenInHandshake || clientModList != null;
      }
 +
-+    // FlameCord start - 1.7.x support
++    // MangoCord start - 1.7.x support
 +    /**
 +      * Checks to see if a user is using an outdated FML build, and takes
 +      * appropriate action on the User side. This should only be called during a
@@ -1486,7 +1486,7 @@ index bea2bbff..caed4384 100644
 +        }
 +        return forgeOutdated;
 +    }
-+    // FlameCord end - 1.7.x support
++    // MangoCord end - 1.7.x support
  }
 diff --git a/proxy/src/main/java/net/md_5/bungee/forge/ForgeClientHandshakeState.java b/proxy/src/main/java/net/md_5/bungee/forge/ForgeClientHandshakeState.java
 index 5e02f8c8..85bc21b9 100644
@@ -1504,7 +1504,7 @@ index 5e02f8c8..85bc21b9 100644
                      // Once we've done it, no point doing it again.
                      Map<String, String> clientModList = ForgeUtils.readModList( message );
                      con.getForgeClientHandler().setClientModList( clientModList );
-+                    // FlameCord start - 1.7.x support
++                    // MangoCord start - 1.7.x support
 +                    // If the user is below 1.8, we need to check the version of FML - it's not always an OK version.
 +                    if ( ProtocolConstants.isBeforeOrEq( con.getPendingConnection().getVersion(), ProtocolConstants.MINECRAFT_1_7_6 ) )
 +                    {
@@ -1519,7 +1519,7 @@ index 5e02f8c8..85bc21b9 100644
 +                            con.getForgeClientHandler().setForgeOutdated( true );
 +                        }
 +                    }
-+                    // FlameCord end - 1.7.x support
++                    // MangoCord end - 1.7.x support
                  }
  
                  return WAITINGSERVERDATA;
@@ -1531,7 +1531,7 @@ index f70d357a..df6a4b12 100644
  {
  
      private final Collection<UUID> uuids = new HashSet<>();
-+    private final Collection<String> usernames = new HashSet<>(); // FlameCord - 1.7.x support
++    private final Collection<String> usernames = new HashSet<>(); // MangoCord - 1.7.x support
  
      public ServerUnique(ProxiedPlayer player)
      {
@@ -1540,7 +1540,7 @@ index f70d357a..df6a4b12 100644
              if ( playerListItem.getAction() == PlayerListItem.Action.ADD_PLAYER )
              {
 -                uuids.add( item.getUuid() );
-+                // FlameCord start - 1.7.x support
++                // MangoCord start - 1.7.x support
 +                if ( item.getUuid() != null )
 +                {
 +                    uuids.add( item.getUuid() );
@@ -1548,11 +1548,11 @@ index f70d357a..df6a4b12 100644
 +                {
 +                    usernames.add( item.getUsername() );
 +                }
-+                // FlameCord end - 1.7.x support
++                // MangoCord end - 1.7.x support
              } else if ( playerListItem.getAction() == PlayerListItem.Action.REMOVE_PLAYER )
              {
 -                uuids.remove( item.getUuid() );
-+                // FlameCord start - 1.7.x support
++                // MangoCord start - 1.7.x support
 +                if ( item.getUuid() != null )
 +                {
 +                    uuids.remove( item.getUuid() );
@@ -1560,7 +1560,7 @@ index f70d357a..df6a4b12 100644
 +                {
 +                    usernames.remove( item.getUsername() );
 +                }
-+                // FlameCord end - 1.7.x support
++                // MangoCord end - 1.7.x support
              }
          }
          player.unsafe().sendPacket( playerListItem );
@@ -1569,10 +1569,10 @@ index f70d357a..df6a4b12 100644
              PlayerListItem packet = new PlayerListItem();
              packet.setAction( PlayerListItem.Action.REMOVE_PLAYER );
 -            PlayerListItem.Item[] items = new PlayerListItem.Item[ uuids.size() ];
-+            PlayerListItem.Item[] items = new PlayerListItem.Item[ uuids.size() + usernames.size() ]; // FlameCord - 1.7.x support
++            PlayerListItem.Item[] items = new PlayerListItem.Item[ uuids.size() + usernames.size() ]; // MangoCord - 1.7.x support
              int i = 0;
 +
-+            // FlameCord start - 1.7.x support
++            // MangoCord start - 1.7.x support
 +            for ( String username : usernames )
 +            {
 +                PlayerListItem.Item item = items[i++] = new PlayerListItem.Item();
@@ -1580,7 +1580,7 @@ index f70d357a..df6a4b12 100644
 +                item.setDisplayName( username );
 +                item.setPing( 0 );
 +            }
-+            // FlameCord end - 1.7.x support
++            // MangoCord end - 1.7.x support
 +
              for ( UUID uuid : uuids )
              {
@@ -1589,7 +1589,7 @@ index f70d357a..df6a4b12 100644
              }
              packet.setItems( items );
 -            player.unsafe().sendPacket( packet );
-+            // FlameCord start - 1.7.x support
++            // MangoCord start - 1.7.x support
 +            if ( ProtocolConstants.isAfterOrEq( player.getPendingConnection().getVersion(), ProtocolConstants.MINECRAFT_1_8 ) )
 +            {
 +                player.unsafe().sendPacket( packet );
@@ -1608,10 +1608,10 @@ index f70d357a..df6a4b12 100644
 +                    player.unsafe().sendPacket( p2 );
 +                }
 +            }
-+            // FlameCord end - 1.7.x support
++            // MangoCord end - 1.7.x support
          }
          uuids.clear();
-+        usernames.clear(); // FlameCord - 1.7.x support
++        usernames.clear(); // MangoCord - 1.7.x support
      }
  
      @Override

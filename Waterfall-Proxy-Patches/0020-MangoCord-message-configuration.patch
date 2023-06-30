@@ -1,23 +1,23 @@
 From 1bcd1ea1d1480107e8e63b28761d3be67ab4467b Mon Sep 17 00:00:00 2001
 From: linsaftw <25271111+linsaftw@users.noreply.github.com>
 Date: Sat, 1 May 2021 13:40:39 -0300
-Subject: [PATCH] FlameCord message configuration
+Subject: [PATCH] MangoCord message configuration
 
 
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/FlameCord.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/FlameCord.java
+diff --git a/mangocord/src/main/java/dev/lucianishimiya/mangocord/MangoCord.java b/mangocord/src/main/java/dev/lucianishimiya/mangocord/MangoCord.java
 index fb3d8ca2..676ba95b 100644
---- a/flamecord/src/main/java/dev/_2lstudios/flamecord/FlameCord.java
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/FlameCord.java
+--- a/mangocord/src/main/java/dev/lucianishimiya/mangocord/MangoCord.java
++++ b/mangocord/src/main/java/dev/lucianishimiya/mangocord/MangoCord.java
 @@ -4,6 +4,7 @@ import java.util.Collection;
  import java.util.logging.Logger;
  
- import dev._2lstudios.flamecord.configuration.FlameCordConfiguration;
-+import dev._2lstudios.flamecord.configuration.MessagesConfiguration;
- import dev._2lstudios.flamecord.configuration.ModulesConfiguration;
+ import dev.lucianishimiya.mangocord.configuration.MangoCordConfiguration;
++import dev.lucianishimiya.mangocord.configuration.MessagesConfiguration;
+ import dev.lucianishimiya.mangocord.configuration.ModulesConfiguration;
  import lombok.Getter;
  import net.md_5.bungee.config.ConfigurationProvider;
-@@ -27,6 +28,8 @@ public class FlameCord {
-     // FlameCord - Module System
+@@ -27,6 +28,8 @@ public class MangoCord {
+     // MangoCord - Module System
      @Getter
      private ModulesConfiguration modulesConfiguration;
 +    @Getter
@@ -25,21 +25,21 @@ index fb3d8ca2..676ba95b 100644
  
      public void reload(final Logger logger, final Collection<String> whitelistedAddresses) {
          final ConfigurationProvider configurationProvider = ConfigurationProvider.getProvider(YamlConfiguration.class);
-@@ -35,5 +38,6 @@ public class FlameCord {
+@@ -35,5 +38,6 @@ public class MangoCord {
          
-         // FlameCord - Module System
+         // MangoCord - Module System
          this.modulesConfiguration = new ModulesConfiguration(configurationProvider);
 +        this.messagesConfiguration = new MessagesConfiguration(logger, configurationProvider);
      }
  }
 \ No newline at end of file
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/MessagesConfiguration.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/MessagesConfiguration.java
+diff --git a/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MessagesConfiguration.java b/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MessagesConfiguration.java
 new file mode 100644
 index 00000000..ae179438
 --- /dev/null
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/MessagesConfiguration.java
++++ b/mangocord/src/main/java/dev/lucianishimiya/mangocord/configuration/MessagesConfiguration.java
 @@ -0,0 +1,102 @@
-+package dev._2lstudios.flamecord.configuration;
++package dev.lucianishimiya.mangocord.configuration;
 +
 +import java.io.File;
 +import java.text.MessageFormat;
@@ -51,7 +51,7 @@ index 00000000..ae179438
 +import net.md_5.bungee.config.Configuration;
 +import net.md_5.bungee.config.ConfigurationProvider;
 +
-+public class MessagesConfiguration extends FlameConfig {
++public class MessagesConfiguration extends MangoConfig {
 +	private final Logger logger;
 +	private final Map<String, String> messages = new HashMap<>();
 +
@@ -61,12 +61,12 @@ index 00000000..ae179438
 +		final File configurationFile = new File("./messages.yml");
 +		final Configuration configuration = load(configurationFile);
 +
-+		// FlameCord
-+		setIfUnexistant("flamecord_reload", "&aAll files had been successfully reloaded!", configuration);
-+		setIfUnexistant("flamecord_help",
-+				"&aMangocord&b {0}&a by&b LuciaNishimiya\n&e /mangocord reload&7 >&b Reloads Mangocord files!\n&e /mangocord firewall <add/remove> <ip>&7 >&b Firewall certain ips!\n&e /bplugins&7 >&b Show the plugin list!\n&e /bip <player>&7 >&b Show the ip and info of a player!\n&e /mangocord stats&7 >&b Displays flamecord stats!\n&e /mangocord help&7 >&b Shows this message!\n&c join our discord >&b https://discord.gg/VmcKYCmQPn ",
++		// MangoCord
++		setIfUnexistant("mangocord_reload", "&aAll files had been successfully reloaded!", configuration);
++		setIfUnexistant("mangocord_help",
++				"&aMangocord&b {0}&a by&b LuciaNishimiya\n&e /mangocord reload&7 >&b Reloads Mangocord files!\n&e /mangocord firewall <add/remove> <ip>&7 >&b Firewall certain ips!\n&e /bplugins&7 >&b Show the plugin list!\n&e /bip <player>&7 >&b Show the ip and info of a player!\n&e /mangocord stats&7 >&b Displays mangocord stats!\n&e /mangocord help&7 >&b Shows this message!\n&c join our discord >&b https://discord.gg/VmcKYCmQPn ",
 +				configuration);
-+		setIfUnexistant("flamecord_nopermission", "&cYou don't have permission to do this!", configuration);
++		setIfUnexistant("mangocord_nopermission", "&cYou don't have permission to do this!", configuration);
 +
 +		// BungeeCord
 +		setIfUnexistant("alert", "&8[&4Alert&8]&r ", configuration);
@@ -151,56 +151,56 @@ index 698b420f..e4ad7e38 100644
                      serverTextComponent.setHoverEvent( new HoverEvent(
                              HoverEvent.Action.SHOW_TEXT,
 -                            new ComponentBuilder( count + ( count == 1 ? " player" : " players" ) + "\n" ).appendLegacy( ProxyServer.getInstance().getTranslation( "click_to_connect" ) ).create() )
-+                            // FlameCord - FlameCord messages configuration
++                            // MangoCord - MangoCord messages configuration
 +                            // Make player count customizable
 +                            new ComponentBuilder( ProxyServer.getInstance().getTranslation( "server_command_hover_players", count ) + "\n" ).appendLegacy( ProxyServer.getInstance().getTranslation( "click_to_connect" ) ).create() )
                      );
                      serverTextComponent.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/server " + server.getName() ) );
                      serverList.append( serverTextComponent );
-diff --git a/proxy/src/main/java/dev/_2lstudios/flamecord/commands/FlameCordCommand.java b/proxy/src/main/java/dev/_2lstudios/flamecord/commands/FlameCordCommand.java
+diff --git a/proxy/src/main/java/dev/lucianishimiya/mangocord/commands/MangoCordCommand.java b/proxy/src/main/java/dev/lucianishimiya/mangocord/commands/MangoCordCommand.java
 index 021b38d4..fb81adee 100644
---- a/proxy/src/main/java/dev/_2lstudios/flamecord/commands/FlameCordCommand.java
-+++ b/proxy/src/main/java/dev/_2lstudios/flamecord/commands/FlameCordCommand.java
+--- a/proxy/src/main/java/dev/lucianishimiya/mangocord/commands/MangoCordCommand.java
++++ b/proxy/src/main/java/dev/lucianishimiya/mangocord/commands/MangoCordCommand.java
 @@ -4,6 +4,7 @@ import java.util.Collection;
  import java.util.HashSet;
  
- import dev._2lstudios.flamecord.FlameCord;
-+import dev._2lstudios.flamecord.configuration.MessagesConfiguration;
+ import dev.lucianishimiya.mangocord.MangoCord;
++import dev.lucianishimiya.mangocord.configuration.MessagesConfiguration;
  import net.md_5.bungee.BungeeCord;
  import net.md_5.bungee.api.CommandSender;
  import net.md_5.bungee.api.chat.TextComponent;
 @@ -22,6 +23,7 @@ private final BungeeCord bungeeCord;
      @Override
      public void execute(final CommandSender sender, final String[] args) {
-         final FlameCord flameCord = FlameCord.getInstance();
-+        final MessagesConfiguration messagesConfiguration = flameCord.getMessagesConfiguration();
+         final MangoCord mangoCord = MangoCord.getInstance();
++        final MessagesConfiguration messagesConfiguration = mangoCord.getMessagesConfiguration();
  
          if (sender.hasPermission("mangocord.usage")) {
              if (args.length > 0) {
 @@ -38,21 +40,22 @@ private final BungeeCord bungeeCord;
  
-                         FlameCord.initialize(bungeeCord.getLogger(), whitelistedAddresses);
+                         MangoCord.initialize(bungeeCord.getLogger(), whitelistedAddresses);
                          sender.sendMessage(TextComponent
--                                .fromLegacyText("flamecord_reload"));
-+                                .fromLegacyText(messagesConfiguration.getTranslation("flamecord_reload")));
+-                                .fromLegacyText("mangocord_reload"));
++                                .fromLegacyText(messagesConfiguration.getTranslation("mangocord_reload")));
                          break;
                      }
                      default: {
--                        sender.sendMessage(TextComponent.fromLegacyText("flamecord_help"));
+-                        sender.sendMessage(TextComponent.fromLegacyText("mangocord_help"));
 +                        sender.sendMessage(TextComponent.fromLegacyText(
-+                                messagesConfiguration.getTranslation("flamecord_help", bungeeCord.getVersion())));
++                                messagesConfiguration.getTranslation("mangocord_help", bungeeCord.getVersion())));
                          break;
                      }
                  }
              } else {
                  sender.sendMessage(TextComponent
--                        .fromLegacyText("flamecord_help"));
-+                        .fromLegacyText(messagesConfiguration.getTranslation("flamecord_help", bungeeCord.getVersion())));
+-                        .fromLegacyText("mangocord_help"));
++                        .fromLegacyText(messagesConfiguration.getTranslation("mangocord_help", bungeeCord.getVersion())));
              }
          } else {
              sender.sendMessage(TextComponent
--                    .fromLegacyText("flamecord_nopermission"));
-+                    .fromLegacyText(messagesConfiguration.getTranslation("flamecord_nopermission")));
+-                    .fromLegacyText("mangocord_nopermission"));
++                    .fromLegacyText(messagesConfiguration.getTranslation("mangocord_nopermission")));
          }
      }
  }
@@ -214,8 +214,8 @@ index 7c4da8c4..0c53eba3 100644
      {
 -        Format format = messageFormats.get( name );
 -        return ( format != null ) ? format.format( args ) : "<translation '" + name + "' missing>";
-+        // FlameCord - Use own translation system
-+        return FlameCord.getInstance().getMessagesConfiguration().getTranslation(name, args);
++        // MangoCord - Use own translation system
++        return MangoCord.getInstance().getMessagesConfiguration().getTranslation(name, args);
      }
  
      @Override
@@ -227,7 +227,7 @@ index e48f7713..0c4a0def 100644
      @Override
      public void sendMessage(String message)
      {
-+        if (!message.equals("")) // FlameCord - FlameCord message configuration
++        if (!message.equals("")) // MangoCord - MangoCord message configuration
          sendMessage( TextComponent.fromLegacyText( message ) );
      }
  

@@ -4,26 +4,26 @@ Date: Fri, 4 Mar 2022 14:09:35 -0300
 Subject: [PATCH] Allow Invalid Names
 
 
-diff --git a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
+diff --git a/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MangoCordConfiguration.java b/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MangoCordConfiguration.java
 index 241f5a0e..59b2d94f 100644
---- a/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
-+++ b/flamecord/src/main/java/dev/_2lstudios/flamecord/configuration/FlameCordConfiguration.java
+--- a/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MangoCordConfiguration.java
++++ b/mangcord/src/main/java/dev/lucianishimiya/mangcord/configuration/MangoCordConfiguration.java
 @@ -15,6 +15,10 @@ import net.md_5.bungee.config.Configuration;
  import net.md_5.bungee.config.ConfigurationProvider;
  
- public class FlameCordConfiguration extends FlameConfig {
-+    // FlameCord - Allow Invalid Names
+ public class MangoCordConfiguration extends MangoConfig {
++    // MangoCord - Allow Invalid Names
 +    @Getter
 +    private boolean allowInvalidNames = false;
 +
      // Antibot accounts
      @Getter
      private boolean antibotAccountsEnabled = true;
-@@ -353,6 +357,9 @@ public class FlameCordConfiguration extends FlameConfig {
-         // FlameCord - Antibot System
+@@ -353,6 +357,9 @@ public class MangoCordConfiguration extends MangoConfig {
+         // MangoCord - Antibot System
          loadAntibot(configuration, whitelistedAddresses);
  
-+        // FlameCord - Allow Invalid Names
++        // MangoCord - Allow Invalid Names
 +        this.allowInvalidNames = setIfUnexistant("allow-invalid-names", this.allowInvalidNames, configuration);
 +
          save(configuration, configurationFile);
@@ -38,7 +38,7 @@ index 443e2718..6f336346 100644
          Preconditions.checkState( thisState == State.USERNAME, "Not expecting USERNAME" );
  
 -        if ( !AllowedCharacters.isValidName( loginRequest.getData(), onlineMode ) )
-+        if ( !FlameCord.getInstance().getFlameCordConfiguration().isAllowInvalidNames() && !AllowedCharacters.isValidName( loginRequest.getData(), onlineMode ) )
++        if ( !MangoCord.getInstance().getMangoCordConfiguration().isAllowInvalidNames() && !AllowedCharacters.isValidName( loginRequest.getData(), onlineMode ) )
          {
              disconnect( bungee.getTranslation( "name_invalid" ) );
              return;

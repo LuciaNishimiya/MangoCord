@@ -13,7 +13,7 @@ index 763d34c2..57e50a8b 100644
          if ( protocolVersion >= ProtocolConstants.MINECRAFT_1_19_1 )
          {
 -            if ( buf.readBoolean() )
-+            // FlameCord - Avoid throwing IOOB on login
++            // MangoCord - Avoid throwing IOOB on login
 +            if ( buf.isReadable() && buf.readBoolean() )
              {
                  uuid = readUUID( buf );

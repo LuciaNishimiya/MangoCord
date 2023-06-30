@@ -12,46 +12,46 @@ index 6f1d8336..b98ee6a7 100644
      @Getter
      private volatile boolean closing;
  
-+    // FlameCord start - Optimize Decoder/Encoder Getter
++    // MangoCord start - Optimize Decoder/Encoder Getter
 +    MinecraftDecoder decoder;
 +    MinecraftEncoder encoder;
-+    // FlameCord end - Optimize Decoder/Encoder Getter
++    // MangoCord end - Optimize Decoder/Encoder Getter
 +
      public ChannelWrapper(ChannelHandlerContext ctx)
      {
          this.ch = ctx.channel();
          this.remoteAddress = ( this.ch.remoteAddress() == null ) ? this.ch.parent().localAddress() : this.ch.remoteAddress();
 +
-+        // FlameCord start - Optimize Decoder/Encoder Getter
++        // MangoCord start - Optimize Decoder/Encoder Getter
 +        this.decoder = (MinecraftDecoder) ch.pipeline().get( PipelineUtils.PACKET_DECODER );
 +        this.encoder = (MinecraftEncoder) ch.pipeline().get( PipelineUtils.PACKET_ENCODER );
-+        // FlameCord end - Optimize Decoder/Encoder Getter
++        // MangoCord end - Optimize Decoder/Encoder Getter
      }
  
      public void setProtocol(Protocol protocol)
      {
-         // FlameCord - Use pipeline to reduce redundancy
+         // MangoCord - Use pipeline to reduce redundancy
          final ChannelPipeline pipeline = ch.pipeline();
 -        pipeline.get( MinecraftDecoder.class ).setProtocol( protocol );
 -        pipeline.get( MinecraftEncoder.class ).setProtocol( protocol );
 +
-+        // FlameCord start - Optimize Decoder/Encoder Getter
++        // MangoCord start - Optimize Decoder/Encoder Getter
 +        decoder.setProtocol( protocol );
 +        encoder.setProtocol( protocol );
-+        // FlameCord end - Optimize Decoder/Encoder Getter
++        // MangoCord end - Optimize Decoder/Encoder Getter
      }
  
      public void setVersion(int protocol)
      {
-         // FlameCord - Use pipeline to reduce redundancy
+         // MangoCord - Use pipeline to reduce redundancy
          final ChannelPipeline pipeline = ch.pipeline();
 -        pipeline.get( MinecraftDecoder.class ).setProtocolVersion( protocol );
 -        pipeline.get( MinecraftEncoder.class ).setProtocolVersion( protocol );
 +
-+        // FlameCord start - Optimize Decoder/Encoder Getter
++        // MangoCord start - Optimize Decoder/Encoder Getter
 +        decoder.setProtocolVersion( protocol );
 +        encoder.setProtocolVersion( protocol );
-+        // FlameCord end - Optimize Decoder/Encoder Getter
++        // MangoCord end - Optimize Decoder/Encoder Getter
      }
  
      public void write(Object packet)

@@ -13,7 +13,7 @@ index c31ec1ce7..640f0ea26 100644
  
          Protocol.DirectionData prot = ( server ) ? protocol.TO_SERVER : protocol.TO_CLIENT;
 +
-+        // FlameCord - Check size before decoding
++        // MangoCord - Check size before decoding
 +        if (prot == protocol.TO_SERVER) {
 +            final int readableBytes = in.readableBytes();
 +            final int capacity = in.capacity();
@@ -25,7 +25,7 @@ index c31ec1ce7..640f0ea26 100644
 +            }
 +        }
 +
-         ByteBuf slice = in.duplicate(); // FlameCord - Duplicate buf instead of Copy
+         ByteBuf slice = in.duplicate(); // MangoCord - Duplicate buf instead of Copy
  
          Object packetTypeInfo = null;
 diff --git a/proxy/src/main/java/net/md_5/bungee/netty/HandlerBoss.java b/proxy/src/main/java/net/md_5/bungee/netty/HandlerBoss.java
@@ -36,7 +36,7 @@ index 29cf4b4fc..4820267b3 100644
      @Override
      public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception
      {
-+        // FlameCord - Return if channel isn't active
++        // MangoCord - Return if channel isn't active
 +        if (!ctx.channel().isActive()) {
 +            if (msg instanceof PacketWrapper) {
 +                ((PacketWrapper) msg).trySingleRelease();

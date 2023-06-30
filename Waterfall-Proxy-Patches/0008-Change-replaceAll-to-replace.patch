@@ -13,7 +13,7 @@ index d672c8ef..9067b806 100644
  
                  // If we do not perform the replacement, then the IP Forwarding code in Spigot et. al. will try to split on this prematurely.
 -                newp[newp.length - 1] = new net.md_5.bungee.protocol.Property( ForgeConstants.EXTRA_DATA, user.getExtraDataInHandshake().replaceAll( "\0", "\1"), "" );
-+                // FlameCord - Change replaceAll() to replace()
++                // MangoCord - Change replaceAll() to replace()
 +                newp[newp.length - 1] = new net.md_5.bungee.protocol.Property( ForgeConstants.EXTRA_DATA, user.getExtraDataInHandshake().replace( "\0", "\1"), "" );
  
                  // All done.

@@ -14,7 +14,7 @@ index 2d72e26ea..94702434d 100644
              if ( getServer() == null && !ch.isClosing() )
              {
 -                throw new IllegalStateException( "Cancelled ServerConnectEvent with no server or disconnect." );
-+                // FlameCord - Change IllegalStateException to QuietException and explain that is a plugin
++                // MangoCord - Change IllegalStateException to QuietException and explain that is a plugin
 +                throw new QuietException("A plugin cancelled ServerConnectEvent with no server or disconnect.");
              }
              return;
