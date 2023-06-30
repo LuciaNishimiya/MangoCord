@@ -41,7 +41,7 @@ index 820f7b03..76f5fed7 100644
      {
 -        sender.sendMessage( ChatColor.BLUE + "This server is running MangoCord version " + ProxyServer.getInstance().getVersion() + " by md_5" );
 +        // MangoCord - Use custom version message
-+        sender.sendMessage( net.md_5.bungee.api.chat.TextComponent.fromLegacyText( ChatColor.translateAlternateColorCodes( '&', "&eThis server is running &c" + ProxyServer.getInstance().getName() + "&e version &a" + ProxyServer.getInstance().getVersion() + "&e by &bArkFlame Development&e." ) ) );
++        sender.sendMessage( net.md_5.bungee.api.chat.TextComponent.fromLegacyText( ChatColor.translateAlternateColorCodes( '&', "&eThis server is running &c" + ProxyServer.getInstance().getName() + "&e version &a" + ProxyServer.getInstance().getVersion() + "&e by &bLuciaNishimiya Development&e." ) ) );
      }
  }
 diff --git a/query/src/main/java/net/md_5/bungee/query/QueryHandler.java b/query/src/main/java/net/md_5/bungee/query/QueryHandler.java
