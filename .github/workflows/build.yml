@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [8]
+        java: [17]
       fail-fast: true
     steps:
       - uses: actions/checkout@v3
@@ -24,7 +24,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           distribution: 'adopt'
-      - name: Update submodule
+      - name: Update Submodule
         run: |
           git config --global user.email "git@github.com"
           git config --global user.name "git"
