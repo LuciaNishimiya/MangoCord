@@ -1,0 +1,41 @@
+name: Build Mangocord
+on:
+  push:
+    branches:
+      - master
+      - actions #temp
+      - main
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [8]
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Install Java ${{ matrix.java }}
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'adopt'
+      - name: Update submodule
+        run: |
+          git config --global user.email "git@github.com"
+          git config --global user.name "git"
+          git submodule update --init --recursive
+      - name: Patch Mangocord
+        run: |
+          ./mangocord p
+      - name: Build Mangocord
+        run: |
+          ./mangocord b
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Artifact
+          path: MangoCord-Proxy/bootstrap/target
