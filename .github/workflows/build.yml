@@ -44,6 +44,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./FlameCord-Proxy/bootstrap/target/FlameCord.jar
+          asset_path: ./MangoCord-Proxy/bootstrap/target/MangoCord.jar
           asset_name: MangoCord.jar
           asset_content_type: application/java-archive
