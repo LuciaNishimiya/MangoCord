@@ -67,7 +67,7 @@ applyPatch BungeeCord Waterfall-Proxy HEAD
 popd
 basedir=$(dirname "$basedir")
 
-# Apply flamecord patches
+# Apply mangocord patches
 applyPatch Waterfall/Waterfall-Proxy MangoCord-Proxy HEAD
 
 enableCommitSigningIfNeeded

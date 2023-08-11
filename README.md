@@ -32,7 +32,7 @@ https://discord.gg/PeS8h8eJZJ
 - /mangocord firewall <add/remove> <ip> > Firewall certain ips!
 - /bplugins > Show the plugin list!
 - /bip <player> > Show the ip and info of a player!
-- /mangocord stats > Displays flamecord stats!
+- /mangocord stats > Displays mangocord stats!
 - /mangocord help > Shows this message!
 
 

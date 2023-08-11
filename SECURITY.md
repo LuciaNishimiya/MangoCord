@@ -9,7 +9,7 @@ If you suspect or confirm a possible vulnerability, let us know privately by DM.
 
 In your report, please include as much detail as possible:
 
-- The version or git sha of FlameCord you are running.
+- The version or git sha of MangoCord you are running.
 - Your operating system distribution & version.
 - Steps to reproduce.
 - Expected behavior.
